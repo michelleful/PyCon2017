@@ -7,10 +7,11 @@
 		<title>reveal.js</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/beige.css">
+		<link rel="stylesheet" href="css/custom.css">
 
 		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/googlecode.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -24,8 +25,462 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<!-- Title slide -->
+				<section>
+					<h2>A gentle introduction to deep learning with TensorFlow</h2>
+					<p>Michelle Fullwood<br />
+					@michelleful</p>
+					<p>PyCon 2017</p>
+				</section>
+
+				<section>
+					<p>Traditional machine learning
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						 Deep learning
+					</p>
+					<!-- TODO: images -->
+				</section>
+
+				<section>
+					<h2>Linear Regression
+				</section>
+
+				<section>
+					<h2>Linear Regression</h2>
+					<img src="images/regression_feature_floor_area.png"
+						   style="width:14%; margin:2%"
+							 alt = "Feature: floor area"
+							 class="fragment" data-fragment-index="3">
+					<img src="images/regression_feature_distance.png"
+							 style="width:18%; margin:2%;"
+							 alt="Feature: distance from public transportation"
+							 class="fragment" data-fragment-index="4">
+					<img src="images/regression_feature_number_of_rooms.png"
+							 alt="Feature: number of bedrooms"
+					     style="width:14%; margin:2%"
+							 class="fragment" data-fragment-index="5">
+				  <img src="images/right_arrow.png"
+							 alt="are predictors for"
+	 					   style="width:15%"
+							 class="fragment" data-fragment-index="2">
+					<img src="images/regression_target_house_price.png"
+						   alt="Target value for regression: house price"
+					     style="width:18%;"
+							 class="fragment" data-fragment-index="1">
+				</section>
+
+				<section>
+					<h2>Variables</h2>
+					<p>$$\left[ \begin{array}{ccc}
+						1250 & 350 & 3 \end{array} \right] \rightarrow 345000$$</p>
+				</section>
+
+				<section>
+					<h2>Variables</h2>
+					<pre>
+						<code data-trim data-noescape>
+							import numpy as np
+
+							x = np.array([1250, 350, 3])
+							y = 345000
+						</code>
+					</pre>
+				</section>
+
+				<section>
+					<h2>Model</h2>
+
+				</section>
+
+				<section>
+					<h2>Model - Parameters</h2>
+					<pre>
+						<code data-trim data-noescape>
+weights = np.array([??, ??, ??])
+intercept = ??
+						</code>
+					</pre>
+				</section>
+
+				<section>
+					<h2>Model - Operation</h2>
+					<pre>
+						<code data-trim data-noescape>
+def model(x, weights, intercept):
+    return x.dot(weights) + intercept
+
+>>> model(x, weights, intercept)
+345000
+						</code>
+					</pre>
+
+					<!-- code: define  -->
+				</section>
+				<section>
+					<h2>Cost function</h2>
+Graph: cost function
+				</section>
+
+				<section>
+					<h2>Cost function</h2>
+					<pre>
+						<code data-trim data-noescape>
+def cost_function(y_predicted, y_actual):
+    return (y_predicted - y_actual)**2
+						</code>
+				</section>
+
+				<section>
+					<h2>Optimization</h2>
+Graph: gradient descent
+				</section>
+
+				<section>
+					<h2>Optimization</h2>
+Math: chain rule
+				</section>
+
+				<section>
+					<h2>Optimization</h2>
+Code
+				</section>
+
+				<section>
+					<h2>Optimization</h2>
+Intuitive explanation
+				</section>
+
+				<section>
+					<h2>Training</h2>
+Putting everything together
+				</section>
+
+				<section>
+					<h2>Testing</h2>
+Brief showing of testing
+				</section>
+
+				<section>
+					<h3>Surprise, you've made a neural network!</h3>
+
+Graph: linear regression neural network
+				</section>
+
+				<section>
+					<h2>Once more, with TensorFlow</h2>
+				</section>
+
+				<section>
+					<h2>Variables/Placeholders</h2>
+point out difference that we're not defining the actual x, y here
+				</section>
+
+				<section>
+					<h2>Model - parameters</h2>
+				</section>
+
+				<section>
+					<h2>Model - operations</h2>
+				</section>
+
+				<section>
+					<h2>Cost function</h2>
+				</section>
+
+				<section>
+					<h2>Optimization</h2>
+				</section>
+
+				<section>
+					<h2>Training</h2>
+				</section>
+
+				<section>
+					<h2>Training</h2>
+analogy: architectural plan vs actual building
+				</section>
+
+				<section>
+					<h2>Testing</h2>
+				</section>
+
+				<section>
+					<h2>Compare and contrast</h2>
+Show code side by side and reinforce the major differences
+				</section>
+
+				<section>
+					<h2>Logistic regression
+				</section>
+
+				<section>
+					<h2>Logistic regression</h2>
+illustrate the new problem
+				</section>
+
+				<section>
+					<h2>Logistic regression</h2>
+illustrate the solution of adding a function onto the end
+why not just treat it like linear regression?
+				</section>
+
+				<section>
+					<h2>What needs changing?</h2>
+				</section>
+
+				<section>
+					<h2>Variables/Placeholders</h2>
+					No change
+				</section>
+
+				<section>
+					<h2>Model - parameters</h2>
+					No change, but different interpretation
+				</section>
+
+				<section>
+					<h2>Model - operations</h2>
+					Changed
+				</section>
+
+				<section>
+					<h2>Cost function</h2>
+					Changed
+				</section>
+
+				<section>
+					<h2>Optimization</h2>
+					Same
+				</section>
+
+				<section>
+					<h2>Training</h2>
+					Same
+				</section>
+
+				<section>
+					<h2>Testing</h2>
+					Same
+				</section>
+
+				<section>
+					<h2>Neural network interpretation</h2>
+				</section>
+
+				<section>
+					<h2>Activation functions</h2>
+					* Identity function: linear regression
+					* Step function 0/1: perceptron
+					* Logistic function: logistic regression
+				</section>
+
+				<section>
+					<h2>Multi-class logistic regression</h2>
+				</section>
+
+				<section>
+					<h2>Let's go deeper!</h2>
+				</section>
+
+				<section>
+					<h2>Adding another layer</h2>
+					diagram
+				</section>
+
+				<section>
+					<h2>Adding another layer</h2>
+					Code
+				</section>
+
+				<section>
+					<h2>Results</h2>
+					Table -- no improvement
+				</section>
+
+				<section>
+					<h2>Is Deep Learning a myth?</h2>
+				</section>
+
+				<section>
+					<h2>Modified intermediate layer</h2>
+					Introduce non-linearity in the intermediate layer
+				</section>
+
+				<section>
+					<h2>Non-linear activation functions</h2>
+					* Logistic
+					* tanh
+					* ReLU
+				</section>
+
+				<section>
+					<h2>Results</h2>
+					table -- show improvement
+				</section>
+
+				<section>
+					<h2>What the hidden layer bought us</h2>
+
+					what can we now model with the hidden layer?
+					* some non-linearities, XOR. Concentric Circles??
+				</section>
+
+				<section>
+					<h2>Back-propagation</h2>
+					Briefly say that the chain rule in this context is called backprop,
+					we don't really need to worry about it due to the beauty of autodiff
+				</section>
+
+				<section>
+					<h2>Let's go deeper - add a layer</h2>
+				</section>
+
+				<section>
+					<h2>Going deeper</h2>
+					We're not doing deep learning yet. Graph of new layer
+				</section>
+
+				<section>
+					<h2>Going deeper</h2>
+					Code for adding a new layer. Just define new parameters and change the model.
+				</section>
+
+				<section>
+					<h2>Results</h2>
+					table -- show improvement, maybe in training error only?
+					Or both training and testing but only have a couple extra layers
+				</section>
+
+				<section>
+					<h2>What does going deep buy us?</h2>
+					Learning higher-level features
+				</section>
+
+				<section>
+					<h2>What does going deep buy us?</h2>
+					Show features learned in convnet for images: dots, edges, etc ---> objects
+				</section>
+
+				<section>
+					<h2>What does going deep buy us?</h2>
+					Incidentally, this is how neural style transfer works (maybe include this?)
+				</section>
+
+				<section>
+					<h2>What does going deep buy us?</h2>
+					What about if we're doing text and passing in words? Get word embeddings
+				</section>
+
+				<section>
+					<h2>What does going deep buy us?</h2>
+					Talk about word2vec (show diagram), but say that it's not actually learned
+					via deep learning. Can transform one-hot vectors to word2vec vectors,
+					which more or less skips a layer
+				</section>
+
+				<section>
+					<h2>What does going deep buy us?</h2>
+					In general, very difficult to interpret. Active research.
+				</section>
+
+				<section>
+					<h2>Regularization</h2>
+				</section>
+
+				<section>
+					<h2>The dangers of overfitting</h2>
+			    show that at some point our testing error goes up
+				</section>
+
+				<section>
+					<h2>Regularization</h2>
+					Explain concept of regularization: instead of letting
+					training data take over, add some constraints on
+					the weights that limits the dangers of overfitting
+				</section>
+
+				<section>
+					<h2>L2 regularization</h2>
+					Limiting the size of coefficients -- motivate why it's a good desideratum
+				</section>
+
+				<section>
+					<h2>L2 regularization</h2>
+					Show in code where L2 regularization should go,
+					modify for TensorFlow implementation
+				</section>
+
+				<section>
+					<h2>Dropout</h2>
+					Another consideration -- reinforce redundancy
+				</section>
+
+				<section>
+					<h2>Dropout</h2>
+					Animation showing removal
+				</section>
+
+				<section>
+					<h2>Implementing dropout in TensorFlow</h2>
+					Show code for adding dropout layer
+				</section>
+
+				<section>
+					<h2>Results</h2>
+					Show that our training error goes up but testing error goes down
+				</section>
+
+<!-- end section on regularization -->
+<!-- start conclusion -->
+
+
+<!-- maybe review the steps and briefly say what else is possible?
+
+model: changing # of hidden layers, # of neurons per hidden layer,
+       some different architectures, RNNs, CNNs
+cost function: some different possibilities?
+optimizer: change up the alpha, AdaGrad, etc?
+
+-->
+
+				<section>
+					<h2>Exploring more: architectures</h2>
+
+					Show diagram from neural network zoo,
+					maybe highlight CNNs and RNNs and briefly
+					say that connecting them is exciting.
+				</section>
+
+				<section>
+					<h2>Exploring more: Keras</h2>
+
+					<!-- analogy -->
+$$
+\begin{align*}
+\textrm{numpy} &: \textrm{scikit-learn} \\
+&:: \\
+\textrm{TensorFlow} &: \textrm{Keras}
+\end{align*}
+$$
+				</section>
+
+				<section>
+					<h2>Exploring more: Keras</h2>
+
+					<!-- translate our final diagram to Keras code -->
+				</section>
+
+				<section>
+					<h2>Final thoughts</h2>
+
+					<ul>
+					  <li class="fragment">If you're familiar with traditional ML,<br>you can do deep learning!</li>
+					  <li class="fragment">But try traditional ML first!</li>
+						<li class="fragment">Go forth and experiment!</li>
+				  </ul>
+				</section>
+
 			</div>
 		</div>
 
@@ -42,7 +497,8 @@
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ 				  { src: 'plugin/math/math.js', async: true }
 				]
 			});
 		</script>
