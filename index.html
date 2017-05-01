@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>A gentle introduction to Deep Learning with Tensorflow - PyCon 2017</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/beige.css">
@@ -74,7 +74,7 @@
 					<h2>Variables</h2>
 					<p>$$\left[ \begin{array}{ccc}
 						1250 & 350 & 3 \end{array} \right] \rightarrow 345000$$</p>
-				</section>
+=				</section>
 
 				<section>
 					<h2>Variables</h2>
@@ -104,19 +104,73 @@ intercept = ??
 				</section>
 
 				<section>
-					<h2>Model - Operation</h2>
+					<h2>Model - Operations</h2>
 					<pre>
 						<code data-trim data-noescape>
 def model(x, weights, intercept):
     return x.dot(weights) + intercept
 
->>> model(x, weights, intercept)
+>>> y_hat = model(x, weights, intercept)
+>>> y_hat
 345000
 						</code>
 					</pre>
-
-					<!-- code: define  -->
 				</section>
+
+				<section>
+					<h2>Model - Operations</h2>
+TODO: image of linear model - 1 point, exactly on line
+				</section>
+
+				<section>
+					<h2>Model - Operations</h2>
+TODO: image of linear model - 2 additional points, NOT on line
+				</section>
+
+				<section>
+					<h2>Model - Variables</h2>
+<pre>
+<code data-trim data-noescape>
+X = np.array([
+		[??, ??, ??],
+		[??, ??, ??],
+		[??, ??, ??]
+])
+
+Y = np.array([??, ??, ??])
+</code>
+</pre>
+				</section>
+
+				<section>
+					<h2>Model - Parameters</h2>
+<!-- no change -->
+					<pre>
+						<code data-trim data-noescape>
+weights = np.array([??, ??, ??])
+intercept = ??
+						</code>
+					</pre>
+				</section>
+
+				<section>
+Graph: Matrix multiplication == Dot product in bulk
+				</section>
+
+				<section>
+					<h2>Model - Operations</h2>
+					<pre>
+						<code data-trim data-noescape>
+def model(X, weights, intercept):
+    return X.dot(weights) + intercept
+
+>>> Y_hat = model(X, weights, intercept)
+>>> Y_hat
+[345000, ??, ??]
+						</code>
+					</pre>
+				</section>
+
 				<section>
 					<h2>Cost function</h2>
 Graph: cost function
@@ -126,8 +180,8 @@ Graph: cost function
 					<h2>Cost function</h2>
 					<pre>
 						<code data-trim data-noescape>
-def cost_function(y_predicted, y_actual):
-    return (y_predicted - y_actual)**2
+def cost_function(Y_hat, Y):
+    return np.sum((Y_hat - Y)**2)
 						</code>
 				</section>
 
@@ -202,12 +256,33 @@ analogy: architectural plan vs actual building
 				</section>
 
 				<section>
-					<h2>Testing</h2>
+					<h2>Compare and contrast</h2>
+Show code side by side and reinforce the major differences
 				</section>
 
 				<section>
-					<h2>Compare and contrast</h2>
-Show code side by side and reinforce the major differences
+					<h2>Computational graph</h2>
+Illustrate the computational graph - two parts to it, first
+computing y' and then computing the error
+				</section>
+
+				<section>
+					<h2>Train loop - Forward propagation</h2>
+Show the numbers
+				</section>
+
+				<section>
+					<h2>Train loop - Backward propagation</h2>
+Show the numbers
+				</section>
+
+				<section>
+					<h2>Train loop - Update</h2>
+
+				</section>
+
+				<section>
+					<h2>Testing</h2>
 				</section>
 
 				<section>
@@ -309,9 +384,20 @@ why not just treat it like linear regression?
 
 				<section>
 					<h2>Non-linear activation functions</h2>
-					* Logistic
-					* tanh
-					* ReLU
+					<table>
+						<tr>
+							<td>
+								<img src="images/latex_generated_images/sigmoid.png">
+							</td>
+							<td>
+								<img src="images/latex_generated_images/tanh.png">
+							</td>
+							<td>
+								<img src="images/latex_generated_images/relu.png">
+							</td>
+						</tr>
+					</table>
+
 				</section>
 
 				<section>
