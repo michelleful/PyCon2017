@@ -1,0 +1,16 @@
+\documentclass{standalone}
+\usepackage{pgfplots}
+
+
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[xmax=4,xmin=-4,ymin=-0.5,ymax=4, samples=100, title={Rectified linear (ReLU)}, title style={font=\huge}]
+  \addplot[domain=-10:8, gray, dashed] (x, 0);
+  \addplot[domain=-1:10, gray, dashed] (0, x);
+  \addplot[domain=-10:0, orange, ultra thick] (x, 0);
+  \addplot[domain=0:8, orange, ultra thick] (x, x);
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

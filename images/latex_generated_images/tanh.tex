@@ -1,0 +1,15 @@
+\documentclass{standalone}
+\usepackage{pgfplots}
+
+
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[xmax=8,xmin=-8,ymax=1.2, samples=100, title={Hyperbolic tangent (tanh)}, title style={font=\huge}]
+  \addplot[domain=-8:8, gray, dashed] (x, -1);
+  \addplot[domain=-8:8, gray, dashed] (x, 1);
+  \addplot[domain=-8:8, blue, ultra thick] (x, {tanh(x)});
+\end{axis}
+\end{tikzpicture}
+
+\end{document}
