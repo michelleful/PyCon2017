@@ -15,3 +15,4 @@ js/reveal.min.js
 *.aux
 *.log
 do-not-check-in/
+*.pdf
