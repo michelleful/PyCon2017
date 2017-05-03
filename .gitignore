@@ -14,4 +14,4 @@ js/reveal.min.js
 *.synctex.gz
 *.aux
 *.log
-
+do-not-check-in/
