@@ -11,3 +11,7 @@ node_modules/
 .sass-cache
 css/reveal.min.css
 js/reveal.min.js
+*.synctex.gz
+*.aux
+*.log
+
