@@ -34,12 +34,32 @@
 				</section>
 
 				<section>
-					<p>Traditional machine learning
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						 Deep learning
-					</p>
-					<!-- TODO: images -->
+					TODO: graph
+
+					Deep learning learning curve
+				</section>
+
+				<section>
+					<table style="border-collapse:collapse;">
+						<tr>
+							<td style="border: none; text-align: center">
+								<img src="images/hammer.png"
+									   style="width: 50%; display: block;
+										        margin-left: auto; margin-right: auto;">
+							</td>
+							<td style="border: none; text-align: center;">
+								<div class="fragment" data-fragment-index="1">
+								<img src="images/tensorflow_logo_big.png"
+						         style="width: 55%; display: block;
+						                margin-left: auto; margin-right: auto">
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">Traditional machine learning</td>
+							<td style="text-align: center;"><div class="fragment" data-fragment-index="1">Deep learning</div></td>
+						</tr>
+					</table>
 				</section>
 
 				<section>
@@ -66,15 +86,14 @@
 							 class="fragment" data-fragment-index="2">
 					<img src="images/regression_target_house_price.png"
 						   alt="Target value for regression: house price"
-					     style="width:18%;"
-							 class="fragment" data-fragment-index="1">
+					     style="width:18%;">
 				</section>
 
 				<section>
 					<h2>Variables</h2>
 					<p>$$\left[ \begin{array}{ccc}
 						1250 & 350 & 3 \end{array} \right] \rightarrow 345000$$</p>
-=				</section>
+				</section>
 
 				<section>
 					<h2>Variables</h2>
@@ -90,17 +109,34 @@
 
 				<section>
 					<h2>Model</h2>
+					<p>
+						Multiply each <b>feature</b> by a <b>weight</b>.<br/>
+						Add an <b>intercept</b> to get our final <b>estimate</b>.
+					</p>
+				</section>
 
+				<section>
+					<h2>Model</h2>
+					<img src="images/latex_generated_images/linear_regression_2d_nopoints.png"
+						   style="width:50%"
+							 alt = "Linear regression is a straight line with one feature">
 				</section>
 
 				<section>
 					<h2>Model - Parameters</h2>
 					<pre>
 						<code data-trim data-noescape>
-weights = np.array([??, ??, ??])
-intercept = ??
+weights = np.array([300, -10, -1])
+intercept = 26497
 						</code>
 					</pre>
+				</section>
+
+				<section>
+					<h2>Model - Operations</h2>
+					<img src="images/latex_generated_images/dot_product.png"
+						   style="width:50%"
+							 alt = "Use dot product to accomplish the weight multiplication step">
 				</section>
 
 				<section>
@@ -119,12 +155,16 @@ def model(x, weights, intercept):
 
 				<section>
 					<h2>Model - Operations</h2>
-TODO: image of linear model - 1 point, exactly on line
+<img src="images/latex_generated_images/linear_regression_2d_1point.png"
+	   style="width:50%"
+		 alt = "It's easy to match just one point">
 				</section>
 
 				<section>
 					<h2>Model - Operations</h2>
-TODO: image of linear model - 2 additional points, NOT on line
+					<img src="images/latex_generated_images/linear_regression_2d_multiplepoints.png"
+						   style="width:50%"
+							 alt = "But the chances it works on more points are...minuscule">
 				</section>
 
 				<section>
@@ -143,6 +183,41 @@ Y = np.array([??, ??, ??])
 				</section>
 
 				<section>
+					<h2>Interlude: scaling</h2>
+		<pre>
+			<code data-trim data-noescape>
+import sklearn
+
+# center around zero and divide by stddev
+scalerX = sklearn.preprocessing.StandardScaler()
+scalerY = sklearn.preprocessing.StandardScaler()
+
+X = scalerX.fit_transform(X)
+Y = scalerY.fit_transform(Y)
+			</code>
+		</pre>
+
+				</section>
+
+				<section>
+					<h2>Model - Variables</h2>
+<pre>
+<code data-trim data-noescape>
+>>> X  # fake numbers!
+np.array([
+	[??, ??, ??],
+	[??, ??, ??],
+	[??, ??, ??]
+])
+
+>>> Y
+np.array([??, ??, ??])
+</code>
+</pre>
+				</section>
+
+
+				<section>
 					<h2>Model - Parameters</h2>
 <!-- no change -->
 					<pre>
@@ -153,8 +228,32 @@ intercept = ??
 					</pre>
 				</section>
 
-				<section>
-Graph: Matrix multiplication == Dot product in bulk
+				<section data-transition="fade">
+					<h2>Model - Operations</h2>
+<img src="images/latex_generated_images/matrix_mult_1.png"
+	   style="width:70%"
+		 alt = "Matrix multiplication: the two matrices to be multiplied">
+				</section>
+
+				<section data-transition="fade">
+					<h2>Model - Operations</h2>
+<img src="images/latex_generated_images/matrix_mult_2.png"
+		 style="width:70%"
+		 alt = "Matrix multiplication: dot product the row and column of the desired entry">
+				</section>
+
+				<section data-transition="fade">
+					<h2>Model - Operations</h2>
+<img src="images/latex_generated_images/matrix_mult_3.png"
+		 style="width:70%"
+		 alt = "Matrix multiplication: first result">
+				</section>
+
+				<section data-transition="fade">
+					<h2>Model - Operations</h2>
+<img src="images/latex_generated_images/matrix_mult_4.png"
+		 style="width:70%"
+		 alt = "Matrix multiplication: second result">
 				</section>
 
 				<section>
@@ -171,9 +270,25 @@ def model(X, weights, intercept):
 					</pre>
 				</section>
 
-				<section>
-					<h2>Cost function</h2>
-Graph: cost function
+				<section data-transition="fade-out">
+					<h2>Model - Cost function</h2>
+					<img src="images/latex_generated_images/linear_regression_2d_multiplepoints.png"
+						   style="width:50%"
+							 alt = "Okay so we had a pretty bad fit...let's measure it">
+				</section>
+
+				<section data-transition="fade">
+					<h2>Model - Cost function</h2>
+					<img src="images/latex_generated_images/linear_regression_2d_multiplepoints_witherrorlines.png"
+						   style="width:50%"
+							 alt = "Drop a line from the actual y to the estimated y_hat">
+				</section>
+
+				<section data-transition="fade-in">
+					<h2>Model - Cost function</h2>
+					<img src="images/latex_generated_images/linear_regression_2d_multiplepoints_betterfit.png"
+						   style="width:50%"
+							 alt = "Drop a line from the actual y to the estimated y_hat">
 				</section>
 
 				<section>
@@ -187,38 +302,183 @@ def cost_function(Y_hat, Y):
 
 				<section>
 					<h2>Optimization</h2>
-Graph: gradient descent
+<p>Adjust <b>parameters</b> to minimize <b>cost</b>.</p>
 				</section>
 
 				<section>
 					<h2>Optimization</h2>
-Math: chain rule
+Graph: Parabola with two tangents
+				</section>
+
+				<section data-transition="fade-out">
+					<h2>Optimization - Gradient Calculation</h2>
+<p>$$\hat{y} = w_0x_0 + w_1x_1 + w_2x_2 + b$$
+$$\epsilon = (y-\hat{y})^2$$</p>
+
+<p>&nbsp;</p>
+
+<p><b>Goal:</b> \(\frac{d\epsilon}{dw_i}, \frac{d\epsilon}{db}\)</p>
+				</section>
+
+				<section data-transition="fade">
+					<h2>Optimization - Gradient Calculation</h2>
+<p>$$\hat{y} = w_0x_0 + w_1x_1 + w_2x_2 + b$$</p>
+
+<p>&nbsp;</p>
+
+<p>\(\frac{\partial\hat{y}}{\partial w_0} =\)<span class="fragment">\( x_0\)</span></p>
+				</section>
+
+				<section data-transition="fade">
+					<h2>Optimization - Gradient Calculation</h2>
+<p>$$\epsilon = (y-\hat{y})^2$$</p>
+
+<p>&nbsp;</p>
+
+<p>\(\frac{d\epsilon}{d\hat{y}} =\) <span class="fragment"><span class="fragment">\(-\)</span>\(2(y-\hat{y})\)</span></p>
+				</section>
+
+
+				<section data-transition="fade">
+					<h2>Optimization - Gradient Calculation</h2>
+<p>\(\frac{\partial\hat{y}}{\partial w_0} = x_0\)</p>
+<p>\(\frac{d\epsilon}{d\hat{y}} = -2(y-\hat{y})\)</p>
+
+<p>&nbsp;</p>
+
+<p><b>Chain rule:</b> \(\frac{\partial\epsilon}{\partial x_0} =
+	    \frac{d\epsilon}{d\hat{y}}\frac{\partial\hat{y}}{\partial w_0} \)
+				</section>
+
+				<section data-transition="fade-in">
+					<h2>Optimization - Gradient Calculation</h2>
+<p>\(\frac{\partial\hat{y}}{\partial w_0} = x_0\)</p>
+<p>\(\frac{d\epsilon}{d\hat{y}} = -2(y-\hat{y})\)</p>
+
+<p>&nbsp;</p>
+
+\(\frac{\partial\epsilon}{\partial x_0} =
+	    -2(y-\hat{y})x_0 \)
+				</section>
+
+				<section data-transition="fade-in">
+					<h2>Optimization - Gradient Calculation</h2>
+<p>$$\hat{y} = w_0x_0 + w_1x_1 + w_2x_2 + b\cdot1$$</p>
+
+<p>&nbsp;</p>
+
+\(\frac{\partial\epsilon}{\partial b} =
+	    -2(y-\hat{y})\cdot 1 \)
 				</section>
 
 				<section>
-					<h2>Optimization</h2>
-Code
+					<h2>Optimization - Gradient Calculation</h2>
+<pre>
+	<code data-trim data-noescape>
+		delta_y = y - y_hat
+		delta_weights = -2 * delta_y * weights
+		delta_intercept = -2 * delta_y * 1
+	</code>
+</pre>
 				</section>
 
 				<section>
-					<h2>Optimization</h2>
-Intuitive explanation
+					<h2>Optimization - Learning Rate</h2>
+					TODO
+				</section>
+
+				<section>
+					<h2>Optimization - Parameter Update</h2>
+<pre>
+	<code data-trim data-noescape>
+learning_rate = 0.05
+
+weights = weights - \
+             learning_rate * delta_weights
+intercept = intercept - \
+             learning_rate * delta_intercept
+	</code>
+</pre>
 				</section>
 
 				<section>
 					<h2>Training</h2>
-Putting everything together
+<pre style="font-size:60%;">
+	<code data-trim data-noescape>
+def training_round(X, Y, weights, intercept,
+                   alpha=learning_rate):
+    # calculate our estimate, y_hat
+    Y_hat = model(X, weights, intercept)
+
+    # calculate error
+    delta_Y = Y - Y_hat  # TODO: check for batch
+
+    # calculate gradients
+    delta_weights = -2 * delta_y * weights
+    delta_intercept = -2 * delta_y
+
+    # update parameters
+    weights = weights - alpha * delta_weights
+    intercept = intercept - alpha * delta_intercept
+
+    return weights, intercept
+	</code>
+</pre>
+				</section>
+
+				<section>
+					<h2>Training</h2>
+					<pre style="font-size:60%;">
+						<code data-trim data-noescape>
+def train(X, Y):
+    # initialize weights to something small and non-zero
+    # using a recipe from http://cs231n.github.io/neural-networks-2/
+    weights = np.random.randn(len(Y)) * sqrt(2.0/len(Y))
+
+    for i in range(100):
+        weights, intercept = training_round(X, Y,
+                               weights, intercept)
+</pre>
+</code>
 				</section>
 
 				<section>
 					<h2>Testing</h2>
-Brief showing of testing
+					<pre style="font-size:60%;">
+						<code data-trim data-noescape>
+# don't forget to scale!
+X_test = scalerX.transform(X_test)
+Y_test = scalerY.transform(Y_test)
+
+def test(X_test, Y_test, final_weights, final_intercept):
+    Y_hat_test = model(X_test, final_weights,
+                               final_intercept)
+    return cost_function(Y_hat_test, Y_test) / len(Y_test)
+
+>>> accuracy = test(X_test, Y_test,
+                    final_weights, final_intercept)
+>>> accuracy
+???
+</code>
+</pre>
 				</section>
 
-				<section>
-					<h3>Surprise, you've made a neural network!</h3>
+		    <section>
+					<h2>Surprise! <br/> You've made <br/> a neural network!</h2>
+				</section>
 
-Graph: linear regression neural network
+				<section data-transition="fade-out">
+					<h2>Linear regression = <br/> Simplest neural network</h2>
+					<img src="images/latex_generated_images/linear_regression_as_neural_network.png"
+						   style="width:30%"
+							 alt = "Linear regression is basically the simplest possible neural network">
+				</section>
+
+				<section data-transition="fade-in">
+					<h2>Linear regression = <br/> Simplest neural network</h2>
+					<img src="images/latex_generated_images/linear_regression_as_neural_network_no_b.png"
+						   style="width:30%"
+							 alt = "Usually we omit the intercept from this diagram">
 				</section>
 
 				<section>
@@ -227,42 +487,136 @@ Graph: linear regression neural network
 
 				<section>
 					<h2>Variables/Placeholders</h2>
-point out difference that we're not defining the actual x, y here
+<pre>
+  <code data-trim data-noescape>
+import tensorflow as tf
+
+X = tf.placeholder(tf.float32, [None, 3])
+Y = tf.placeholder(tf.float32, [None, 1])
+  </code>
+</pre>
 				</section>
 
 				<section>
 					<h2>Model - parameters</h2>
+
+<pre>
+  <code data-trim data-noescape>
+weights   = tf.Variable(tf.zeros([3, 1]))
+intercept = tf.Variable(tf.zeros([1, 1]))
+  </code>
+</pre>
+
 				</section>
 
 				<section>
 					<h2>Model - operations</h2>
+<pre>
+  <code data-trim data-noescape>
+Y_hat = tf.matmul(X, weights) + intercept
+  </code>
+</pre>
 				</section>
 
 				<section>
 					<h2>Cost function</h2>
+<pre>
+  <code data-trim data-noescape>
+cost = tf.reduce_mean(tf.square(Y_hat - Y))
+  </code>
+</pre>
 				</section>
 
 				<section>
 					<h2>Optimization</h2>
+<pre>
+  <code data-trim data-noescape>
+learning_rate = 0.05
+optimizer = tf.train.GradientDescentOptimizer
+               (learning_rate).minimize(cost)
+  </code>
+</pre>
 				</section>
 
 				<section>
 					<h2>Training</h2>
+<pre>
+  <code data-trim data-noescape>
+with tf.Session() as sess:
+    # initialize variables
+    sess.run(tf.global_variables_initializer())
+
+    for epoch in range(100):
+        X_batch, Y_batch = random_minibatch(X, Y)
+        sess.run(optimizer,
+                 feed_dict={
+                     X: X_batch,
+                     Y: Y_batch
+                 })
+  </code>
+</pre>
 				</section>
 
 				<section>
-					<h2>Training</h2>
-analogy: architectural plan vs actual building
-				</section>
+
+					<div style="width: 60%; float: left;">
+
+<pre style="font-size: 40%;">
+  <code data-trim data-noescape>
+# Placeholders
+X = tf.placeholder(tf.float32, [None, 3])
+Y = tf.placeholder(tf.float32, [None, 1])
+
+# Parameters
+weights   = tf.Variable(tf.zeros([3, 1]))
+intercept = tf.Variable(tf.zeros([1, 1]))
+
+# Operations
+Y_hat = tf.matmul(X, weights) + intercept
+
+# Cost function
+cost = tf.reduce_mean(tf.square(Y_hat - Y))
+
+# Optimization
+optimizer = tf.train.GradientDescentOptimizer
+               (learning_rate).minimize(cost)
+	</code>
+</pre>
+
+								</div>
+								<div style="width: 30%; height: 8em; float: right;">
+									<img src="images/blueprint.png"
+									     alt="All the code in this section is like a blueprint">
+								</div>
+
+								<div style="width: 70%; float: left;">
+
+			<pre style="font-size: 40%;">
+			  <code data-trim data-noescape>
+# train
+with tf.Session() as sess:
+    # initialize variables
+    sess.run(tf.global_variables_initializer())
+
+    # run training rounds
+    for epoch in range(100):
+        X_batch, Y_batch = random_minibatch(X, Y)
+        sess.run(optimizer,
+                 feed_dict={X: X_batch, Y: Y_batch})
+				</code>
+			</pre>
+
+											</div>
+											<div style="width: 30%; height: 8em; float: right;">
+												<img src="images/rocket.jpg"
+												     alt="And this section is like the actual rocket that gets built">
+											</div>
+
+					</section>
 
 				<section>
-					<h2>Compare and contrast</h2>
-Show code side by side and reinforce the major differences
-				</section>
-
-				<section>
-					<h2>Computational graph</h2>
-Illustrate the computational graph - two parts to it, first
+					<h2>Computation graph</h2>
+Illustrate the computation graph - two parts to it, first
 computing y' and then computing the error
 				</section>
 
@@ -577,6 +931,7 @@ $$
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				history: true,
+				transition: 'slide',
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
