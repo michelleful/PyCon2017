@@ -1,0 +1,70 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+
+\begin{document}
+
+\begin{tikzpicture}
+
+\node[inner sep=0pt] (feat1) at (0,0)
+    {\includegraphics[width=0.5in]{../regression_feature_floor_area.png}};
+
+\node[inner sep=0pt] (feat2) at (2,0)
+    {\includegraphics[width=0.5in]{../regression_feature_distance.png}};
+
+\node[inner sep=0pt] (feat2) at (4,0)
+    {\includegraphics[width=0.5in]{../regression_feature_number_of_rooms.png}};
+
+
+
+
+% house features
+
+\node[inner sep=0pt] (house1) at (-2,-2)
+    {\includegraphics[width=0.7in]{../regression_house1.png}};
+
+\node[scale=3] (leftbracket_x) at (-1, -2) {$[$};
+
+\node[scale=3] (feat1_x) at (0, -2) {$-2$};
+
+\node[scale=3] (feat2_x) at (2, -2) {$1$};
+
+\node[scale=3] (feat3_x) at (4, -2) {$-3$};
+
+\node[scale=3] (rightbracket_x) at (4.8, -2) {$]$};
+
+% dot product
+
+\node[scale=3] (dotprod) at (2, -3) {$\cdot$};
+
+
+% parameters
+
+\node (weights) at (-2,-4) {weights};
+
+\node[scale=3] (leftbracket_w) at (-1, -4) {$[$};
+
+\node[scale=3] (weight1) at (0, -4) {$4$};
+
+\node[scale=3] (weight2) at (2, -4) {$5$};
+
+\node[scale=3] (weight3) at (4, -4) {$-2$};
+
+\node[scale=3] (rightbracket_w) at (4.8, -4) {$]$};
+
+
+% result
+
+\node[scale=2] (equals) at (2, -5.5) {$=$};
+
+
+% parameters
+
+\node[scale=3] (y) at (2, -7) {$3$};
+\node[scale=2] (intercept) at (4.5, -7) {(+intercept)};
+
+
+\end{tikzpicture}
+
+\end{document}
