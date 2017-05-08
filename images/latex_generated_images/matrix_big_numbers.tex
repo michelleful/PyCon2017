@@ -1,0 +1,64 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, matrix}
+
+\begin{document}
+
+\begin{tikzpicture}
+
+\node[inner sep=0pt] (feat1) at (-0.7,1.5)
+    {\includegraphics[width=0.17in]{../regression_feature_floor_area.png}};
+
+\node[inner sep=0pt] (feat2) at (0.25,1.5)
+    {\includegraphics[width=0.3in]{../regression_feature_distance.png}};
+
+\node[inner sep=0pt] (feat2) at (1.0,1.5)
+    {\includegraphics[width=0.17in]{../regression_feature_number_of_rooms.png}};
+
+\node[inner sep=0pt] (feat2) at (3,1.5)
+    {\includegraphics[width=0.25in]{../regression_target_house_price.png}};
+
+
+% grey rectangles - selectively grey out
+%\draw[fill=gray!25, color=gray!25] (-1.1, 0.1) rectangle (1.1,0.7);
+%\draw[fill=gray!25, color=gray!25] (-1.1, -0.7) rectangle (1.1,-0.1);
+%\draw[fill=gray!25, color=gray!25] (1.7, 3.1) rectangle (2.3,0.9); % centred around (2, 2)
+%\draw[fill=gray!25, color=gray!25] (1.7, 0.7) rectangle (2.3,0.1); 
+%\draw[fill=gray!25, color=gray!25] (1.7, -0.7) rectangle (2.3,-0.1); 
+
+
+
+% house features
+
+\node[inner sep=0pt] (house1) at (-2,0.85)
+    {\includegraphics[width=0.3in]{../regression_house1.png}};
+
+\node[inner sep=0pt] (house2) at (-2,0.05)
+    {\includegraphics[width=0.3in]{../regression_house2.png}};
+
+\node[inner sep=0pt] (house2) at (-2,-0.8)
+    {\includegraphics[width=0.3in]{../regression_house2.png}};
+
+
+\matrix (m)[scale=3,matrix of math nodes,left delimiter={[},right delimiter={]}, column sep=5, row sep=10] at (0, 0)
+{
+1250 & 350 & 3 \\
+1700 & 900 & 6 \\
+1400 & 600 & 3 \\
+};
+
+% right arrow
+\node[] (rightarrow) at (1.8, 0) {$\rightarrow$};
+
+% y
+\matrix (y)[scale=3, matrix of math nodes, left delimiter={[}, right delimiter={]}, row sep=10] at (3,0) {
+	345000 \\ 
+	580000 \\
+	360000 \\
+};
+
+
+
+\end{tikzpicture}
+
+\end{document}

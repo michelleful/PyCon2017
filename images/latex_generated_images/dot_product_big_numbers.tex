@@ -1,0 +1,76 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+
+\begin{document}
+
+\begin{tikzpicture}
+
+\node[inner sep=0pt] (feat1) at (0,0)
+    {\includegraphics[width=0.5in]{../regression_feature_floor_area.png}};
+
+\node[inner sep=0pt] (feat2) at (2,0)
+    {\includegraphics[width=0.5in]{../regression_feature_distance.png}};
+
+\node[inner sep=0pt] (feat2) at (4,0)
+    {\includegraphics[width=0.5in]{../regression_feature_number_of_rooms.png}};
+
+
+
+
+% house features
+
+\node[inner sep=0pt] (house1) at (-2,-2)
+    {\includegraphics[width=0.7in]{../regression_house1.png}};
+
+\node[scale=3] (leftbracket_x) at (-1, -2) {$[$};
+
+\node[scale=2] (feat1_x) at (0, -2) {$1250$};
+\node[scale=2] (feat2_x) at (2, -2) {$350$};
+\node[scale=2] (feat3_x) at (4, -2) {$3$};
+
+\node[scale=3] (rightbracket_x) at (4.8, -2) {$]$};
+
+%\node[scale=3] (right_arrow) at (6.0, -2) {$\rightarrow$};
+
+%\node[inner sep=0pt] (house1) at (8.0,0)
+%    {\includegraphics[width=0.7in]{../regression_target_house_price.png}};
+
+%\node[scale=2] (feat3_x) at (8, -2) {$345000$};
+
+
+% dot product
+
+\node[scale=3] (dotprod) at (2, -3) {$\cdot$};
+
+
+% parameters
+
+\node (weights) at (-2,-4) {weights};
+
+\node[scale=3] (leftbracket_w) at (-1, -4) {$[$};
+
+\node[scale=2] (weight1) at (0, -4) {$300$};
+\node[scale=2] (weight2) at (2, -4) {$-10$};
+\node[scale=2] (weight3) at (4, -4) {$-1$};
+
+\node[scale=3] (rightbracket_w) at (4.8, -4) {$]$};
+
+
+% result
+
+\node[scale=2] (equals) at (2, -5.5) {$=$};
+
+
+% parameters
+
+\node[scale=2] (yhat) at (0, -7) {$\hat{y} = $};
+
+\node[scale=2] (y) at (2, -7) {$371497$};
+\node[scale=2] (intercept) at (5.5, -7) {+intercept};
+
+
+\end{tikzpicture}
+
+\end{document}
