@@ -1,0 +1,22 @@
+\documentclass{standalone}
+\usepackage{pgfplots}
+
+
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[xmax=25,xmin=-6, samples=100, axis lines=none]
+%  \addplot[domain=-8:8, gray, dashed] (x, -1);
+%  \addplot[domain=-8:8, gray, dashed] (x, 1);
+  \addplot[domain=-5:5, blue!50, ultra thick] (x, {0.5*tanh(x)});
+  \addplot[domain=5:15, blue!50, ultra thick] (x, {0.5*(2*tanh(5)+tanh(x-10))});
+  \addplot[domain=15:25, blue!50, ultra thick] (x, {0.5*(4*tanh(5)+tanh(x-20))});
+  
+  \node[color=green, circle,fill,inner sep=3pt] at (axis cs:19.5, {0.5*(4*tanh(5)+tanh(19.5-20)}) {};
+%  \node[color=red, circle,fill,inner sep=3pt] at (axis cs:-4.5, {0.5*(tanh(-4.5)}) {};
+%  \node[color=red, circle,fill,inner sep=3pt] at (axis cs:5.5, {0.5*(2*tanh(5)+tanh(5.5-10))}) {};
+  \node[color=red, circle,fill,inner sep=3pt] at (axis cs:10.5, {0.5*(2*tanh(5)+tanh(10.5-10))}) {};
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

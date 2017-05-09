@@ -35,10 +35,11 @@
 \def\forward{4}
 \def\backward{-8}
 \draw (\x, \y) --
-  node[above, shift={(1, -0.4)}, scale=3] {$\textcolor{OliveGreen}{\forward}-\alpha(\textcolor{BrickRed}{\backward})$}
-%  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
+%  node[above, shift={(1, -0.4)}, scale=3] {$\textcolor{OliveGreen}{\forward}-\alpha(\textcolor{BrickRed}{\backward})$}
+  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
+  node[below,shift={(0,0.4)},scale=3,text=BrickRed] {$\frac{\partial\epsilon}{\partial w_0}$}
 %  node[below,shift={(0,0.4)},scale=3,text=BrickRed] {$\frac{\partial\epsilon}{\partial w_0}=\backward$}
-  node[below,shift={(0,0.4)},scale=4,text=BrickRed] {\backward}
+%  node[below,shift={(0,0.4)},scale=4,text=BrickRed] {\backward}
 (\x+3,\y);
 \draw [-{Latex[length=3mm]}] (6,18) -- (8,16.5);
 
@@ -52,7 +53,7 @@
 \def\forward{-2}
 \def\backward{16}
 \draw (\x, \y) --
-%  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
+  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
 %  node[below,shift={(0,0.4)},scale=4,text=BrickRed] {\backward}
 (\x+3,\y);
 \draw [-{Latex[length=3mm]}] (6,15) -- (8,16.5);
@@ -80,10 +81,10 @@
 \def\forward{5}
 \def\backward{4}
 \draw (\x, \y) --
-  node[above, shift={(1, -0.4)}, scale=3] {$\textcolor{OliveGreen}{\forward}-\alpha(\textcolor{BrickRed}{\backward})$}
-%  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
-%  node[below,shift={(0,0.4)},scale=3,text=BrickRed] {$\frac{\partial\epsilon}{\partial w_1}$}
-  node[below,shift={(0,0.4)},scale=4,text=BrickRed] {\backward}
+%  node[above, shift={(1, -0.4)}, scale=3] {$\textcolor{OliveGreen}{\forward}-\alpha(\textcolor{BrickRed}{\backward})$}
+  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
+  node[below,shift={(0,0.4)},scale=3,text=BrickRed] {$\frac{\partial\epsilon}{\partial w_1}$}
+%  node[below,shift={(0,0.4)},scale=4,text=BrickRed] {\backward}
 (\x+3,\y);
 \draw [-{Latex[length=3mm]}] (6,11) -- (8,9.5);
 
@@ -94,7 +95,7 @@
 \def\forward{1}
 \def\backward{20}
 \draw (\x, \y) --
-%  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
+  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
 %  node[below,shift={(0,0.4)},scale=4,text=BrickRed] {\backward}
 (\x+3,\y);
 \draw [-{Latex[length=3mm]}] (6,8) -- (8,9.5);
@@ -117,10 +118,10 @@
 \def\forward{-2}
 \def\backward{-12}
 \draw (\x, \y) --
-  node[above, shift={(1.5, -0.4)}, scale=3] {$\textcolor{OliveGreen}{\forward}-\alpha(\textcolor{BrickRed}{\backward})$}
-%  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
-%  node[below,shift={(0,0.4)},scale=3,text=BrickRed] {$\frac{\partial\epsilon}{\partial w_2}$}
-  node[below,shift={(0,0.4)},scale=4,text=BrickRed] {\backward}
+%  node[above, shift={(1.5, -0.4)}, scale=3] {$\textcolor{OliveGreen}{\forward}-\alpha(\textcolor{BrickRed}{\backward})$}
+  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
+  node[below,shift={(0,0.4)},scale=3,text=BrickRed] {$\frac{\partial\epsilon}{\partial w_2}$}
+%  node[below,shift={(0,0.4)},scale=4,text=BrickRed] {\backward}
 (\x+3,\y);
 \draw [-{Latex[length=3mm]}] (6,4) -- (8,2.5);
 
@@ -131,7 +132,7 @@
 \def\forward{-3}
 \def\backward{-8}
 \draw (\x, \y) --
-%  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
+  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
 %  node[below,shift={(0,0.4)},scale=4,text=BrickRed] {\backward}
 (\x+3,\y);
 \draw [-{Latex[length=3mm]}] (6,1) -- (8,2.5);
@@ -147,7 +148,7 @@
 \def\forward{-8}
 \def\backward{4}
 \draw (\x, \y) --
-%  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
+  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
 %  node[below,shift={(0,0.4)},scale=4,text=BrickRed] {\backward}
 %  node[below,shift={(0,0.4)},scale=4,text=BrickRed] {$\epsilon'=\backward$}
 (\x+3,\y);
@@ -161,7 +162,7 @@
 \def\forward{5}
 \def\backward{4}
 \draw (\x, \y) --
-%  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
+  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
 %  node[below,shift={(0,0.4)},scale=4,text=BrickRed] {\backward}
 (\x+4,\y);
 
@@ -172,7 +173,7 @@
 \def\forward{6}
 \def\backward{4}
 \draw (\x, \y) --
-%  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
+  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
 %  node[below,shift={(0,0.4)},scale=4,text=BrickRed] {\backward}
 (\x+3,\y);
 \draw [-{Latex[length=3mm]}] (13,2.5) -- (15,8.5);
@@ -190,10 +191,10 @@
 \def\forward{8}
 \def\backward{4}
 \draw (\x, \y) --
-  node[above, shift={(0.5, -0.4)}, scale=3] {$\textcolor{OliveGreen}{\forward}-\alpha(\textcolor{BrickRed}{\backward})$}
-%  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
-%  node[below,shift={(0,0.4)},scale=3,text=BrickRed] {$\frac{\partial\epsilon}{\partial b}=4$}
-  node[below,shift={(0,0.4)},scale=4,text=BrickRed] {\backward}
+%  node[above, shift={(0.5, -0.4)}, scale=3] {$\textcolor{OliveGreen}{\forward}-\alpha(\textcolor{BrickRed}{\backward})$}
+  node[above, shift={(0,-0.4)}, scale=4,text=OliveGreen] {\forward}
+  node[below,shift={(0,0.4)},scale=3,text=BrickRed] {$\frac{\partial\epsilon}{\partial b}=4$}
+%  node[below,shift={(0,0.4)},scale=4,text=BrickRed] {\backward}
 (\x+3,\y);
 \draw [-{Latex[length=3mm]}] (19,16.5) -- (21,10.5);
 
@@ -204,7 +205,7 @@
 % arrow from sum to +b
 \draw [-{Latex[length=3mm]}] (16, 9.5) -- (20,9.5);
 \draw [-{Latex[length=3mm]}] (16, 9.5) -- 
-%  node[above,scale=4,shift={(0,-0.1)},text=OliveGreen] {$\cdot=3$} 
+  node[above,scale=4,shift={(0,-0.1)},text=OliveGreen] {$\cdot=3$} 
 %  node[below,scale=4,shift={(0,0.1)},text=BrickRed] {$4$} 
 %  node[below,scale=4,shift={(0,0.1)},text=BrickRed] {$\epsilon'=4$} 
 (20,9.5);
@@ -212,7 +213,7 @@
 % arrow from +b to -y
 \draw [-{Latex[length=3mm]}] (22, 9.5) -- (26,9.5);
 \draw [-{Latex[length=3mm]}] (22, 9.5) -- 
-%  node[above, shift={(0,-0.4)},text=OliveGreen,scale=4] {$\hat{y}=11$}
+  node[above, shift={(0,-0.4)},text=OliveGreen,scale=4] {$\hat{y}=11$}
 %  node[below,scale=4,shift={(0,0.1)},text=BrickRed] {$4$} 
 %  node[below,scale=4,shift={(0,0.1)},text=BrickRed] {$\epsilon'=4$} 
 (26,9.5);
@@ -230,7 +231,7 @@
 % arrow from y to -y
 \draw (22,16.5) -- (25,16.5);
 \draw (22,16.5) -- 
-%  node[above,scale=4,shift={(0,-0.1)},text=OliveGreen] {9} 
+  node[above,scale=4,shift={(0,-0.1)},text=OliveGreen] {9} 
 %  node[below,scale=4,shift={(0,0.1)},text=BrickRed] {$-4$} 
 (25,16.5);
 \draw [-{Latex[length=3mm]}] (25,16.5) -- (27,10.5);
@@ -252,24 +253,24 @@
 % arrow from -y to square
 \draw [-{Latex[length=3mm]}] (28, 9.5) -- (32,9.5);
 \draw [-{Latex[length=3mm]}] (28, 9.5) -- 
-%  node[above,scale=3.5,shift={(0,-0.1)},text=OliveGreen] {$\Delta=-2$} 
+  node[above,scale=3.5,shift={(0,-0.1)},text=OliveGreen] {$\Delta=-2$} 
 %  node[below,scale=3.7,text=BrickRed,shift={(0,0.1)}] {$-4$}
 %  node[below,scale=3.7,text=BrickRed,shift={(0,0.1)}] {$\epsilon'=-4$}
-%  node[below,scale=3,text=BrickRed,shift={(0,0.1)}] {$\frac{d\epsilon}{d\Delta}=?$}
+  node[below,scale=3,text=BrickRed,shift={(0,0.1)}] {$\frac{d\epsilon}{d\Delta}=-4$}
 (32,9.5);
 
 
 
-%\node[scale=3.5, align=center] at (33, 4) {$f(\Delta)=\Delta^2$ \\ 
-%                                         $\frac{df}{dz}=2\Delta=-4$ \\
-%                                         $\frac{d\epsilon}{d\Delta} = \frac{df}{dz}\cdot\epsilon' = -4\cdot1$};
+\node[scale=3.5, align=center] at (33, 4) {$f(\Delta)=\Delta^2$ \\ 
+                                         $\frac{df}{d\Delta}=2\Delta=-4$ \\
+                                         $\frac{d\epsilon}{d\Delta} = \frac{df}{d\Delta}\cdot\epsilon' = -4\cdot1$};
 
 % arrow out of square
 \draw [-{Latex[length=3mm]}] (34, 9.5) -- 
 %  node[above,scale=4,shift={(0,-0.1)}] {$\epsilon$}
-%  node[above,scale=4,text=OliveGreen,shift={(0,-0.1)}] {$\epsilon=4$} 
+  node[above,scale=4,text=OliveGreen,shift={(0,-0.1)}] {$\epsilon=4$} 
 %  node[below,scale=4,text=BrickRed,shift={(0,0.1)}] {1}
-%  node[below,scale=4,text=BrickRed,shift={(0,0.1)}] {$\epsilon'=1$}
+  node[below,scale=4,text=BrickRed,shift={(0,0.1)}] {$\epsilon'=1$}
 %  node[below,scale=4,text=BrickRed,shift={(0,0.1)}] {$\frac{d\epsilon}{d\epsilon}=1$}
 (38,9.5);
 
