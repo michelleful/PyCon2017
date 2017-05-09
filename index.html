@@ -1,10 +1,11 @@
+
 <!doctype html>
 <html>
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>A gentle introduction to Deep Learning with Tensorflow - PyCon 2017</title>
+		<title>A Gentle Introduction to Deep Learning with Tensorflow - PyCon 2017</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/beige.css">
@@ -34,9 +35,82 @@
 				</section>
 
 				<section>
-					TODO: graph
+					<h2>About Me</h2>
+					<ul>
+						<li>Grad student in linguistics at MIT</li>
+						<li>Consultant in speech and natural language processing</li>
+					</ul>
+				</section>
 
-					Deep learning learning curve
+				<section>
+					<img src="images/vid1.png">
+				</section>
+
+				<section>
+					<img src="images/vid2.png">
+				</section>
+
+				<section>
+					<img src="images/vid3.png">
+				</section>
+
+				<section>
+					<h2>A gentle<span style="color: red">r</span> introduction to deep learning with TensorFlow</h2>
+					<p>Michelle Fullwood<br />
+					@michelleful</p>
+					<p>PyCon 2017</p>
+				</section>
+
+				<section>
+					<img src="images/vid4.png">
+				</section>
+
+				<section>
+					<h2>A gentle introduction to deep learning with TensorFlow</h2>
+					<p>Michelle Fullwood<br />
+					@michelleful</p>
+					<p>PyCon 2017</p>
+				</section>
+
+				<section data-transition="fade-out">
+					<h2>Deep learning learning curve</h2>
+					<img src="images/latex_generated_images/learning_curve_nopoints.png"
+					     alt="Completely made-up learning curve"
+							 style="width: 60%;">
+				</section>
+
+				<section data-transition="fade">
+					<h2>Deep learning learning curve</h2>
+					<img src="images/latex_generated_images/learning_curve_target.png"
+					     alt="Our goal is here: completely understanding of the most
+							      fundamental class of neural networks, feedforward networks
+										or multi-layer perceptrons. How they work, how to train them,
+										how to optimize them."
+							 style="width: 60%;">
+				</section>
+
+				<section data-transition="fade">
+					<h2>Deep learning learning curve</h2>
+					<img src="images/latex_generated_images/learning_curve_not_here.png"
+					     alt="If you meet the prerequisites for this talk, namely,
+							      you know the fundamentals of supervised machine learning
+										and are familiar with linear and logistic regression,
+										then you're not here..."
+							 style="width: 60%;">
+				</section>
+
+				<section data-transition="fade">
+					<h2>Deep learning learning curve</h2>
+					<img src="images/latex_generated_images/learning_curve_nor_here.png"
+					     alt="...nor here..."
+							 style="width: 60%;">
+				</section>
+
+				<section data-transition="fade">
+					<h2>Deep learning learning curve</h2>
+					<img src="images/latex_generated_images/learning_curve_but_here.png"
+					     alt="but you're actually here!"
+							 style="width: 60%;">
 				</section>
 
 				<section>
@@ -44,6 +118,7 @@
 						<tr>
 							<td style="border: none; text-align: center">
 								<img src="images/hammer.png"
+								     alt="To use a metaphor, "
 									   style="width: 50%; display: block;
 										        margin-left: auto; margin-right: auto;">
 							</td>
@@ -90,15 +165,16 @@
 				</section>
 
 				<section>
-					<h2>Variables</h2>
-					<p>$$\left[ \begin{array}{ccc}
-						1250 & 350 & 3 \end{array} \right] \rightarrow 345000$$</p>
+					<h2>Inputs</h2>
+					<img src="images/latex_generated_images/single_x_array.png"
+						   alt="Representation of our variables as an array and float"
+					     style="width:90%">
 				</section>
 
 				<section>
-					<h2>Variables</h2>
+					<h2>Inputs</h2>
 					<pre>
-						<code data-trim data-noescape>
+						<code data-trim data-noescape class="python">
 							import numpy as np
 
 							x = np.array([1250, 350, 3])
@@ -110,7 +186,7 @@
 				<section>
 					<h2>Model</h2>
 					<p>
-						Multiply each <b>feature</b> by a <b>weight</b>.<br/>
+						Multiply each <b>feature</b> by a <b>weight</b> and add them.<br/>
 						Add an <b>intercept</b> to get our final <b>estimate</b>.
 					</p>
 				</section>
@@ -125,24 +201,24 @@
 				<section>
 					<h2>Model - Parameters</h2>
 					<pre>
-						<code data-trim data-noescape>
+						<code data-trim data-noescape class="python">
 weights = np.array([300, -10, -1])
-intercept = 26497
+intercept = -26497
 						</code>
 					</pre>
 				</section>
 
 				<section>
 					<h2>Model - Operations</h2>
-					<img src="images/latex_generated_images/dot_product.png"
-						   style="width:50%"
+					<img src="images/latex_generated_images/dot_product_big_numbers.png"
+						   style="width:70%"
 							 alt = "Use dot product to accomplish the weight multiplication step">
 				</section>
 
 				<section>
 					<h2>Model - Operations</h2>
 					<pre>
-						<code data-trim data-noescape>
+						<code data-trim data-noescape class="python">
 def model(x, weights, intercept):
     return x.dot(weights) + intercept
 
@@ -168,16 +244,24 @@ def model(x, weights, intercept):
 				</section>
 
 				<section>
-					<h2>Model - Variables</h2>
+					<h2>Model - Parameters</h2>
+					<img src="images/latex_generated_images/matrix_big_numbers.png"
+						   style="width:80%"
+							 alt = "Represent multiple x's in an mxn matrix
+							        and y's in a mx1 vector">
+				</section>
+
+				<section>
+					<h2>Model - Parameters</h2>
 <pre>
-<code data-trim data-noescape>
-X = np.array([
-		[??, ??, ??],
-		[??, ??, ??],
-		[??, ??, ??]
+<code data-trim data-noescape class="python">
+X_train = np.array([
+    [1250, 350, 3],
+    [1700, 900, 6],
+    [1400, 600, 3]
 ])
 
-Y = np.array([??, ??, ??])
+Y_train = np.array([345000, 580000, 360000])
 </code>
 </pre>
 				</section>
@@ -185,33 +269,33 @@ Y = np.array([??, ??, ??])
 				<section>
 					<h2>Interlude: scaling</h2>
 		<pre>
-			<code data-trim data-noescape>
+			<code data-trim data-noescape class="python">
 import sklearn
 
 # center around zero and divide by stddev
 scalerX = sklearn.preprocessing.StandardScaler()
 scalerY = sklearn.preprocessing.StandardScaler()
 
-X = scalerX.fit_transform(X)
-Y = scalerY.fit_transform(Y)
+X_train = scalerX.fit_transform(X_train)
+Y_train = scalerY.fit_transform(Y_train)
 			</code>
 		</pre>
 
 				</section>
 
 				<section>
-					<h2>Model - Variables</h2>
+					<h2>Inputs</h2>
 <pre>
-<code data-trim data-noescape>
->>> X  # fake numbers!
+<code data-trim data-noescape class="python">
+>>> X_train  # fake numbers!
 np.array([
-	[??, ??, ??],
-	[??, ??, ??],
-	[??, ??, ??]
+    [-2, 1, -3],
+    [3, 5, 1],
+    [2.5, 3, -1]
 ])
 
->>> Y
-np.array([??, ??, ??])
+>>> Y_train
+np.array([-4, 3, -1])
 </code>
 </pre>
 				</section>
@@ -221,9 +305,9 @@ np.array([??, ??, ??])
 					<h2>Model - Parameters</h2>
 <!-- no change -->
 					<pre>
-						<code data-trim data-noescape>
-weights = np.array([??, ??, ??])
-intercept = ??
+						<code data-trim data-noescape class="python">
+weights = np.array([4, 5, -2])
+intercept = -7
 						</code>
 					</pre>
 				</section>
@@ -259,13 +343,14 @@ intercept = ??
 				<section>
 					<h2>Model - Operations</h2>
 					<pre>
-						<code data-trim data-noescape>
+						<code data-trim data-noescape class="python">
 def model(X, weights, intercept):
     return X.dot(weights) + intercept
 
->>> Y_hat = model(X, weights, intercept)
->>> Y_hat
-[345000, ??, ??]
+>>> Y_hat_train = model(X_train,
+                        weights, intercept)
+>>> Y_hat_train
+[-4, 28, 20]
 						</code>
 					</pre>
 				</section>
@@ -294,7 +379,7 @@ def model(X, weights, intercept):
 				<section>
 					<h2>Cost function</h2>
 					<pre>
-						<code data-trim data-noescape>
+						<code data-trim data-noescape class="python">
 def cost_function(Y_hat, Y):
     return np.sum((Y_hat - Y)**2)
 						</code>
@@ -305,9 +390,18 @@ def cost_function(Y_hat, Y):
 <p>Adjust <b>parameters</b> to minimize <b>cost</b>.</p>
 				</section>
 
-				<section>
+				<section data-transition="fade-out">
 					<h2>Optimization</h2>
-Graph: Parabola with two tangents
+<img src="images/latex_generated_images/cost_function_no_tangents.png"
+     alt="Graph of cost with respect to weights"
+		 style="width: 50%;">
+				</section>
+
+				<section data-transition="fade">
+					<h2>Optimization</h2>
+<img src="images/latex_generated_images/cost_function_with_tangents.png"
+     alt="Follow tangents down to the weight with the lowest cost"
+		 style="width: 50%;">
 				</section>
 
 				<section data-transition="fade-out">
@@ -374,7 +468,7 @@ $$\epsilon = (y-\hat{y})^2$$</p>
 				<section>
 					<h2>Optimization - Gradient Calculation</h2>
 <pre>
-	<code data-trim data-noescape>
+	<code data-trim data-noescape class="python">
 		delta_y = y - y_hat
 		delta_weights = -2 * delta_y * weights
 		delta_intercept = -2 * delta_y * 1
@@ -383,14 +477,35 @@ $$\epsilon = (y-\hat{y})^2$$</p>
 				</section>
 
 				<section>
-					<h2>Optimization - Learning Rate</h2>
-					TODO
+					<h2>Optimization - Parameter Update</h2>
+<pre>
+	<code data-trim data-noescape class="python">
+weights = weights - delta_weights
+intercept = intercept delta_intercept
+	</code>
+</pre>
 				</section>
+
+
+				<section data-transition="fade-out">
+					<h2>Optimization - Overshoot</h2>
+	<img src="images/latex_generated_images/cost_function_overshoot.png"
+	     alt="If we take steps that are too big, we risk overshooting"
+			 style="width: 50%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Optimization - Undershoot</h2>
+		<img src="images/latex_generated_images/cost_function_undershoot.png"
+		     alt="If we take steps that are too small, convergence takes forever"
+				 style="width: 50%;">
+						</section>
+
 
 				<section>
 					<h2>Optimization - Parameter Update</h2>
 <pre>
-	<code data-trim data-noescape>
+	<code data-trim data-noescape class="python">
 learning_rate = 0.05
 
 weights = weights - \
@@ -403,23 +518,23 @@ intercept = intercept - \
 
 				<section>
 					<h2>Training</h2>
-<pre style="font-size:60%;">
-	<code data-trim data-noescape>
+<pre style="font-size:55%;">
+	<code data-trim data-noescape class="python">
 def training_round(X, Y, weights, intercept,
                    alpha=learning_rate):
-    # calculate our estimate, y_hat
+    # calculate our estimate
     Y_hat = model(X, weights, intercept)
 
     # calculate error
-    delta_Y = Y - Y_hat  # TODO: check for batch
+    delta_Y = Y - Y_hat
 
     # calculate gradients
     delta_weights = -2 * delta_y * weights
     delta_intercept = -2 * delta_y
 
     # update parameters
-    weights = weights - alpha * delta_weights
-    intercept = intercept - alpha * delta_intercept
+    weights = weights - alpha * delta_weights / len(Y)
+    intercept = intercept - alpha * delta_intercept / len(Y)
 
     return weights, intercept
 	</code>
@@ -429,13 +544,14 @@ def training_round(X, Y, weights, intercept,
 				<section>
 					<h2>Training</h2>
 					<pre style="font-size:60%;">
-						<code data-trim data-noescape>
-def train(X, Y):
-    # initialize weights to something small and non-zero
-    # using a recipe from http://cs231n.github.io/neural-networks-2/
-    weights = np.random.randn(len(Y)) * sqrt(2.0/len(Y))
+						<code data-trim data-noescape class="python">
+NUM_ITERATIONS = 100
 
-    for i in range(100):
+def train(X, Y):
+    weights = np.random.randn(3)
+    intercept = 0
+
+    for i in range(NUM_ITERATIONS):
         weights, intercept = training_round(X, Y,
                                weights, intercept)
 </pre>
@@ -445,20 +561,15 @@ def train(X, Y):
 				<section>
 					<h2>Testing</h2>
 					<pre style="font-size:60%;">
-						<code data-trim data-noescape>
+						<code data-trim data-noescape class="python">
 # don't forget to scale!
 X_test = scalerX.transform(X_test)
 Y_test = scalerY.transform(Y_test)
 
-def test(X_test, Y_test, final_weights, final_intercept):
-    Y_hat_test = model(X_test, final_weights,
-                               final_intercept)
-    return cost_function(Y_hat_test, Y_test) / len(Y_test)
-
->>> accuracy = test(X_test, Y_test,
-                    final_weights, final_intercept)
->>> accuracy
-???
+def test(X_test, Y_test, weights, intercept):
+    Y_hat_test = model(X_test, weights, intercept)
+    return np.sqrt(np.mean(
+           cost_function(Y_hat_test, Y_test)))
 </code>
 </pre>
 				</section>
@@ -486,9 +597,9 @@ def test(X_test, Y_test, final_weights, final_intercept):
 				</section>
 
 				<section>
-					<h2>Variables/Placeholders</h2>
+					<h2>Inputs &rarr; Placeholders</h2>
 <pre>
-  <code data-trim data-noescape>
+  <code data-trim data-noescape class="python">
 import tensorflow as tf
 
 X = tf.placeholder(tf.float32, [None, 3])
@@ -499,11 +610,13 @@ Y = tf.placeholder(tf.float32, [None, 1])
 
 				<section>
 					<h2>Model - parameters</h2>
-
 <pre>
-  <code data-trim data-noescape>
-weights   = tf.Variable(tf.zeros([3, 1]))
-intercept = tf.Variable(tf.zeros([1, 1]))
+  <code data-trim data-noescape class="python">
+# create tf.Variable(s)
+W = tf.get_variable("weights", [3, 1],
+       initializer=tf.random_normal_initializer())
+b = tf.get_variable("intercept", [1, 1],
+       initializer=tf.constant_initializer(0))
   </code>
 </pre>
 
@@ -512,8 +625,8 @@ intercept = tf.Variable(tf.zeros([1, 1]))
 				<section>
 					<h2>Model - operations</h2>
 <pre>
-  <code data-trim data-noescape>
-Y_hat = tf.matmul(X, weights) + intercept
+  <code data-trim data-noescape class="python">
+Y_hat = tf.matmul(X, W) + b
   </code>
 </pre>
 				</section>
@@ -521,7 +634,7 @@ Y_hat = tf.matmul(X, weights) + intercept
 				<section>
 					<h2>Cost function</h2>
 <pre>
-  <code data-trim data-noescape>
+  <code data-trim data-noescape class="python">
 cost = tf.reduce_mean(tf.square(Y_hat - Y))
   </code>
 </pre>
@@ -530,7 +643,7 @@ cost = tf.reduce_mean(tf.square(Y_hat - Y))
 				<section>
 					<h2>Optimization</h2>
 <pre>
-  <code data-trim data-noescape>
+  <code data-trim data-noescape class="python">
 learning_rate = 0.05
 optimizer = tf.train.GradientDescentOptimizer
                (learning_rate).minimize(cost)
@@ -541,18 +654,21 @@ optimizer = tf.train.GradientDescentOptimizer
 				<section>
 					<h2>Training</h2>
 <pre>
-  <code data-trim data-noescape>
+  <code data-trim data-noescape class="python">
 with tf.Session() as sess:
     # initialize variables
     sess.run(tf.global_variables_initializer())
 
-    for epoch in range(100):
-        X_batch, Y_batch = random_minibatch(X, Y)
-        sess.run(optimizer,
-                 feed_dict={
-                     X: X_batch,
-                     Y: Y_batch
-                 })
+    # train
+    for _ in range(NUM_ITERATIONS):
+        for (X_batch, Y_batch) in \
+           minibatches(X_train, Y_train,
+                       BATCH_SIZE):
+            sess.run(optimizer,
+                     feed_dict={
+                         X: X_batch,
+                         Y: Y_batch
+                     })
   </code>
 </pre>
 				</section>
@@ -562,17 +678,19 @@ with tf.Session() as sess:
 					<div style="width: 60%; float: left;">
 
 <pre style="font-size: 40%;">
-  <code data-trim data-noescape>
+  <code data-trim data-noescape class="python">
 # Placeholders
 X = tf.placeholder(tf.float32, [None, 3])
 Y = tf.placeholder(tf.float32, [None, 1])
 
 # Parameters
-weights   = tf.Variable(tf.zeros([3, 1]))
-intercept = tf.Variable(tf.zeros([1, 1]))
+W = tf.get_variable("weights", [3, 1],
+       initializer=tf.random_normal_initializer())
+b = tf.get_variable("intercept", [1, 1],
+       initializer=tf.constant_initializer(0))
 
 # Operations
-Y_hat = tf.matmul(X, weights) + intercept
+Y_hat = tf.matmul(X, W) + b
 
 # Cost function
 cost = tf.reduce_mean(tf.square(Y_hat - Y))
@@ -580,132 +698,503 @@ cost = tf.reduce_mean(tf.square(Y_hat - Y))
 # Optimization
 optimizer = tf.train.GradientDescentOptimizer
                (learning_rate).minimize(cost)
-	</code>
-</pre>
 
-								</div>
-								<div style="width: 30%; height: 8em; float: right;">
-									<img src="images/blueprint.png"
-									     alt="All the code in this section is like a blueprint">
-								</div>
+# ------------------------------------------------
 
-								<div style="width: 70%; float: left;">
-
-			<pre style="font-size: 40%;">
-			  <code data-trim data-noescape>
-# train
+# Train
 with tf.Session() as sess:
     # initialize variables
     sess.run(tf.global_variables_initializer())
 
     # run training rounds
-    for epoch in range(100):
-        X_batch, Y_batch = random_minibatch(X, Y)
-        sess.run(optimizer,
-                 feed_dict={X: X_batch, Y: Y_batch})
+    for _ in range(NUM_ITERATIONS):
+        for X_batch, Y_batch in get_minibatches(
+                   X_train, Y_train, BATCH_SIZE):
+            sess.run(optimizer,
+                     feed_dict={X: X_batch, Y: Y_batch})
 				</code>
 			</pre>
+		</div>
 
-											</div>
-											<div style="width: 30%; height: 8em; float: right;">
-												<img src="images/rocket.jpg"
-												     alt="And this section is like the actual rocket that gets built">
-											</div>
+			<div style="width: 30%; height: 8em; float: right;">
+				<img src="images/blueprint.png"
+						 alt="All the code in this section is like a blueprint">
+			</div>
+
+      <div style="width: 30%; float: right">
+				<pre><code class="python">#-------------</code></pre>
+			</div>
+
+			<div style="width: 30%; height: 8em; float: right;">
+				<img src="images/rocket.jpg"
+				     alt="And this section is like the actual rocket that gets built">
+			</div>
 
 					</section>
 
-				<section>
-					<h2>Computation graph</h2>
-Illustrate the computation graph - two parts to it, first
-computing y' and then computing the error
+					<section data-transition="fade">
+						<h2>Computation graph</h2>
+	<img src="images/latex_generated_images/computation_graph_up_to_y_predicted.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Computation graph</h2>
+	<img src="images/latex_generated_images/computation_graph_up_to_error_term.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Forward propagation</h2>
+	<img src="images/latex_generated_images/computation_graph_forward_1.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Forward propagation</h2>
+	<img src="images/latex_generated_images/computation_graph_forward_2.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Forward propagation</h2>
+	<img src="images/latex_generated_images/computation_graph_forward_3.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Forward propagation</h2>
+	<img src="images/latex_generated_images/computation_graph_forward_4.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Forward propagation</h2>
+	<img src="images/latex_generated_images/computation_graph_forward_5.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Backpropagation</h2>
+	<img src="images/latex_generated_images/computation_graph_backprop_goal.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Backpropagation</h2>
+	<img src="images/latex_generated_images/computation_graph_backprop_0.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Backpropagation</h2>
+	<img src="images/latex_generated_images/computation_graph_backprop_0.5.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Backpropagation</h2>
+	<img src="images/latex_generated_images/computation_graph_backprop_1.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Backpropagation</h2>
+	<img src="images/latex_generated_images/computation_graph_backprop_1.5.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Backpropagation</h2>
+	<img src="images/latex_generated_images/computation_graph_backprop_2.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Backpropagation</h2>
+	<img src="images/latex_generated_images/computation_graph_backprop_3.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Backpropagation</h2>
+	<img src="images/latex_generated_images/computation_graph_backprop_4.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Backpropagation</h2>
+	<img src="images/latex_generated_images/computation_graph_backprop_5.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Backpropagation</h2>
+	<img src="images/latex_generated_images/computation_graph_backprop_6.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Backpropagation</h2>
+	<img src="images/latex_generated_images/computation_graph_backprop_7.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Backpropagation</h2>
+	<img src="images/latex_generated_images/computation_graph_backprop_8.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Backpropagation</h2>
+	<img src="images/latex_generated_images/computation_graph_backprop_complete.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+					<section data-transition="fade">
+						<h2>Weight Update</h2>
+	<img src="images/latex_generated_images/computation_graph_just_before_update.png"
+	     alt="Just gradually working through the computation graph..."
+	     style="width: 100%;">
+					</section>
+
+
+				<section data-transition="fade">
+					<h2>Weight Update</h2>
+<img src="images/latex_generated_images/computation_graph_after_update_w0.png"
+     alt="Just gradually working through the computation graph..."
+     style="width: 100%;">
 				</section>
 
-				<section>
-					<h2>Train loop - Forward propagation</h2>
-Show the numbers
-				</section>
-
-				<section>
-					<h2>Train loop - Backward propagation</h2>
-Show the numbers
-				</section>
-
-				<section>
-					<h2>Train loop - Update</h2>
-
+				<section data-transition="fade">
+					<h2>Weight Update</h2>
+<img src="images/latex_generated_images/computation_graph_after_update.png"
+     alt="Just gradually working through the computation graph..."
+     style="width: 100%;">
 				</section>
 
 				<section>
 					<h2>Testing</h2>
-				</section>
+<pre>
+	<code data-trim data-noescape class="python">
+with tf.Session() as sess:
+    # train
+    # ... (code from above)
 
-				<section>
-					<h2>Logistic regression
+    # test
+    Y_hat_test = sess.run(model, feed_dict = {X: X_test})
+    accuracy = tf.reduce_mean(tf.square(Y_test, Y_hat_test))
+	</code>
+</pre>
 				</section>
 
 				<section>
 					<h2>Logistic regression</h2>
-illustrate the new problem
+
+					Word frequencies $\rightarrow$
+					<img src="images/ham.png" alt="Ham"
+					     style="width: 10%; vertical-align: middle;">
+					<img src="images/spam.png" alt="Spam"
+					     style="width: 10%; vertical-align: middle;">
 				</section>
 
 				<section>
-					<h2>Logistic regression</h2>
-illustrate the solution of adding a function onto the end
-why not just treat it like linear regression?
+					<h2>Placeholders</h2>
+<pre>
+	<code data-trim data-noescape class="python">
+X = tf.placeholder(tf.float32, [None, VOCAB_SIZE])
+Y = tf.placeholder(tf.float32, [None, 1])
+# 0 = ham, 1 = spam
+  </code>
+</pre>
 				</section>
 
 				<section>
-					<h2>What needs changing?</h2>
+					<h2>Model</h2>
+					<p>
+						Take a <b>weighted sum</b> of the features<br/>
+						and add a <b>bias term</b> to get the <b>logit</b>.<br/>
+						Convert the logit to a <b>probability</b><br/>
+						via the <b>logistic-sigmoid function</b>.
+					</p>
 				</section>
 
 				<section>
-					<h2>Variables/Placeholders</h2>
-					No change
+					<h2>Logistic-sigmoid function</h2>
+					<img src="images/latex_generated_images/sigmoid_notitle.png"
+					     alt="Logistic-sigmoid function shape"
+							 style="width: 50%;">
+					<div>$f(x) = \frac{e^x}{1+e^x}$</div>
+				</section>
+
+				<section>
+					<h2>Model</h2>
+					<img src="images/latex_generated_images/logistic_regression_as_neural_network.png"
+					     alt="Logistic regression as neural network"
+							 style="width: 40%;">
 				</section>
 
 				<section>
 					<h2>Model - parameters</h2>
-					No change, but different interpretation
+
+<pre>
+	<code data-trim data-noescape class="python">
+# Parameters
+W = tf.get_variable("weights", [VOCAB_SIZE, 1],
+       initializer=tf.random_normal_initializer())
+b = tf.get_variable("bias", [1],
+       initializer=tf.constant_initializer(0))
+	</code>
+</pre>
 				</section>
 
 				<section>
 					<h2>Model - operations</h2>
-					Changed
+<pre>
+	<code data-trim data-noescape class="python">
+logit = tf.matmul(X, W) + b
+Y_hat = tf.nn.sigmoid(logit)
+	</code>
+</pre>
 				</section>
 
 				<section>
 					<h2>Cost function</h2>
-					Changed
+Cross Entropy
+
+<p>$H(y) = \sum\limits_i y_i \log(\hat{y}_i) + (1-y_i)\log(1-\hat{y}_i)$</p>
+				</section>
+
+				<section>
+					<h2>Cost function</h2>
+<pre>
+	<code data-trim data-noescape class="python">
+cost_function = tf.reduce_mean(
+                  tf.reduce_sum(
+                    (-Y * tf.log(Y_hat)) -
+                    ((1 - Y) * tf.log(1 - Y_hat)),
+                  reduction_indices=[1]))
+
+	</code>
+</pre>
+<small>(Better way to do this in next section!)</small>
 				</section>
 
 				<section>
 					<h2>Optimization</h2>
-					Same
+<pre>
+	<code data-trim data-noescape class="python">
+learning_rate = 0.05
+optimizer = tf.train.GradientDescentOptimizer
+              (learning_rate).minimize(cost)
+	</code>
+</pre>
 				</section>
 
 				<section>
 					<h2>Training</h2>
-					Same
+<pre>
+	<code data-trim data-noescape class="python">
+with tf.Session() as sess:
+    sess.run(tf.global_variables_initializer())
+
+    for i in range(NUM_ITERATIONS):
+        X_batch, Y_batch = random_minibatch(
+                 X_train, Y_train, BATCH_SIZE)
+        sess.run(optimizer,
+                 feed_dict={X: X_batch,
+                            Y: Y_batch})
+	</code>
+</pre>
 				</section>
 
 				<section>
 					<h2>Testing</h2>
-					Same
-				</section>
+<pre>
+	<code data-trim data-noescape class="python">
+with tf.Session() as sess:
+    # training code from above
 
-				<section>
-					<h2>Neural network interpretation</h2>
-				</section>
-
-				<section>
-					<h2>Activation functions</h2>
-					* Identity function: linear regression
-					* Step function 0/1: perceptron
-					* Logistic function: logistic regression
+    Y_hat_test = sess.run(model,
+                          feed_dict = {X: X_test})
+    correct = tf.equal(tf.argmax(Y_test, 1),
+                       tf.argmax(Y_hat_test, 1))
+    accuracy = tf.reduce_mean(
+                    tf.cast(correct, tf.float32))
+  </code>
+</pre>
 				</section>
 
 				<section>
 					<h2>Multi-class logistic regression</h2>
+				</section>
+
+				<section>
+					<h2>The Problem</h2>
+					<img src="images/mnist.png" alt="MNIST example"
+					     style="width: 40%;">
+				</section>
+
+				<section>
+					<h2>Placeholders</h2>
+<pre>
+	<code data-trim data-noescape class="python">
+# X = vector length 784 (= 28 x 28 pixels)
+
+# Y = one-hot vectors
+# digit 0 = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+X = tf.placeholder(tf.float32, [None, 28*28])
+Y = tf.placeholder(tf.float32, [None, 10])
+  </code>
+</pre>
+				</section>
+
+				<section>
+					<h2>Model</h2>
+					<img src="images/latex_generated_images/multinomial_logistic_regression_as_neural_network_up_to_logits.png"
+					     alt="Neural network representation of multi-valued logistic regression"
+					     style="width: 30%;">
+				</section>
+
+				<section>
+					<h2>Softmax</h2>
+<pre>
+	<code data-trim data-noescape class="python">
+Z = np.sum(np.exp(logits))
+  </code>
+</pre>
+
+<img src="images/latex_generated_images/softmax.png"
+		 alt="Softmax"
+		 style="width: 60%;">
+				</section>
+
+				<section>
+					<h2>Model</h2>
+					<img src="images/latex_generated_images/multinomial_logistic_regression_as_neural_network.png"
+					     alt="Neural network representation of multi-valued logistic regression"
+					     style="width: 30%;">
+				</section>
+
+				<section>
+					<h2>Model - parameters</h2>
+
+<pre>
+	<code data-trim data-noescape class="python">
+# Parameters
+W = tf.get_variable("weights", [784, 10],
+       initializer=tf.random_normal_initializer())
+b = tf.get_variable("bias", [10],
+       initializer=tf.constant_initializer(0))
+	</code>
+</pre>
+				</section>
+
+				<section>
+					<h2>Model - operations</h2>
+<pre>
+	<code data-trim data-noescape class="python">
+y_logits = tf.matmul(X, W) + b
+	</code>
+</pre>
+				</section>
+
+				<section>
+					<h2>Cost function</h2>
+<pre>
+	<code data-trim data-noescape class="python">
+cost_function = tf.reduce_mean(
+    tf.nn.softmax_cross_entropy_with_logits(
+         logits=y_logits, labels=Y))
+	</code>
+</pre>
+				</section>
+
+				<section>
+					<h2>Optimization</h2>
+<pre>
+	<code data-trim data-noescape class="python">
+learning_rate = 0.05
+optimizer = tf.train.GradientDescentOptimizer
+              (learning_rate).minimize(cost)
+	</code>
+</pre>
+				</section>
+
+				<section>
+					<h2>Training</h2>
+<pre>
+	<code data-trim data-noescape class="python">
+with tf.Session() as sess:
+    sess.run(tf.global_variables_initializer())
+
+    for i in range(NUM_ITERATIONS):
+        for (X_batch, Y_batch) in get_minibatches(
+                 X_train, Y_train, BATCH_SIZE):
+            sess.run(optimizer,
+                     feed_dict={X: X_batch,
+                                Y: Y_batch})
+	</code>
+</pre>
+				</section>
+
+				<section>
+					<h2>Testing</h2>
+<pre>
+	<code data-trim data-noescape class="python">
+predict = tf.argmax(Y_logits, 1)
+
+with tf.Session() as sess:
+    # training code from above
+
+    predictions = sess.run(predict,
+                    feed_dict={X: X_test})
+    test_error  = tf.reduce_mean(np.mean(
+        np.argmax(Y_test, axis=1) == predictions)
+
+# test_error = 92.5%
+  </code>
+</pre>
+				</section>
+
+				<section>
+					<h2>Deficiencies of linear models</h2>
+<img src="images/xor.png" alt="XOR can't be learned by a linear model"
+     style="width: 40%;">
+
+		 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://playground.tensorflow.org">playground.tensorflow.org</a></p>
+
+				</section>
+
+				<section>
+					<h2>Deficiencies of linear models</h2>
+<img src="images/concentric_circles.png"
+     alt="Concentric circles can't be learned by a linear model"
+     style="width: 40%;">
+
+		 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://playground.tensorflow.org">playground.tensorflow.org</a></p>
 				</section>
 
 				<section>
@@ -714,26 +1203,85 @@ why not just treat it like linear regression?
 
 				<section>
 					<h2>Adding another layer</h2>
-					diagram
+<img src="images/latex_generated_images/hidden_layer_neural_network_linear.png"
+     alt="Adding a hidden layer"
+     style="width: 50%;">
 				</section>
 
 				<section>
-					<h2>Adding another layer</h2>
-					Code
-				</section>
+					<h2>Adding another layer - Parameters</h2>
+
+	<pre style="font-size: 65%;">
+		<code data-trim data-noescape class="python">
+HIDDEN_NODES = 128
+W1 = tf.get_variable("weights", [784, HIDDEN_NODES],
+       initializer=tf.random_normal_initializer())
+b1 = tf.get_variable("bias", [HIDDEN_NODES],
+       initializer=tf.constant_initializer(0))
+W2 = tf.get_variable("weights", [HIDDEN_NODES, 10],
+      initializer=tf.random_normal_initializer())
+b2 = tf.get_variable("bias", [10],
+      initializer=tf.constant_initializer(0))
+		</code>
+	</pre>
+					</section>
+
+					<section>
+						<h2>Adding another layer - operations</h2>
+	<pre>
+		<code data-trim data-noescape class="python">
+layer_1  = tf.matmul(X, W1) + b1
+y_logits = tf.matmul(layer_1, W2) + b2
+		</code>
+	</pre>
+					</section>
 
 				<section>
 					<h2>Results</h2>
-					Table -- no improvement
+<table style="text-align: center;">
+	<tr>
+		<td># hidden layers</td><td>Train accuracy</td><td>Test accuracy</td>
+	</tr>
+	<tr>
+	  <td>0</td><td>93.0</td><td>92.5</td>
+	</tr>
+	<tr>
+		<td>1</td><td>89.2</td><td>88.8</td>
+	</tr>
+</table>
+
 				</section>
 
 				<section>
-					<h2>Is Deep Learning a myth?</h2>
+					<h2>Is Deep Learning just hype?</h2>
+
+					<p class="fragment"><small>(Well, it's a little bit over-hyped...)</small></p>
 				</section>
 
 				<section>
-					<h2>Modified intermediate layer</h2>
-					Introduce non-linearity in the intermediate layer
+					<h2>Problem</h2>
+					<p>
+					A linear transformation of a linear
+					transformation is <b>still</b> a
+					linear transformation!
+				</p>
+
+				<p class="fragment">We need to add <b>non-linearity</b> to the system.
+				</section>
+
+
+						<section data-transition="fade-out">
+							<h2>Adding non-linearity</h2>
+		<img src="images/latex_generated_images/hidden_layer_neural_network_linear.png"
+		     alt="Adding a hidden layer that's actually non-linear: before"
+		     style="width: 50%;">
+						</section>
+
+				<section data-transition="fade">
+					<h2>Adding non-linearity</h2>
+<img src="images/latex_generated_images/hidden_layer_neural_network_sigmoid.png"
+     alt="Adding a hidden layer that's actually non-linear: after"
+     style="width: 50%;">
 				</section>
 
 				<section>
@@ -755,73 +1303,232 @@ why not just treat it like linear regression?
 				</section>
 
 				<section>
+					<h2>Adding non-linearity</h2>
+<img src="images/latex_generated_images/hidden_layer_neural_network_relu.png"
+     alt="Adding a hidden layer with ReLU"
+     style="width: 50%;">
+				</section>
+
+
+				<section>
+					<h2>Model - operations</h2>
+<pre styl>
+	<code data-trim data-noescape class="python">
+hidden   = tf.nn.relu(tf.matmul(X, W1) + b1)
+y_logits = tf.matmul(hidden, W2) + b2
+	</code>
+</pre>
+				</section>
+
+				<section>
 					<h2>Results</h2>
-					table -- show improvement
+<table  style="text-align: center;">
+	<tr>
+		<td># hidden layers</td><td>Train accuracy</td><td>Test accuracy</td>
+	</tr>
+	<tr>
+	  <td>0</td><td>93.0</td><td>92.5</td>
+	</tr>
+	<tr>
+		<td>1</td><td>97.9</td><td>95.2</td>
+	</tr>
+</table>
 				</section>
 
 				<section>
 					<h2>What the hidden layer bought us</h2>
+<img src="images/xor_4hidden.png" alt="XOR can be learned with a non-linear hidden layer"
+     style="width: 40%;">
 
-					what can we now model with the hidden layer?
-					* some non-linearities, XOR. Concentric Circles??
+<p style="font-size: 35%; text-align: left;">Image generated with <a href="http://playground.tensorflow.org">playground.tensorflow.org</a></p>
+
 				</section>
 
 				<section>
-					<h2>Back-propagation</h2>
-					Briefly say that the chain rule in this context is called backprop,
-					we don't really need to worry about it due to the beauty of autodiff
+					<h2>What the hidden layer bought us</h2>
+<img src="images/concentric_circles_3hidden.png"
+     alt="Concentric circles can be learned with a non-linear hidden layer"
+     style="width: 40%;">
+
+ <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://playground.tensorflow.org">playground.tensorflow.org</a></p>
 				</section>
 
 				<section>
-					<h2>Let's go deeper - add a layer</h2>
+					<h2>Adding hidden neurons</h2>
+
+<img src="images/clusters_2neurons.png"
+     alt="Effect of adding hidden neurons"
+     style="width: 40%;">
+
+ <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
 				</section>
 
 				<section>
-					<h2>Going deeper</h2>
-					We're not doing deep learning yet. Graph of new layer
+					<h2>Adding hidden neurons</h2>
+
+<img src="images/clusters_3neurons.png"
+     alt="Effect of adding hidden neurons"
+     style="width: 40%;">
+
+		 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
 				</section>
 
 				<section>
-					<h2>Going deeper</h2>
-					Code for adding a new layer. Just define new parameters and change the model.
+					<h2>Adding hidden neurons</h2>
+
+<img src="images/clusters_4neurons.png"
+     alt="Effect of adding hidden neurons"
+     style="width: 40%;">
+
+		 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
+				</section>
+
+				<section>
+					<h2>Adding hidden neurons</h2>
+
+<img src="images/clusters_5neurons.png"
+     alt="Effect of adding hidden neurons"
+     style="width: 40%;">
+
+		 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
+
+				</section>
+
+				<section>
+					<h2>Adding hidden neurons</h2>
+
+				<img src="images/clusters_5neurons_mapping.png"
+				     alt="The hidden layer transforms our old features into a new feature space where a linear classifier can classify our points"
+				     style="width: 80%;">
+
+						 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
+				</section>
+
+				<section>
+					<h2>Universal approximation theorem</h2>
+					A <b>feedforward network</b> with a <b>single hidden layer</b>
+					containing a <b>finite number of neurons</b> can approximate
+					(basically) <b>any interesting function</b>
+				</section>
+
+				<section>
+					<h2>Are we deep learning yet?</h2>
+					<p class="fragment">No!</p>
+				</section>
+
+				<section>
+					<h2>Model - operations</h2>
+<pre style="font-size: 68%;">
+	<code data-trim data-noescape class="python">
+hidden_1 = tf.nn.relu(tf.matmul(X, W1) + b1)
+hidden_2 = tf.nn.relu(tf.matmul(hidden_1, W2) + b2)
+y_logits = tf.matmul(hidden_2, W3) + b3
+	</code>
+</pre>
+				</section>
+
+				<section>
+					<h2>Why go deep?</h2>
+					3 reasons:
+					<ul>
+						<li class="fragment">Deeper networks are <b>more powerful</b></li>
+						<li style="visibility: hidden;">Deeper networks are <b>less prone to overfitting</b></li>
+						<li style="visibility: hidden;">Deeper networks learn <b>hierarchical feature representations</b></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>More powerful</h2>
+					<img src="images/latex_generated_images/shallow_vs_deep_power.png"
+					     alt="Some functions can be approximated only by a layer-k network
+							      with an exponential number of hidden neurons, but with a
+										layer (k+1) network with only a polynomial number of hidden
+										neurons"
+							 style="width: 70%;">
+				</section>
+
+				<section>
+					<h2>Why go deep?</h2>
+					3 reasons:
+					<ul>
+						<li>Deeper networks are <b>more powerful</b></li>
+						<li>Deeper networks are <b>less prone to overfitting</b></li>
+						<li style="visibility: hidden;">Deeper networks learn <b>hierarchical feature representations</b></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Overfitting</h2>
+					<img src="images/overfitting.png"
+					     alt="Illustration of overfitting"
+							 style="width: 40%">
+				</section>
+
+				<section>
+					<h2>Less prone to overfitting</h2>
+					<img src="images/latex_generated_images/autocorrelation.png"
+					     alt="When data is funnelled through a narrow layer,
+							      the network is forced to select a good, compressed
+										representation. One application of this is
+										autocorrelation"
+							 style="width: 70%;">
+				</section>
+
+				<section>
+					<h2>Why go deep?</h2>
+					3 reasons:
+					<ul>
+						<li>Deeper networks are <b>more powerful</b></li>
+						<li>Deeper networks are <b>less prone to overfitting</b></li>
+						<li>Deeper networks learn <b>hierarchical feature representations</b></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Learns hierarchical representations</h2>
+					<img src="images/goodfellow_representation_learning.png"
+						   alt="Convolutional neural networks learn hierarchical representations"
+							 style="width:50%;">
+					 <p class="fragment">&rarr; End-to-end learning</p>
+					 <p style="font-size: 35%; text-align: left;">Image source: Goodfellow, Bengio, and Courville (2016) <a href="http://www.deeplearningbook.org/">(The) Deep Learning (Book)</a></p>
+				</section>
+
+				<section>
+					<h2>Why go deep?</h2>
+					3 reasons:
+					<ul>
+						<li>Deeper networks are <b>more powerful</b></li>
+						<li>Deeper networks are <b>less prone to overfitting</b></li>
+						<li>Deeper networks learn <b>hierarchical feature representations</b></li>
+					</ul>
+					<p>So let's go deeper!</p>
 				</section>
 
 				<section>
 					<h2>Results</h2>
-					table -- show improvement, maybe in training error only?
-					Or both training and testing but only have a couple extra layers
+<table>
+	<tr>
+		<td># hidden layers</td><td>Train accuracy</td><td>Test accuracy</td>
+	</tr>
+	<tr>
+	  <td>0</td><td>93.0</td><td>92.5</td>
+	</tr>
+	<tr>
+		<td>1</td><td>97.9</td><td>95.2</td>
+	</tr>
+	<tr>
+		<td>2</td><td>98.0</td><td>93.2</td>
+	</tr>
+</table>
 				</section>
 
 				<section>
-					<h2>What does going deep buy us?</h2>
-					Learning higher-level features
-				</section>
-
-				<section>
-					<h2>What does going deep buy us?</h2>
-					Show features learned in convnet for images: dots, edges, etc ---> objects
-				</section>
-
-				<section>
-					<h2>What does going deep buy us?</h2>
-					Incidentally, this is how neural style transfer works (maybe include this?)
-				</section>
-
-				<section>
-					<h2>What does going deep buy us?</h2>
-					What about if we're doing text and passing in words? Get word embeddings
-				</section>
-
-				<section>
-					<h2>What does going deep buy us?</h2>
-					Talk about word2vec (show diagram), but say that it's not actually learned
-					via deep learning. Can transform one-hot vectors to word2vec vectors,
-					which more or less skips a layer
-				</section>
-
-				<section>
-					<h2>What does going deep buy us?</h2>
-					In general, very difficult to interpret. Active research.
+					<h2>Overfitting</h2>
+					<img src="images/train_test_overfitting.svg"
+					     alt="It's useful to plot train and test error
+							      against epochs and model complexity
+										to diagnose over- and under-fitting"
+							 style="width: 50%;">
 				</section>
 
 				<section>
@@ -829,71 +1536,251 @@ why not just treat it like linear regression?
 				</section>
 
 				<section>
-					<h2>The dangers of overfitting</h2>
-			    show that at some point our testing error goes up
+					<h2>Regularization</h2>
+					Put the brakes on the <b>training data</b>
+					by enforcing constraints on <b>weights</b>.
 				</section>
 
 				<section>
 					<h2>Regularization</h2>
-					Explain concept of regularization: instead of letting
-					training data take over, add some constraints on
-					the weights that limits the dangers of overfitting
+					<b>L2 regularization:</b> weights should be small.
 				</section>
 
 				<section>
-					<h2>L2 regularization</h2>
-					Limiting the size of coefficients -- motivate why it's a good desideratum
+					<h2>L2 Regularization in TensorFlow</h2>
+<pre style="font-size: 68%;">
+	<code data-trim data-noescape class="python">
+cost_function += REGULARIZATION_CONSTANT * \
+   (tf.nn.l2_loss(W1) +
+    tf.nn.l2_loss(W2) +
+    tf.nn.l2_loss(W3))
+	</code>
+</pre>
 				</section>
 
+<!-- haven't gotten this method to work yet
 				<section>
-					<h2>L2 regularization</h2>
-					Show in code where L2 regularization should go,
-					modify for TensorFlow implementation
-				</section>
+					<h2>L2 Regularization in TensorFlow</h2>
+<pre style="font-size: 60%;">
+	<code data-trim data-noescape class="python">
+# Alternative technique
+W1 = tf.get_variable("weights", [784, HIDDEN_NODES],
+      initializer=tf.random_normal_initializer(),
+      <mark>regularizer=tf.contrib.layers.l2_regularizer(</mark>
+                                        <mark>scale=0.01)</mark>)
+# ditto with W2, W3...
 
-				<section>
+cost_function = data_loss + tf.get_collection(
+                    tf.GraphKeys.REGULARIZATION_LOSSES)
+	</code>
+</pre>
+				</section>
+-->
+
+<section>
+	<h2>Results</h2>
+	<table>
+		<tr>
+			<td>Regularization</td><td>Train accuracy</td><td>Test accuracy</td>
+		</tr>
+		<tr>
+			<td>None</td><td>95.5</td><td>92.9</td>
+		</tr>
+		<tr>
+			<td>L2</td><td>95.1</td><td>95.1</td>
+		</tr>
+	</table>
+</section>
+
+				<section data-transition="fade-out">
 					<h2>Dropout</h2>
-					Another consideration -- reinforce redundancy
+<img src="images/latex_generated_images/dropout_before.png"
+     alt="Before dropout: using all hidden nodes"
+		 style="width: 60%;">
+				</section>
+
+				<section data-transition="fade">
+					<h2>Dropout</h2>
+<img src="images/latex_generated_images/dropout_train.png"
+     alt="Before dropout: knock out half the hidden nodes"
+		 style="width: 60%;">
+				</section>
+
+				<section data-transition="fade">
+					<h2>Dropout</h2>
+<img src="images/latex_generated_images/dropout_2x.png"
+     alt="Before dropout: in training, bump up the rest by 2x"
+		 style="width: 60%;">
 				</section>
 
 				<section>
-					<h2>Dropout</h2>
-					Animation showing removal
+					<h2>Dropout: why it works</h2>
+<ul>
+	<li>"Averaging" over several models</li>
+  <li class="fragment">Forces redundancy of useful features</li>
+	<li class="fragment">No conspiracies! Hidden neurons must be individually useful</li>
+</ul>
 				</section>
 
 				<section>
 					<h2>Implementing dropout in TensorFlow</h2>
-					Show code for adding dropout layer
+<pre>
+	<code data-trim data-noescape class="python">
+# add a new placeholder
+keep_prob = tf.placeholder(tf.float32)
+
+# add a step to the model
+hidden   = tf.nn.relu(tf.matmul(X, w0) + b0)
+<mark>dropout  = tf.nn.dropout(hidden, keep_prob)</mark>
+y_logits = tf.nn.relu(tf.matmul(dropout, w1) + b1)
+  </code>
+</pre>
+				</section>
+
+				<section>
+					<h2>Implementing dropout in TensorFlow</h2>
+<pre>
+	<code data-trim data-noescape class="python">
+
+with tf.Session() as sess:
+    # ... init, then train:
+    for _ in range(NUM_ITERATIONS <mark>* 2</mark>):
+        X_batch, Y_batch = random_minibatch(
+              X_train, Y_train, BATCH_SIZE)
+        sess.run(optimizer,
+                 feed_dict={
+                     X: X_batch, Y: Y_batch,
+                     <mark>keep_prob: 0.5</mark>
+                 })
+
+    # test
+    sess.run(predict, feed_dict={X: X_test,
+                            <mark>keep_prob: 1.0</mark>})
+  </code>
+</pre>
 				</section>
 
 				<section>
 					<h2>Results</h2>
-					Show that our training error goes up but testing error goes down
+					<table>
+						<tr>
+							<td>Regularization</td><td>Train accuracy</td><td>Test accuracy</td>
+						</tr>
+						<tr>
+							<td>None</td><td>95.5</td><td>92.9</td>
+						</tr>
+						<tr>
+							<td>L2</td><td>95.1</td><td>95.1</td>
+						</tr>
+						<tr>
+							<td>Dropout</td><td>93.3</td><td>93.1</td>
+						</tr>
+					</table>
 				</section>
 
 <!-- end section on regularization -->
 <!-- start conclusion -->
 
-
-<!-- maybe review the steps and briefly say what else is possible?
-
-model: changing # of hidden layers, # of neurons per hidden layer,
-       some different architectures, RNNs, CNNs
-cost function: some different possibilities?
-optimizer: change up the alpha, AdaGrad, etc?
-
--->
-
 				<section>
-					<h2>Exploring more: architectures</h2>
+					<h2>Where to from here?</h2>
+				</section>
 
-					Show diagram from neural network zoo,
-					maybe highlight CNNs and RNNs and briefly
-					say that connecting them is exciting.
+				<section data-transition="fade-out">
+					<h2></h2>
+					<ul>
+						<li>Variables</li>
+						<li>Model - Parameters</li>
+						<li>Model - Operations</li>
+						<li>Cost function</li>
+						<li>Optimization</li>
+						<li>Regularization</li>
+					</ul>
+				</section>
+
+				<section data-transition="fade-in">
+					<h2></h2>
+					<ul>
+						<li style="color: #A9A9A9;">Variables</li>
+						<li>Model - Parameters</li>
+						<li>Model - Operations</li>
+						<li style="color: #A9A9A9;">Cost function</li>
+						<li>Optimization</li>
+						<li>Regularization</li>
+					</ul>
 				</section>
 
 				<section>
-					<h2>Exploring more: Keras</h2>
+					<h2>Model - Parameters</h2>
+					<p>
+					<img src="images/nnz_mlp.png"
+					     style="width: 20%;">
+					</p>
+					<p># layers, # neurons / layer</p>
+					<p style="font-size: 35%; text-align: left;">Image source: Fjodor van Veen (2016) <a href="http://www.asimovinstitute.org/neural-network-zoo/">Neural Network Zoo</a></p>
+				</section>
+
+				<section>
+					<h2>Model - Operations</h2>
+					<p>
+					<img src="images/nnz_mlp.png"
+					     style="width: 20%;">
+					</p>
+					<p>Activation functions: ReLU, tanh, leaky RELU, Maxout...</p>
+					<p style="font-size: 35%; text-align: left;">Image source: Fjodor van Veen (2016) <a href="http://www.asimovinstitute.org/neural-network-zoo/">Neural Network Zoo</a></p>
+				</section>
+
+				<section>
+					<h2>Model - Operations</h2>
+					<img src="images/nnz_cnn.png" style="vertical-align: top; width: 34%;">
+					<img src="images/nnz_rnn.png" style="vertical-align: top; width: 40%;">
+					Convolutional neural networks (images)<br/>
+					Recurrent neural networks (sequences &amp; time series)
+
+					<p style="font-size: 35%; text-align: left;">Image source: Fjodor van Veen (2016) <a href="http://www.asimovinstitute.org/neural-network-zoo/">Neural Network Zoo</a></p>
+				</section>
+
+				<section>
+					<h2>Models - Parameters</h2>
+					<ul>
+						<li>tf.random_normal_initializer</li>
+						<li>tf.random_uniform_initializer</li>
+						<li>tf.truncated_normal_initializer</li>
+						<li>tf.constant_initializer</li>
+						<li>tf.contrib.layers.xavier_initializer</li>
+					</ul>
+
+				</section>
+
+				<section>
+					<h2>Optimization</h2>
+					<img src="images/radford_sgd_comparison.gif">
+					<p>Try Adam</p>
+					<p style="font-size: 35%; text-align: left;">Image source: <a href="https://www.reddit.com/r/MachineLearning/comments/2gopfa/visualizing_gradient_optimization_techniques/cklhott/">Alec Radford</a></p>
+				</section>
+
+				<section>
+					<h2>Optimization &amp; Regularization</h2>
+					<ul>
+						<li>L1, L2 regularization</li>
+						<li>Dropout</li>
+						<li>Batch normalization</li>
+						<li>Layer normalization</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Other toolkits</h2>
+					<ul>
+						<li>Torch (PyTorch)</li>
+						<li>Caffe</li>
+						<li>mxnet</li>
+						<li>DyNet</li>
+						<li>Many others...</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Keras</h2>
 
 					<!-- analogy -->
 $$
@@ -906,9 +1793,27 @@ $$
 				</section>
 
 				<section>
-					<h2>Exploring more: Keras</h2>
+					<h2>Keras</h2>
 
-					<!-- translate our final diagram to Keras code -->
+<pre style="font-size: 58%;">
+	<code data-trim data-noescape class="python">
+from keras.models import Sequential
+model = Sequential()
+
+model.add(Dense(input_dim=784, units=64, activation='relu'))
+model.add(Dropout(0.5))
+model.add(Dense(units=64, activation='relu'))
+model.add(Dropout(0.5))
+model.add(Dense(units=10, activation='softmax'))
+
+model.compile(loss='categorical_crossentropy',
+              optimizer=keras.optimizers.SGD(lr=0.05),
+              metrics=['accuracy'])
+
+model.fit(X_train, Y_train, epochs=100, batch_size=120)
+model.evaluate(X_test, Y_test)
+	</code>
+</pre>
 				</section>
 
 				<section>
@@ -916,8 +1821,10 @@ $$
 
 					<ul>
 					  <li class="fragment">If you're familiar with traditional ML,<br>you can do deep learning!</li>
-					  <li class="fragment">But try traditional ML first!</li>
+						<li class="fragment">But you'll need data. Lots of it.</li>
+					  <li class="fragment">So try traditional ML first!</li>
 						<li class="fragment">Go forth and experiment!</li>
+						<li class="fragment">Thank you!</li>
 				  </ul>
 				</section>
 
