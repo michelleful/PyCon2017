@@ -35,34 +35,21 @@
 				</section>
 
 				<section>
-					<h2>About Me</h2>
+					<h2>Prerequisites</h2>
 					<ul>
-						<li>Grad student in linguistics at MIT</li>
-						<li>Consultant in speech and natural language processing</li>
+						<li>Familiarity with linear and logistic regression</li>
+						<li>Knowledge of concepts of supervised learning</li>
 					</ul>
 				</section>
 
 				<section>
-					<img src="images/vid1.png">
-				</section>
-
-				<section>
-					<img src="images/vid2.png">
-				</section>
-
-				<section>
-					<img src="images/vid3.png">
-				</section>
-
-				<section>
-					<h2>A gentle<span style="color: red">r</span> introduction to deep learning with TensorFlow</h2>
-					<p>Michelle Fullwood<br />
-					@michelleful</p>
-					<p>PyCon 2017</p>
-				</section>
-
-				<section>
-					<img src="images/vid4.png">
+					<h2>Target</h2>
+          (Deep) Feed-forward neural networks
+					<ul>
+						<li>How they're constructed</li>
+						<li>Why they work</li>
+						<li>How to write, train, optimize them</li>
+					</ul>
 				</section>
 
 				<section data-transition="fade-out">
@@ -159,85 +146,6 @@
 
 				<section>
 					<h2>Inputs</h2>
-					<img src="images/latex_generated_images/single_x_array.png"
-						   alt="Representation of our variables as an array and float"
-					     style="width:90%">
-				</section>
-
-				<section>
-					<h2>Inputs</h2>
-					<pre>
-						<code data-trim data-noescape class="python">
-							import numpy as np
-
-							x = np.array([1250, 350, 3])
-							y = 345000
-						</code>
-					</pre>
-				</section>
-
-				<section>
-					<h2>Model</h2>
-					<p>
-						Multiply each <b>feature</b> by a <b>weight</b> and add them.<br/>
-						Add an <b>intercept</b> to get our final <b>estimate</b>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Model</h2>
-					<img src="images/latex_generated_images/linear_regression_2d_nopoints.png"
-						   style="width:50%"
-							 alt = "Linear regression is a straight line with one feature">
-				</section>
-
-				<section>
-					<h2>Model - Parameters</h2>
-					<pre>
-						<code data-trim data-noescape class="python">
-weights = np.array([300, -10, -1])
-intercept = -26497
-						</code>
-					</pre>
-				</section>
-
-				<section>
-					<h2>Model - Operations</h2>
-					<img src="images/latex_generated_images/dot_product_big_numbers.png"
-						   style="width:70%"
-							 alt = "Use dot product to accomplish the weight multiplication step">
-				</section>
-
-				<section>
-					<h2>Model - Operations</h2>
-					<pre>
-						<code data-trim data-noescape class="python">
-def model(x, weights, intercept):
-    return x.dot(weights) + intercept
-
->>> y_hat = model(x, weights, intercept)
->>> y_hat
-345000
-						</code>
-					</pre>
-				</section>
-
-				<section>
-					<h2>Model - Operations</h2>
-<img src="images/latex_generated_images/linear_regression_2d_1point.png"
-	   style="width:50%"
-		 alt = "It's easy to match just one point">
-				</section>
-
-				<section>
-					<h2>Model - Operations</h2>
-					<img src="images/latex_generated_images/linear_regression_2d_multiplepoints.png"
-						   style="width:50%"
-							 alt = "But the chances it works on more points are...minuscule">
-				</section>
-
-				<section>
-					<h2>Model - Parameters</h2>
 					<img src="images/latex_generated_images/matrix_big_numbers.png"
 						   style="width:80%"
 							 alt = "Represent multiple x's in an mxn matrix
@@ -245,7 +153,7 @@ def model(x, weights, intercept):
 				</section>
 
 				<section>
-					<h2>Model - Parameters</h2>
+					<h2>Inputs</h2>
 <pre>
 <code data-trim data-noescape class="python">
 X_train = np.array([
@@ -260,39 +168,36 @@ Y_train = np.array([345000, 580000, 360000])
 				</section>
 
 				<section>
-					<h2>Interlude: scaling</h2>
-		<pre>
-			<code data-trim data-noescape class="python">
-import sklearn
-
-# center around zero and divide by stddev
-scalerX = sklearn.preprocessing.StandardScaler()
-scalerY = sklearn.preprocessing.StandardScaler()
-
-X_train = scalerX.fit_transform(X_train)
-Y_train = scalerY.fit_transform(Y_train)
-			</code>
-		</pre>
-
+					<h2>Model</h2>
+					<p>
+						Multiply each <b>feature</b> by a <b>weight</b> and add them.<br/>
+						Add an <b>intercept</b> to get our final <b>estimate</b>.
+					</p>
 				</section>
 
 				<section>
-					<h2>Inputs</h2>
-<pre>
-<code data-trim data-noescape class="python">
->>> X_train  # fake numbers!
-np.array([
-    [-2, 1, -3],
-    [3, 5, 1],
-    [2.5, 3, -1]
-])
-
->>> Y_train
-np.array([-4, 3, -1])
-</code>
-</pre>
+					<h2>Model</h2>
+					<img src="images/latex_generated_images/linear_regression_2d_nopoints.png"
+						   style="width:50%"
+							 alt = "Linear regression is a straight line">
 				</section>
 
+				<section>
+					<h2>Model - Parameters</h2>
+					<pre>
+						<code data-trim data-noescape class="python">
+weights = np.array([300, -10, -1])
+intercept = -26497
+						</code>
+					</pre>
+				</section>
+
+				<section>
+					<h2>Model - Operations</h2>
+<img src="images/latex_generated_images/linear_regression_2d_1point.png"
+	   style="width:50%"
+		 alt = "TODO: change to fitting a line to a number of datapoints">
+				</section>
 
 				<section>
 					<h2>Model - Parameters</h2>
@@ -305,32 +210,12 @@ intercept = -7
 					</pre>
 				</section>
 
+
 				<section data-transition="fade">
 					<h2>Model - Operations</h2>
 <img src="images/latex_generated_images/matrix_mult_1.png"
 	   style="width:70%"
-		 alt = "Matrix multiplication: the two matrices to be multiplied">
-				</section>
-
-				<section data-transition="fade">
-					<h2>Model - Operations</h2>
-<img src="images/latex_generated_images/matrix_mult_2.png"
-		 style="width:70%"
-		 alt = "Matrix multiplication: dot product the row and column of the desired entry">
-				</section>
-
-				<section data-transition="fade">
-					<h2>Model - Operations</h2>
-<img src="images/latex_generated_images/matrix_mult_3.png"
-		 style="width:70%"
-		 alt = "Matrix multiplication: first result">
-				</section>
-
-				<section data-transition="fade">
-					<h2>Model - Operations</h2>
-<img src="images/latex_generated_images/matrix_mult_4.png"
-		 style="width:70%"
-		 alt = "Matrix multiplication: second result">
+		 alt = "TODO: straight-up show matrix multiplication, no via dot product">
 				</section>
 
 				<section>
@@ -340,9 +225,9 @@ intercept = -7
 def model(X, weights, intercept):
     return X.dot(weights) + intercept
 
->>> Y_hat_train = model(X_train,
-                        weights, intercept)
->>> Y_hat_train
+>>> Y_hat = model(X_train,
+                  weights, intercept)
+>>> Y_hat
 [-4, 28, 20]
 						</code>
 					</pre>
@@ -373,7 +258,7 @@ def model(X, weights, intercept):
 					<h2>Cost function</h2>
 					<pre>
 						<code data-trim data-noescape class="python">
-def cost_function(Y_hat, Y):
+def cost(Y_hat, Y):
     return np.sum((Y_hat - Y)**2)
 						</code>
 				</section>
@@ -404,7 +289,7 @@ $$\epsilon = (y-\hat{y})^2$$</p>
 
 <p>&nbsp;</p>
 
-<p><b>Goal:</b> \(\frac{d\epsilon}{dw_i}, \frac{d\epsilon}{db}\)</p>
+<p><b>Goal:</b> \(\frac{\partial\epsilon}{\partial w_i}, \frac{\partial\epsilon}{\partial b}\)</p>
 				</section>
 
 				<section data-transition="fade">
@@ -433,7 +318,7 @@ $$\epsilon = (y-\hat{y})^2$$</p>
 
 <p>&nbsp;</p>
 
-<p><b>Chain rule:</b> \(\frac{\partial\epsilon}{\partial x_0} =
+<p><b>Chain rule:</b> \(\frac{\partial\epsilon}{\partial w_0} =
 	    \frac{d\epsilon}{d\hat{y}}\frac{\partial\hat{y}}{\partial w_0} \)
 				</section>
 
@@ -474,7 +359,7 @@ $$\epsilon = (y-\hat{y})^2$$</p>
 <pre>
 	<code data-trim data-noescape class="python">
 weights = weights - delta_weights
-intercept = intercept delta_intercept
+intercept = intercept - delta_intercept
 	</code>
 </pre>
 				</section>
@@ -513,21 +398,46 @@ intercept = intercept - \
 					<h2>Training</h2>
 <pre style="font-size:55%;">
 	<code data-trim data-noescape class="python">
-def training_round(X, Y, weights, intercept,
+def training_round(x, y, weights, intercept,
                    alpha=learning_rate):
     # calculate our estimate
-    Y_hat = model(X, weights, intercept)
+    y_hat = model(x, weights, intercept)
 
     # calculate error
-    delta_Y = Y - Y_hat
+    delta_y = y - y_hat
 
     # calculate gradients
     delta_weights = -2 * delta_y * weights
     delta_intercept = -2 * delta_y
 
     # update parameters
-    weights = weights - alpha * delta_weights / len(Y)
-    intercept = intercept - alpha * delta_intercept / len(Y)
+    weights = weights - alpha * delta_weights
+    intercept = intercept - alpha * delta_intercept
+
+    return weights, intercept
+	</code>
+</pre>
+				</section>
+
+				<section>
+					<h2>Training</h2>
+<pre style="font-size:55%;">
+	<code data-trim data-noescape class="python">
+def training_round(x, y, weights, intercept,
+                   alpha=learning_rate):
+    # calculate our estimate
+    <mark>y_hat = model(x, weights, intercept)</mark>
+
+    # calculate error
+    delta_y = y - y_hat
+
+    # calculate gradients
+    <mark>delta_weights = -2 * delta_y * weights</mark>
+    <mark>delta_intercept = -2 * delta_y</mark>
+
+    # update parameters
+    weights = weights - alpha * delta_weights
+    intercept = intercept - alpha * delta_intercept
 
     return weights, intercept
 	</code>
@@ -538,15 +448,18 @@ def training_round(X, Y, weights, intercept,
 					<h2>Training</h2>
 					<pre style="font-size:60%;">
 						<code data-trim data-noescape class="python">
-NUM_ITERATIONS = 100
+NUM_EPOCHS = 100
 
 def train(X, Y):
+    # initialize parameters
     weights = np.random.randn(3)
     intercept = 0
 
-    for i in range(NUM_ITERATIONS):
-        weights, intercept = training_round(X, Y,
-                               weights, intercept)
+    # training rounds
+    for i in range(NUM_EPOCHS):
+        for (x, y) in zip(X, Y):
+            weights, intercept = training_round(X, Y,
+                                 weights, intercept)
 </pre>
 </code>
 				</section>
@@ -555,16 +468,17 @@ def train(X, Y):
 					<h2>Testing</h2>
 					<pre style="font-size:60%;">
 						<code data-trim data-noescape class="python">
-# don't forget to scale!
-X_test = scalerX.transform(X_test)
-Y_test = scalerY.transform(Y_test)
-
 def test(X_test, Y_test, weights, intercept):
-    Y_hat_test = model(X_test, weights, intercept)
-    return np.sqrt(np.mean(
-           cost_function(Y_hat_test, Y_test)))
+    Y_predicted = model(X_test, weights, intercept)
+		error = cost(Y_predicted, Y_test)
+    return np.sqrt(np.mean(error))
 </code>
 </pre>
+				</section>
+
+				<section>
+					Uh, wasn't this supposed to be a talk about neural networks?
+					Why are we talking about linear regression?
 				</section>
 
 		    <section>
@@ -608,7 +522,7 @@ Y = tf.placeholder(tf.float32, [None, 1])
 # create tf.Variable(s)
 W = tf.get_variable("weights", [3, 1],
        initializer=tf.random_normal_initializer())
-b = tf.get_variable("intercept", [1, 1],
+b = tf.get_variable("intercept", [1],
        initializer=tf.constant_initializer(0))
   </code>
 </pre>
@@ -653,7 +567,7 @@ with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
 
     # train
-    for _ in range(NUM_ITERATIONS):
+    for _ in range(NUM_EPOCHS):
         for (X_batch, Y_batch) in \
            minibatches(X_train, Y_train,
                        BATCH_SIZE):
@@ -666,8 +580,51 @@ with tf.Session() as sess:
 </pre>
 				</section>
 
-				<section>
+				<section data-transition="fade-out">
+					<div style="width: 60%; float: left;">
 
+<pre style="font-size: 40%;">
+  <code data-trim data-noescape class="python">
+# Placeholders
+X = tf.placeholder(tf.float32, [None, 3])
+Y = tf.placeholder(tf.float32, [None, 1])
+
+# Parameters
+W = tf.get_variable("weights", [3, 1],
+       initializer=tf.random_normal_initializer())
+b = tf.get_variable("intercept", [1, 1],
+       initializer=tf.constant_initializer(0))
+
+# Operations
+<mark>Y_hat = tf.matmul(X, W) + b</mark>
+
+# Cost function
+cost = tf.reduce_mean(tf.square(Y_hat - Y))
+
+# Optimization
+optimizer = tf.train.GradientDescentOptimizer
+               (learning_rate).minimize(cost)
+
+# ------------------------------------------------
+
+# Train
+with tf.Session() as sess:
+    # initialize variables
+    sess.run(tf.global_variables_initializer())
+
+    # run training rounds
+    for _ in range(NUM_EPOCHS):
+        for X_batch, Y_batch in get_minibatches(
+                   X_train, Y_train, BATCH_SIZE):
+            sess.run(optimizer,
+               feed_dict={X: X_batch, Y: Y_batch})
+				</code>
+			</pre>
+		</div>
+
+					</section>
+
+					<section data-transition="fade">
 					<div style="width: 60%; float: left;">
 
 <pre style="font-size: 40%;">
@@ -700,11 +657,11 @@ with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
 
     # run training rounds
-    for _ in range(NUM_ITERATIONS):
+    for _ in range(NUM_EPOCHS):
         for X_batch, Y_batch in get_minibatches(
                    X_train, Y_train, BATCH_SIZE):
             sess.run(optimizer,
-                     feed_dict={X: X_batch, Y: Y_batch})
+               feed_dict={X: X_batch, Y: Y_batch})
 				</code>
 			</pre>
 		</div>
@@ -730,6 +687,7 @@ with tf.Session() as sess:
 	<img src="images/latex_generated_images/computation_graph_up_to_y_predicted.png"
 	     alt="Just gradually working through the computation graph..."
 	     style="width: 100%;">
+
 					</section>
 
 					<section data-transition="fade">
@@ -896,31 +854,21 @@ with tf.Session() as sess:
     # ... (code from above)
 
     # test
-    Y_hat_test = sess.run(model, feed_dict = {X: X_test})
-    accuracy = tf.reduce_mean(tf.square(Y_test, Y_hat_test))
+    Y_predicted = sess.run(model,
+                    feed_dict = {X: X_test})
+    squared_error = tf.reduce_mean(
+                 tf.square(Y_test, Y_predicted))
+
+>>> np.sqrt(squared_error)
+TODO
 	</code>
 </pre>
 				</section>
 
 				<section>
-					<h2>Logistic regression</h2>
-
-					Word frequencies $\rightarrow$
-					<img src="images/ham.png" alt="Ham"
-					     style="width: 10%; vertical-align: middle;">
-					<img src="images/spam.png" alt="Spam"
-					     style="width: 10%; vertical-align: middle;">
-				</section>
-
-				<section>
-					<h2>Placeholders</h2>
-<pre>
-	<code data-trim data-noescape class="python">
-X = tf.placeholder(tf.float32, [None, VOCAB_SIZE])
-Y = tf.placeholder(tf.float32, [None, 1])
-# 0 = ham, 1 = spam
-  </code>
-</pre>
+					<h2>Problem</h2>
+					<img src="images/mnist.png" alt="MNIST example"
+					     style="width: 40%;">
 				</section>
 
 				<section>
@@ -934,14 +882,6 @@ Y = tf.placeholder(tf.float32, [None, 1])
 				</section>
 
 				<section>
-					<h2>Logistic-sigmoid function</h2>
-					<img src="images/latex_generated_images/sigmoid_notitle.png"
-					     alt="Logistic-sigmoid function shape"
-							 style="width: 50%;">
-					<div>$f(x) = \frac{e^x}{1+e^x}$</div>
-				</section>
-
-				<section>
 					<h2>Model</h2>
 					<img src="images/latex_generated_images/logistic_regression_as_neural_network.png"
 					     alt="Logistic regression as neural network"
@@ -949,119 +889,11 @@ Y = tf.placeholder(tf.float32, [None, 1])
 				</section>
 
 				<section>
-					<h2>Model - parameters</h2>
-
-<pre>
-	<code data-trim data-noescape class="python">
-# Parameters
-W = tf.get_variable("weights", [VOCAB_SIZE, 1],
-       initializer=tf.random_normal_initializer())
-b = tf.get_variable("bias", [1],
-       initializer=tf.constant_initializer(0))
-	</code>
-</pre>
-				</section>
-
-				<section>
-					<h2>Model - operations</h2>
-<pre>
-	<code data-trim data-noescape class="python">
-logit = tf.matmul(X, W) + b
-Y_hat = tf.nn.sigmoid(logit)
-	</code>
-</pre>
-				</section>
-
-				<section>
-					<h2>Cost function</h2>
-Cross Entropy
-
-<p>$H(y) = \sum\limits_i y_i \log(\hat{y}_i) + (1-y_i)\log(1-\hat{y}_i)$</p>
-				</section>
-
-				<section>
-					<h2>Cost function</h2>
-<pre>
-	<code data-trim data-noescape class="python">
-cost_function = tf.reduce_mean(
-                  tf.reduce_sum(
-                    (-Y * tf.log(Y_hat)) -
-                    ((1 - Y) * tf.log(1 - Y_hat)),
-                  reduction_indices=[1]))
-
-	</code>
-</pre>
-<small>(Better way to do this in next section!)</small>
-				</section>
-
-				<section>
-					<h2>Optimization</h2>
-<pre>
-	<code data-trim data-noescape class="python">
-learning_rate = 0.05
-optimizer = tf.train.GradientDescentOptimizer
-              (learning_rate).minimize(cost)
-	</code>
-</pre>
-				</section>
-
-				<section>
-					<h2>Training</h2>
-<pre>
-	<code data-trim data-noescape class="python">
-with tf.Session() as sess:
-    sess.run(tf.global_variables_initializer())
-
-    for i in range(NUM_ITERATIONS):
-        X_batch, Y_batch = random_minibatch(
-                 X_train, Y_train, BATCH_SIZE)
-        sess.run(optimizer,
-                 feed_dict={X: X_batch,
-                            Y: Y_batch})
-	</code>
-</pre>
-				</section>
-
-				<section>
-					<h2>Testing</h2>
-<pre>
-	<code data-trim data-noescape class="python">
-with tf.Session() as sess:
-    # training code from above
-
-    Y_hat_test = sess.run(model,
-                          feed_dict = {X: X_test})
-    correct = tf.equal(tf.argmax(Y_test, 1),
-                       tf.argmax(Y_hat_test, 1))
-    accuracy = tf.reduce_mean(
-                    tf.cast(correct, tf.float32))
-  </code>
-</pre>
-				</section>
-
-				<section>
-					<h2>Multi-class logistic regression</h2>
-				</section>
-
-				<section>
-					<h2>The Problem</h2>
-					<img src="images/mnist.png" alt="MNIST example"
-					     style="width: 40%;">
-				</section>
-
-				<section>
-					<h2>Placeholders</h2>
-<pre>
-	<code data-trim data-noescape class="python">
-# X = vector length 784 (= 28 x 28 pixels)
-
-# Y = one-hot vectors
-# digit 0 = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-X = tf.placeholder(tf.float32, [None, 28*28])
-Y = tf.placeholder(tf.float32, [None, 10])
-  </code>
-</pre>
+					<h2>Logistic-sigmoid function</h2>
+					<img src="images/latex_generated_images/sigmoid_notitle.png"
+					     alt="Logistic-sigmoid function shape"
+							 style="width: 50%;">
+					<div>$f(x) = \frac{e^x}{1+e^x}$</div>
 				</section>
 
 				<section>
@@ -1092,6 +924,22 @@ Z = np.sum(np.exp(logits))
 				</section>
 
 				<section>
+					<h2>Placeholders</h2>
+<pre>
+	<code data-trim data-noescape class="python">
+# X = vector length 784 (= 28 x 28 pixels)
+
+# Y = one-hot vectors
+# digit 0 = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+X = tf.placeholder(tf.float32, [None, 28*28])
+Y = tf.placeholder(tf.float32, [None, 10])
+  </code>
+</pre>
+				</section>
+
+
+				<section>
 					<h2>Model - parameters</h2>
 
 <pre>
@@ -1116,9 +964,16 @@ y_logits = tf.matmul(X, W) + b
 
 				<section>
 					<h2>Cost function</h2>
+Cross Entropy
+
+<p>$H(y) = -\sum\limits_i y_i \log(\hat{y}_i) + (1-y_i)\log(1-\hat{y}_i)$</p>
+				</section>
+
+				<section>
+					<h2>Cost function</h2>
 <pre>
 	<code data-trim data-noescape class="python">
-cost_function = tf.reduce_mean(
+cost = tf.reduce_mean(
     tf.nn.softmax_cross_entropy_with_logits(
          logits=y_logits, labels=Y))
 	</code>
@@ -1143,7 +998,7 @@ optimizer = tf.train.GradientDescentOptimizer
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
 
-    for i in range(NUM_ITERATIONS):
+    for i in range(NUM_EPOCHS):
         for (X_batch, Y_batch) in get_minibatches(
                  X_train, Y_train, BATCH_SIZE):
             sess.run(optimizer,
@@ -1164,10 +1019,11 @@ with tf.Session() as sess:
 
     predictions = sess.run(predict,
                     feed_dict={X: X_test})
-    test_error  = tf.reduce_mean(np.mean(
+    accuracy  = tf.reduce_mean(np.mean(
         np.argmax(Y_test, axis=1) == predictions)
 
-# test_error = 92.5%
+>>> accuracy
+0.925 TODO
   </code>
 </pre>
 				</section>
@@ -1207,13 +1063,13 @@ with tf.Session() as sess:
 	<pre style="font-size: 65%;">
 		<code data-trim data-noescape class="python">
 HIDDEN_NODES = 128
-W1 = tf.get_variable("weights", [784, HIDDEN_NODES],
+W1 = tf.get_variable("weights1", [784, HIDDEN_NODES],
        initializer=tf.random_normal_initializer())
-b1 = tf.get_variable("bias", [HIDDEN_NODES],
+b1 = tf.get_variable("bias1", [HIDDEN_NODES],
        initializer=tf.constant_initializer(0))
-W2 = tf.get_variable("weights", [HIDDEN_NODES, 10],
+W2 = tf.get_variable("weights2", [HIDDEN_NODES, 10],
       initializer=tf.random_normal_initializer())
-b2 = tf.get_variable("bias", [10],
+b2 = tf.get_variable("bias2", [10],
       initializer=tf.constant_initializer(0))
 		</code>
 	</pre>
@@ -1510,7 +1366,7 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 		<td>1</td><td>97.9</td><td>95.2</td>
 	</tr>
 	<tr>
-		<td>2</td><td>98.0</td><td>93.2</td>
+		<td>2</td><td>98.0</td><td>94.2</td>
 	</tr>
 </table>
 				</section>
@@ -1543,10 +1399,10 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 					<h2>L2 Regularization in TensorFlow</h2>
 <pre style="font-size: 68%;">
 	<code data-trim data-noescape class="python">
-cost_function += REGULARIZATION_CONSTANT * \
-   (tf.nn.l2_loss(W1) +
-    tf.nn.l2_loss(W2) +
-    tf.nn.l2_loss(W3))
+cost += REGULARIZATION_CONSTANT * \
+          (tf.nn.l2_loss(W1) +
+           tf.nn.l2_loss(W2) +
+           tf.nn.l2_loss(W3))
 	</code>
 </pre>
 				</section>
@@ -1631,13 +1487,13 @@ y_logits = tf.nn.relu(tf.matmul(dropout, w1) + b1)
 				</section>
 
 				<section>
-					<h2>Implementing dropout in TensorFlow</h2>
+					<h2>Dropout in TensorFlow</h2>
 <pre>
 	<code data-trim data-noescape class="python">
 
 with tf.Session() as sess:
     # ... init, then train:
-    for _ in range(NUM_ITERATIONS <mark>* 2</mark>):
+    for _ in range(NUM_EPOCHS <mark>* 2</mark>):
         X_batch, Y_batch = random_minibatch(
               X_train, Y_train, BATCH_SIZE)
         sess.run(optimizer,
@@ -1793,9 +1649,9 @@ $$
 from keras.models import Sequential
 model = Sequential()
 
-model.add(Dense(input_dim=784, units=64, activation='relu'))
+model.add(Dense(input_dim=784, units=128, activation='relu'))
 model.add(Dropout(0.5))
-model.add(Dense(units=64, activation='relu'))
+model.add(Dense(units=128, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(units=10, activation='softmax'))
 
@@ -1815,7 +1671,7 @@ model.evaluate(X_test, Y_test)
 					<ul>
 					  <li class="fragment">If you're familiar with traditional ML,<br>you can do deep learning!</li>
 						<li class="fragment">But you'll need data. Lots of it.</li>
-					  <li class="fragment">So try traditional ML first!</li>
+					  <li class="fragment">So try traditional ML first.</li>
 						<li class="fragment">Go forth and experiment!</li>
 						<li class="fragment">Thank you!</li>
 				  </ul>
