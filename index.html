@@ -35,21 +35,19 @@
 				</section>
 
 				<section>
-					<h2>Prerequisites</h2>
-					<ul>
-						<li>Familiarity with linear and logistic regression</li>
-						<li>Knowledge of concepts of supervised learning</li>
-					</ul>
-				</section>
-
-				<section>
 					<h2>Target</h2>
           (Deep) Feed-forward neural networks
+					<p>
+					<img src="images/nnz_mlp.png"
+					     style="width: 20%;">
+					</p>
 					<ul>
 						<li>How they're constructed</li>
 						<li>Why they work</li>
-						<li>How to write, train, optimize them</li>
+						<li>How to train and optimize them</li>
 					</ul>
+					<p style="font-size: 35%; text-align: left;">Image source: Fjodor van Veen (2016) <a href="http://www.asimovinstitute.org/neural-network-zoo/">Neural Network Zoo</a></p>
+
 				</section>
 
 				<section data-transition="fade-out">
@@ -67,6 +65,14 @@
 										or multi-layer perceptrons. How they work, how to train them,
 										how to optimize them."
 							 style="width: 60%;">
+				</section>
+
+				<section>
+					<h2>Starting point</h2>
+					<ul>
+						<li>Knowledge of concepts of supervised learning</li>
+						<li>Familiarity with linear and logistic regression</li>
+					</ul>
 				</section>
 
 				<section data-transition="fade">
@@ -118,7 +124,17 @@
 				</section>
 
 				<section>
-					<h2>Linear Regression
+					<h2>TensorFlow</h2>
+					<ul>
+						<li>Popular deep learning toolkit</li>
+						<li>From Google Brain, Apache-licensed</li>
+						<li>Python API over C++ back-end</li>
+						<li>Works on CPUs and GPUs</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Linear Regression</h2>
 				</section>
 
 				<section>
@@ -177,7 +193,7 @@ Y_train = np.array([345000, 580000, 360000])
 
 				<section>
 					<h2>Model</h2>
-					<img src="images/latex_generated_images/linear_regression_2d_nopoints.png"
+					<img src="images/latex_generated_images/linear_regression_2d_fitline.png"
 						   style="width:50%"
 							 alt = "Linear regression is a straight line">
 				</section>
@@ -192,28 +208,9 @@ intercept = -26497
 					</pre>
 				</section>
 
-				<section>
-					<h2>Model - Operations</h2>
-<img src="images/latex_generated_images/linear_regression_2d_1point.png"
-	   style="width:50%"
-		 alt = "TODO: change to fitting a line to a number of datapoints">
-				</section>
-
-				<section>
-					<h2>Model - Parameters</h2>
-<!-- no change -->
-					<pre>
-						<code data-trim data-noescape class="python">
-weights = np.array([4, 5, -2])
-intercept = -7
-						</code>
-					</pre>
-				</section>
-
-
 				<section data-transition="fade">
 					<h2>Model - Operations</h2>
-<img src="images/latex_generated_images/matrix_mult_1.png"
+<img src="images/latex_generated_images/matrix_mult_4.png"
 	   style="width:70%"
 		 alt = "TODO: straight-up show matrix multiplication, no via dot product">
 				</section>
@@ -225,10 +222,7 @@ intercept = -7
 def model(X, weights, intercept):
     return X.dot(weights) + intercept
 
->>> Y_hat = model(X_train,
-                  weights, intercept)
->>> Y_hat
-[-4, 28, 20]
+Y_hat = model(X_train, weights, intercept)
 						</code>
 					</pre>
 				</section>
@@ -265,7 +259,15 @@ def cost(Y_hat, Y):
 
 				<section>
 					<h2>Optimization</h2>
-<p>Adjust <b>parameters</b> to minimize <b>cost</b>.</p>
+<p>Hold X and Y constant.<br/>Adjust <b>parameters</b> to minimize <b>cost</b>.</p>
+				</section>
+
+				<section>
+					<h2>Trial and error</h2>
+<img src="images/shooting_hoops.jpg"
+     alt="Shooting hoops - adjust angle by trial and error"
+		 style="width: 50%;">
+<p style="font-size: 35%; text-align: left;">Image source: <a href="https://commons.wikimedia.org/wiki/File:Barack_Obama_playing_basketball.jpg">Wikimedia Commons</a></p>
 				</section>
 
 				<section data-transition="fade-out">
@@ -458,7 +460,7 @@ def train(X, Y):
     # training rounds
     for i in range(NUM_EPOCHS):
         for (x, y) in zip(X, Y):
-            weights, intercept = training_round(X, Y,
+            weights, intercept = training_round(x, y,
                                  weights, intercept)
 </pre>
 </code>
@@ -470,8 +472,11 @@ def train(X, Y):
 						<code data-trim data-noescape class="python">
 def test(X_test, Y_test, weights, intercept):
     Y_predicted = model(X_test, weights, intercept)
-		error = cost(Y_predicted, Y_test)
+    error = cost(Y_predicted, Y_test)
     return np.sqrt(np.mean(error))
+
+>>> error
+6052.79
 </code>
 </pre>
 				</section>
@@ -860,15 +865,34 @@ with tf.Session() as sess:
                  tf.square(Y_test, Y_predicted))
 
 >>> np.sqrt(squared_error)
-TODO
+5967.39
 	</code>
 </pre>
+				</section>
+
+				<section>
+					<h2>Logistic regression</h2>
 				</section>
 
 				<section>
 					<h2>Problem</h2>
 					<img src="images/mnist.png" alt="MNIST example"
 					     style="width: 40%;">
+				</section>
+
+				<section>
+					<h2>Placeholders</h2>
+<pre>
+	<code data-trim data-noescape class="python">
+# X = vector length 784 (= 28 x 28 pixels)
+
+# Y = one-hot vectors
+# digit 0 = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+X = tf.placeholder(tf.float32, [None, 28*28])
+Y = tf.placeholder(tf.float32, [None, 10])
+  </code>
+</pre>
 				</section>
 
 				<section>
@@ -924,22 +948,6 @@ Z = np.sum(np.exp(logits))
 				</section>
 
 				<section>
-					<h2>Placeholders</h2>
-<pre>
-	<code data-trim data-noescape class="python">
-# X = vector length 784 (= 28 x 28 pixels)
-
-# Y = one-hot vectors
-# digit 0 = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-X = tf.placeholder(tf.float32, [None, 28*28])
-Y = tf.placeholder(tf.float32, [None, 10])
-  </code>
-</pre>
-				</section>
-
-
-				<section>
 					<h2>Model - parameters</h2>
 
 <pre>
@@ -957,7 +965,7 @@ b = tf.get_variable("bias", [10],
 					<h2>Model - operations</h2>
 <pre>
 	<code data-trim data-noescape class="python">
-y_logits = tf.matmul(X, W) + b
+Y_logits = tf.matmul(X, W) + b
 	</code>
 </pre>
 				</section>
@@ -966,7 +974,7 @@ y_logits = tf.matmul(X, W) + b
 					<h2>Cost function</h2>
 Cross Entropy
 
-<p>$H(y) = -\sum\limits_i y_i \log(\hat{y}_i) + (1-y_i)\log(1-\hat{y}_i)$</p>
+<p>$H(\hat{y}) = -\sum\limits_i y_i \log(\hat{y}_i)$</p>
 				</section>
 
 				<section>
@@ -975,7 +983,7 @@ Cross Entropy
 	<code data-trim data-noescape class="python">
 cost = tf.reduce_mean(
     tf.nn.softmax_cross_entropy_with_logits(
-         logits=y_logits, labels=Y))
+         logits=Y_logits, labels=Y))
 	</code>
 </pre>
 				</section>
@@ -1023,7 +1031,7 @@ with tf.Session() as sess:
         np.argmax(Y_test, axis=1) == predictions)
 
 >>> accuracy
-0.925 TODO
+0.925
   </code>
 </pre>
 				</section>
@@ -1209,6 +1217,8 @@ y_logits = tf.matmul(hidden, W2) + b2
      alt="Effect of adding hidden neurons"
      style="width: 40%;">
 
+<p>2 hidden neurons</p>
+
  <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
 				</section>
 
@@ -1218,6 +1228,8 @@ y_logits = tf.matmul(hidden, W2) + b2
 <img src="images/clusters_3neurons.png"
      alt="Effect of adding hidden neurons"
      style="width: 40%;">
+
+		 <p>3 hidden neurons</p>
 
 		 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
 				</section>
@@ -1229,6 +1241,8 @@ y_logits = tf.matmul(hidden, W2) + b2
      alt="Effect of adding hidden neurons"
      style="width: 40%;">
 
+		 <p>4 hidden neurons</p>
+
 		 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
 				</section>
 
@@ -1238,6 +1252,8 @@ y_logits = tf.matmul(hidden, W2) + b2
 <img src="images/clusters_5neurons.png"
      alt="Effect of adding hidden neurons"
      style="width: 40%;">
+
+		 <p>5 hidden neurons</p>
 
 		 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
 
@@ -1256,7 +1272,7 @@ y_logits = tf.matmul(hidden, W2) + b2
 				<section>
 					<h2>Universal approximation theorem</h2>
 					A <b>feedforward network</b> with a <b>single hidden layer</b>
-					containing a <b>finite number of neurons</b> can approximate
+					containing a finite number of neurons <b>can approximate</b>
 					(basically) <b>any interesting function</b>
 				</section>
 
@@ -1281,7 +1297,7 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 					3 reasons:
 					<ul>
 						<li class="fragment">Deeper networks are <b>more powerful</b></li>
-						<li style="visibility: hidden;">Deeper networks are <b>less prone to overfitting</b></li>
+						<li style="visibility: hidden;">Narrower networks are <b>less prone to overfitting</b></li>
 						<li style="visibility: hidden;">Deeper networks learn <b>hierarchical feature representations</b></li>
 					</ul>
 				</section>
@@ -1301,7 +1317,7 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 					3 reasons:
 					<ul>
 						<li>Deeper networks are <b>more powerful</b></li>
-						<li>Deeper networks are <b>less prone to overfitting</b></li>
+						<li>Narrower networks are <b>less prone to overfitting</b></li>
 						<li style="visibility: hidden;">Deeper networks learn <b>hierarchical feature representations</b></li>
 					</ul>
 				</section>
@@ -1315,11 +1331,11 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 
 				<section>
 					<h2>Less prone to overfitting</h2>
-					<img src="images/latex_generated_images/autocorrelation.png"
+					<img src="images/latex_generated_images/autoencoder.png"
 					     alt="When data is funnelled through a narrow layer,
 							      the network is forced to select a good, compressed
 										representation. One application of this is
-										autocorrelation"
+										the autoencoder network"
 							 style="width: 70%;">
 				</section>
 
@@ -1328,7 +1344,7 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 					3 reasons:
 					<ul>
 						<li>Deeper networks are <b>more powerful</b></li>
-						<li>Deeper networks are <b>less prone to overfitting</b></li>
+						<li>Narrower networks are <b>less prone to overfitting</b></li>
 						<li>Deeper networks learn <b>hierarchical feature representations</b></li>
 					</ul>
 				</section>
@@ -1347,7 +1363,7 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 					3 reasons:
 					<ul>
 						<li>Deeper networks are <b>more powerful</b></li>
-						<li>Deeper networks are <b>less prone to overfitting</b></li>
+						<li>Narrower networks are <b>less prone to overfitting</b></li>
 						<li>Deeper networks learn <b>hierarchical feature representations</b></li>
 					</ul>
 					<p>So let's go deeper!</p>
@@ -1392,7 +1408,8 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 
 				<section>
 					<h2>Regularization</h2>
-					<b>L2 regularization:</b> weights should be small.
+					<p><b>L2 regularization:</b> weights should be small.</p>
+					$L = \sum{w_i}$
 				</section>
 
 				<section>
@@ -1472,11 +1489,11 @@ cost_function = data_loss + tf.get_collection(
 				</section>
 
 				<section>
-					<h2>Implementing dropout in TensorFlow</h2>
+					<h2>Dropout in TensorFlow</h2>
 <pre>
 	<code data-trim data-noescape class="python">
 # add a new placeholder
-keep_prob = tf.placeholder(tf.float32)
+<mark>keep_prob = tf.placeholder(tf.float32)</mark>
 
 # add a step to the model
 hidden   = tf.nn.relu(tf.matmul(X, w0) + b0)
