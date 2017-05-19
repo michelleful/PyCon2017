@@ -32,7 +32,9 @@
 					<h2>A gentle introduction to deep learning with TensorFlow</h2>
 					<p>Michelle Fullwood<br />
 					@michelleful</p>
-					<p>PyCon 2017</p>
+
+					<p>&nbsp;</p>
+					<p>Slides: michelleful.github.io/PyCon2017</p>
 				</section>
 
 <!-- Introduction -->
@@ -476,7 +478,7 @@ def test(X_test, Y_test, weights, intercept):
 				</section>
 
 		    <section>
-					<h2>Surprise! <br/> You've made <br/> a neural network!</h2>
+					<h2>Surprise! <br/> You've already made <br/> a neural network!</h2>
 				</section>
 
 				<section data-transition="fade-out">
@@ -603,7 +605,7 @@ Y = tf.placeholder(tf.float32, [None, 1])
 # Parameters/Variables
 W = tf.get_variable("weights", [3, 1],
        initializer=tf.random_normal_initializer())
-b = tf.get_variable("intercept", [1, 1],
+b = tf.get_variable("intercept", [1],
        initializer=tf.constant_initializer(0))
 
 # Operations
@@ -647,7 +649,7 @@ Y = tf.placeholder(tf.float32, [None, 1])
 # Parameters/Variables
 W = tf.get_variable("weights", [3, 1],
        initializer=tf.random_normal_initializer())
-b = tf.get_variable("intercept", [1, 1],
+b = tf.get_variable("intercept", [1],
        initializer=tf.constant_initializer(0))
 
 # Operations
@@ -783,12 +785,14 @@ with tf.Session() as sess:
 	     style="width: 100%;">
 					</section>
 
+<!--
 					<section data-transition="fade">
 						<h2>Backpropagation</h2>
 	<img src="images/latex_generated_images/computation_graph_backprop_0.5.png"
 	     alt="Just gradually working through the computation graph..."
 	     style="width: 100%;">
 					</section>
+-->
 
 					<section data-transition="fade">
 						<h2>Backpropagation</h2>
@@ -879,7 +883,7 @@ with tf.Session() as sess:
 					</section>
 
 					<section data-transition="fade">
-						<h2>Weight Update</h2>
+						<h2>Variable Update</h2>
 	<img src="images/latex_generated_images/computation_graph_just_before_update.png"
 	     alt="Just gradually working through the computation graph..."
 	     style="width: 100%;">
@@ -887,21 +891,21 @@ with tf.Session() as sess:
 
 
 				<section data-transition="fade">
-					<h2>Weight Update</h2>
+					<h2>Variable Update</h2>
 <img src="images/latex_generated_images/computation_graph_after_update_w0.png"
      alt="Just gradually working through the computation graph..."
      style="width: 100%;">
 				</section>
 
 				<section data-transition="fade">
-					<h2>Weight Update</h2>
+					<h2>Variable Update</h2>
 <img src="images/latex_generated_images/computation_graph_after_update.png"
      alt="Just gradually working through the computation graph..."
      style="width: 100%;">
 				</section>
 
 				<section>
-					<h2>Weight Update</h2>
+					<h2>Variable Update</h2>
 <pre style="font-size:55%;">
 	<code data-trim data-noescape class="python">
 def training_round(x, y, weights, intercept,
@@ -924,6 +928,44 @@ def training_round(x, y, weights, intercept,
 	</code>
 </pre>
 				</section>
+
+				<section>
+					<h2>Variable Update</h2>
+<pre style="font-size:55%;">
+	<code data-trim data-noescape class="python">
+def training_round(x, y, weights, intercept,
+                   alpha=learning_rate):
+    # calculate our estimate
+    y_hat = model(x, weights, intercept)
+
+    # calculate error
+    delta_y = y - y_hat
+
+    # calculate gradients
+    gradient_weights = -2 * delta_y * weights
+    gradient_intercept = -2 * delta_y
+
+    # update parameters
+    <mark>weights = weights - alpha * gradient_weights</mark>
+    <mark>intercept = intercept - alpha * gradient_intercept</mark>
+
+    return weights, intercept
+	</code>
+</pre>
+				</section>
+
+			<section>
+				<h2>Numpy &rarr; TensorFlow</h2>
+				<pre>
+				  <code data-trim data-noescape class="python">
+sess.run(optimizer,
+         feed_dict={
+             X: X_batch,
+             Y: Y_batch
+         })
+				  </code>
+				</pre>
+			</section>
 
 				<section>
 					<h2>Testing</h2>
@@ -960,22 +1002,7 @@ with tf.Session() as sess:
 				</section>
 
 				<section>
-					<h2>Placeholders</h2>
-<pre>
-	<code data-trim data-noescape class="python">
-# X = vector length 784 (= 28 x 28 pixels)
-
-# Y = one-hot vectors
-# digit 0 = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-X = tf.placeholder(tf.float32, [None, 28*28])
-Y = tf.placeholder(tf.float32, [None, 10])
-  </code>
-</pre>
-				</section>
-
-				<section>
-					<h2>Model</h2>
+					<h2>Binary logistic regression - Model</h2>
 					<p>
 						Take a <b>weighted sum</b> of the features<br/>
 						and add a <b>bias term</b> to get the <b>logit</b>.<br/>
@@ -985,7 +1012,7 @@ Y = tf.placeholder(tf.float32, [None, 10])
 				</section>
 
 				<section>
-					<h2>Model</h2>
+					<h2>Binary logistic regression - Model</h2>
 					<img src="images/latex_generated_images/logistic_regression_as_neural_network.png"
 					     alt="Logistic regression as neural network"
 							 style="width: 40%;">
@@ -1035,6 +1062,21 @@ Z = np.sum(np.exp(logits))
 				</section>
 
 				<section>
+					<h2>Placeholders</h2>
+<pre>
+	<code data-trim data-noescape class="python">
+# X = vector length 784 (= 28 x 28 pixels)
+
+# Y = one-hot vectors
+# digit 0 = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+X = tf.placeholder(tf.float32, [None, 28*28])
+Y = tf.placeholder(tf.float32, [None, 10])
+  </code>
+</pre>
+				</section>
+
+				<section>
 					<h2>Variables</h2>
 
 <pre>
@@ -1059,13 +1101,6 @@ Y_logits = tf.matmul(X, W) + b
 
 				<section>
 					<h2>Cost function</h2>
-Cross Entropy
-
-<p>$H(\hat{y}) = -\sum\limits_i y_i \log(\hat{y}_i)$</p>
-				</section>
-
-				<section>
-					<h2>Cost function</h2>
 <pre>
 	<code data-trim data-noescape class="python">
 cost = tf.reduce_mean(
@@ -1074,6 +1109,14 @@ cost = tf.reduce_mean(
 	</code>
 </pre>
 				</section>
+
+				<section>
+					<h2>Cost function</h2>
+Cross Entropy
+
+<p>$H(\hat{y}) = -\sum\limits_i y_i \log(\hat{y}_i)$</p>
+				</section>
+
 
 				<section>
 					<h2>Optimization</h2>
@@ -1158,7 +1201,7 @@ with tf.Session() as sess:
 				</section>
 
 				<section>
-					<h2>Adding another layer - Parameters</h2>
+					<h2>Adding another layer - Variables</h2>
 
 	<pre style="font-size: 65%;">
 		<code data-trim data-noescape class="python">
@@ -1302,7 +1345,7 @@ y_logits = tf.matmul(hidden, W2) + b2
  <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://playground.tensorflow.org">playground.tensorflow.org</a></p>
 				</section>
 
-				<section>
+				<section data-transition="fade-out">
 					<h2>Adding hidden neurons</h2>
 
 <img src="images/clusters_2neurons.png"
@@ -1314,7 +1357,7 @@ y_logits = tf.matmul(hidden, W2) + b2
  <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
 				</section>
 
-				<section>
+				<section data-transition="fade">
 					<h2>Adding hidden neurons</h2>
 
 <img src="images/clusters_3neurons.png"
@@ -1326,7 +1369,7 @@ y_logits = tf.matmul(hidden, W2) + b2
 		 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
 				</section>
 
-				<section>
+				<section data-transition="fade">
 					<h2>Adding hidden neurons</h2>
 
 <img src="images/clusters_4neurons.png"
@@ -1338,7 +1381,7 @@ y_logits = tf.matmul(hidden, W2) + b2
 		 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
 				</section>
 
-				<section>
+				<section data-transition="fade">
 					<h2>Adding hidden neurons</h2>
 
 <img src="images/clusters_5neurons.png"
@@ -1351,11 +1394,21 @@ y_logits = tf.matmul(hidden, W2) + b2
 
 				</section>
 
-				<section>
+				<section data-transition="fade">
 					<h2>Adding hidden neurons</h2>
 
 				<img src="images/clusters_5neurons_mapping.png"
-				     alt="The hidden layer transforms our old features into a new feature space where a linear classifier can classify our points"
+				     alt="The hidden layer transforms our old features into a new feature space..."
+				     style="width: 80%;">
+
+						 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
+				</section>
+
+				<section data-transition="fade">
+					<h2>Adding hidden neurons</h2>
+
+				<img src="images/clusters_5neurons_mapping_with_boundary.png"
+				     alt="...where a linear classifier can classify our points"
 				     style="width: 80%;">
 
 						 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
@@ -1484,6 +1537,14 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 				</section>
 
 				<section>
+					<h2>Results</h2>
+					<img src="images/effect_of_depth.png"
+					     alt="Effect of increasing depth of network"
+							 style="width: 65%;">
+			 <p style="font-size: 35%; text-align: left;">Image source: Goodfellow, Bengio, and Courville (2016) <a href="http://www.deeplearningbook.org/">(The) Deep Learning (Book)</a></p>
+				</section>
+
+				<section>
 					<h2>Overfitting</h2>
 					<img src="images/train_test_overfitting.svg"
 					     alt="It's useful to plot train and test error
@@ -1559,23 +1620,23 @@ cost_function = data_loss + tf.get_collection(
 </section>
 
 				<section data-transition="fade-out">
-					<h2>Dropout</h2>
+					<h2>Dropout - Train</h2>
 <img src="images/latex_generated_images/dropout_before.png"
      alt="Before dropout: using all hidden nodes"
 		 style="width: 60%;">
 				</section>
 
 				<section data-transition="fade">
-					<h2>Dropout</h2>
-<img src="images/latex_generated_images/dropout_train.png"
+					<h2>Dropout - Train</h2>
+<img src="images/latex_generated_images/dropout.png"
      alt="Before dropout: knock out half the hidden nodes"
 		 style="width: 60%;">
 				</section>
 
 				<section data-transition="fade">
-					<h2>Dropout</h2>
-<img src="images/latex_generated_images/dropout_2x.png"
-     alt="Before dropout: in training, bump up the rest by 2x"
+					<h2>Dropout - Train</h2>
+<img src="images/latex_generated_images/dropout_train.png"
+     alt="Before dropout: knock out half the hidden nodes"
 		 style="width: 60%;">
 				</section>
 
@@ -1586,6 +1647,20 @@ cost_function = data_loss + tf.get_collection(
   <li class="fragment">Forces redundancy of useful features</li>
 	<li class="fragment">No conspiracies! Hidden neurons must be individually useful</li>
 </ul>
+				</section>
+
+				<section data-transition="fade-out">
+					<h2>Dropout - Test</h2>
+<img src="images/latex_generated_images/dropout_before.png"
+     alt="Before dropout: using all hidden nodes"
+		 style="width: 60%;">
+				</section>
+
+				<section data-transition="fade">
+					<h2>Dropout - Train</h2>
+<img src="images/latex_generated_images/dropout_2x.png"
+     alt="Before dropout: in training, bump up the rest by 2x"
+		 style="width: 60%;">
 				</section>
 
 				<section>
@@ -1654,7 +1729,7 @@ with tf.Session() as sess:
 				</section>
 
 				<section data-transition="fade-out">
-					<h2></h2>
+					<h2>A guide to further exploration</h2>
 					<ul>
 						<li>Placeholders</li>
 						<li>Model - Variables</li>
@@ -1666,7 +1741,7 @@ with tf.Session() as sess:
 				</section>
 
 				<section data-transition="fade-in">
-					<h2></h2>
+					<h2>A guide to further exploration</h2>
 					<ul>
 						<li style="color: #A9A9A9;">Placeholders</li>
 						<li>Model - Variables</li>
@@ -1678,13 +1753,24 @@ with tf.Session() as sess:
 				</section>
 
 				<section>
-					<h2>Model - Parameters</h2>
+					<h2>Model - Variables</h2>
 					<p>
 					<img src="images/nnz_mlp.png"
 					     style="width: 20%;">
 					</p>
 					<p># layers, # neurons / layer</p>
 					<p style="font-size: 35%; text-align: left;">Image source: Fjodor van Veen (2016) <a href="http://www.asimovinstitute.org/neural-network-zoo/">Neural Network Zoo</a></p>
+				</section>
+
+				<section>
+					<h2>Model - Variables</h2>
+					<ul>
+						<li>tf.random_normal_initializer</li>
+						<li>tf.random_uniform_initializer</li>
+						<li>tf.truncated_normal_initializer</li>
+						<li>tf.constant_initializer</li>
+						<li>tf.contrib.layers.xavier_initializer</li>
+					</ul>
 				</section>
 
 				<section>
@@ -1698,25 +1784,13 @@ with tf.Session() as sess:
 				</section>
 
 				<section>
-					<h2>Model - Operations</h2>
+					<h2>Model</h2>
 					<img src="images/nnz_cnn.png" style="vertical-align: top; width: 34%;">
 					<img src="images/nnz_rnn.png" style="vertical-align: top; width: 40%;">
 					Convolutional neural networks (images)<br/>
 					Recurrent neural networks (sequences &amp; time series)
 
 					<p style="font-size: 35%; text-align: left;">Image source: Fjodor van Veen (2016) <a href="http://www.asimovinstitute.org/neural-network-zoo/">Neural Network Zoo</a></p>
-				</section>
-
-				<section>
-					<h2>Models - Parameters</h2>
-					<ul>
-						<li>tf.random_normal_initializer</li>
-						<li>tf.random_uniform_initializer</li>
-						<li>tf.truncated_normal_initializer</li>
-						<li>tf.constant_initializer</li>
-						<li>tf.contrib.layers.xavier_initializer</li>
-					</ul>
-
 				</section>
 
 				<section>
@@ -1794,6 +1868,8 @@ model.evaluate(X_test, Y_test)
 						<li class="fragment">Go forth and experiment!</li>
 						<li class="fragment">Thank you!</li>
 				  </ul>
+					<p>&nbsp;</p>
+					<p>Slides: michelleful.github.io/PyCon2017</p>
 				</section>
       </section> <!-- end conclusion -->
 

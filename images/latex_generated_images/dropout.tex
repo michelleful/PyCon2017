@@ -21,10 +21,10 @@
 
 \node[draw, scale=2, line width=2, circle, minimum size=1cm] (h0) at (7, 10) {2x};
 \node[draw, scale=2, line width=2, circle, minimum size=1cm, fill=black] (h1) at (7, 6) {};
-\node[draw, scale=2, line width=2, circle, minimum size=1cm] (h2) at (7, 2) {2x};
-\node[draw, scale=2, line width=2, circle, minimum size=1cm] (h3) at (7, -2) {2x};
-\node[draw, scale=2, line width=2, circle, minimum size=1cm, fill=black] (h4) at (7, -6) {};
-\node[draw, scale=2, line width=2, circle, minimum size=1cm, fill=black] (h5) at (7, -10) {};
+\node[draw, scale=2, line width=2, circle, minimum size=1cm, fill=black] (h2) at (7, 2) {2x};
+\node[draw, scale=2, line width=2, circle, minimum size=1cm, fill=black] (h3) at (7, -2) {2x};
+\node[draw, scale=2, line width=2, circle, minimum size=1cm] (h4) at (7, -6) {};
+\node[draw, scale=2, line width=2, circle, minimum size=1cm] (h5) at (7, -10) {};
 
 % output nodes
 
@@ -36,24 +36,24 @@
 % input to hidden
 \draw [->, line width=2] (x0) -- (h0); 
 \draw [->, line width=2, color=gray!25] (x0) -- (h1); 
-\draw [->, line width=2] (x0) -- (h2); 
-\draw [->, line width=2] (x0) -- (h3); 
-\draw [->, line width=2, color=gray!25] (x0) -- (h4); 
-\draw [->, line width=2, color=gray!25] (x0) -- (h5); 
+\draw [->, line width=2, color=gray!25] (x0) -- (h2); 
+\draw [->, line width=2, color=gray!25] (x0) -- (h3); 
+\draw [->, line width=2] (x0) -- (h4); 
+\draw [->, line width=2] (x0) -- (h5); 
 
 \draw [->, line width=2] (x1) -- (h0); 
 \draw [->, line width=2, color=gray!25] (x1) -- (h1); 
-\draw [->, line width=2] (x1) -- (h2); 
-\draw [->, line width=2] (x1) -- (h3); 
-\draw [->, line width=2, color=gray!25] (x1) -- (h4); 
-\draw [->, line width=2, color=gray!25] (x1) -- (h5); 
+\draw [->, line width=2, color=gray!25] (x1) -- (h2); 
+\draw [->, line width=2, color=gray!25] (x1) -- (h3); 
+\draw [->, line width=2] (x1) -- (h4); 
+\draw [->, line width=2] (x1) -- (h5); 
 
 \draw [->, line width=2] (x2) -- (h0); 
 \draw [->, line width=2, color=gray!25] (x2) -- (h1); 
-\draw [->, line width=2] (x2) -- (h2); 
-\draw [->, line width=2] (x2) -- (h3); 
-\draw [->, line width=2, color=gray!25] (x2) -- (h4); 
-\draw [->, line width=2, color=gray!25] (x2) -- (h5); 
+\draw [->, line width=2, color=gray!25] (x2) -- (h2); 
+\draw [->, line width=2, color=gray!25] (x2) -- (h3); 
+\draw [->, line width=2] (x2) -- (h4); 
+\draw [->, line width=2] (x2) -- (h5); 
 
 
 % hidden to output
@@ -65,21 +65,21 @@
 \draw [->, line width=2, color=gray!25] (h1) -- (y1); 
 \draw [->, line width=2, color=gray!25] (h1) -- (y2);
 
-\draw [->, line width=2] (h2) -- (y0); 
-\draw [->, line width=2] (h2) -- (y1); 
-\draw [->, line width=2] (h2) -- (y2);
+\draw [->, line width=2, color=gray!25] (h2) -- (y0); 
+\draw [->, line width=2, color=gray!25] (h2) -- (y1); 
+\draw [->, line width=2, color=gray!25] (h2) -- (y2);
 
-\draw [->, line width=2] (h3) -- (y0); 
-\draw [->, line width=2] (h3) -- (y1); 
-\draw [->, line width=2] (h3) -- (y2);
+\draw [->, line width=2, color=gray!25] (h3) -- (y0); 
+\draw [->, line width=2, color=gray!25] (h3) -- (y1); 
+\draw [->, line width=2, color=gray!25] (h3) -- (y2);
 
-\draw [->, line width=2, color=gray!25] (h4) -- (y0); 
-\draw [->, line width=2, color=gray!25] (h4) -- (y1); 
-\draw [->, line width=2, color=gray!25] (h4) -- (y2);
+\draw [->, line width=2] (h4) -- (y0); 
+\draw [->, line width=2] (h4) -- (y1); 
+\draw [->, line width=2] (h4) -- (y2);
 
-\draw [->, line width=2, color=gray!25] (h5) -- (y0); 
-\draw [->, line width=2, color=gray!25] (h5) -- (y1); 
-\draw [->, line width=2, color=gray!25] (h5) -- (y2);
+\draw [->, line width=2] (h5) -- (y0); 
+\draw [->, line width=2] (h5) -- (y1); 
+\draw [->, line width=2] (h5) -- (y2);
 
 \end{tikzpicture}
 \end{document}
