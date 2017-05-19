@@ -5,18 +5,27 @@
 \begin{document}
 
 \begin{tikzpicture}
-\begin{axis}[xmax=4,xmin=-4,ymax=9, ymin=-1, samples=100, xlabel={$w_i$}, ylabel={Cost $\epsilon$}, title style={font=\huge}]
+\begin{axis}[xmax=4,xmin=-4,ymax=9, ymin=-1, samples=100, xlabel={$w_i$}, ylabel={Cost $\epsilon$}, title style={font=\huge}, axis lines=none]
   % TODO: remove axes
 
-  \addplot[domain=0:2, red, thick] (x, 2*1*x-1);
-  \addplot[domain=-3:-1, red, thick] (x, 2*-2*x-4);
 
-  \addplot[domain=0:2, red, thick] (x, 2*1*x-1);
-  \addplot[domain=-3:-1, red, thick] (x, 2*-2*x-4);
-
-%  \addplot[domain=-9:9, gray] (x, 0);
-%  \addplot[domain=-9:9, gray] (0, x);
   \addplot[domain=-3:3, blue!50, ultra thick] (x, x*x);
+
+% TANGENTS
+%  \addplot[domain=0:2, red, thick] (x, 2*1*x-1);
+%  \addplot[domain=-3:-1, red, thick] (x, 2*-2*x-4);
+
+
+% TARGET
+\addplot[red, mark=*, only marks, mark size=4] coordinates {(0,0)};
+
+% NICE TRAJECTORY
+%\draw[->, red, very thick] (axis cs:2, 2*2)--(axis cs: 1, 1*1);
+%\draw[->, red, very thick] (axis cs:1, 1*1)--(axis cs: -0.4, -0.4*-0.4);
+%\draw[->, red, very thick] (axis cs:-0.4, -0.4*-0.4)--(axis cs: 0, 0*0);
+%\draw[->, red, very thick] (axis cs:1.6, 1.6*1.6)--(axis cs: 1.41, 1.41*1.41);
+%\draw[->, red, very thick] (axis cs:1.45, 1.45*1.45)--(axis cs: 1.25, 1.25*1.26);
+
 
 % OVERSHOOT
 %\node (p1) at (axis cs:2.1,4){};
