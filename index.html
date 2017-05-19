@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="css/theme/beige.css">
 		<link rel="stylesheet" href="css/custom.css">
 
+
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/googlecode.css">
 
@@ -33,6 +34,9 @@
 					@michelleful</p>
 					<p>PyCon 2017</p>
 				</section>
+
+<!-- Introduction -->
+		 <section>
 
 				<section>
 					<h2>Target</h2>
@@ -128,13 +132,17 @@
 					<ul>
 						<li>Popular deep learning toolkit</li>
 						<li>From Google Brain, Apache-licensed</li>
-						<li>Python API over C++ back-end</li>
+						<li>Python API, makes calls to C++ back-end</li>
 						<li>Works on CPUs and GPUs</li>
 					</ul>
 				</section>
+			</section>
+
+<!-- LINEAR REGRESSION IN NUMPY -->
+			<section>
 
 				<section>
-					<h2>Linear Regression</h2>
+					<h2>Linear Regression<br/>from scratch</h2>
 				</section>
 
 				<section>
@@ -186,7 +194,7 @@ Y_train = np.array([345000, 580000, 360000])
 				<section>
 					<h2>Model</h2>
 					<p>
-						Multiply each <b>feature</b> by a <b>weight</b> and add them.<br/>
+						Multiply each <b>feature</b> by a <b>weight</b> and add them up.<br/>
 						Add an <b>intercept</b> to get our final <b>estimate</b>.
 					</p>
 				</section>
@@ -212,7 +220,7 @@ intercept = -26497
 					<h2>Model - Operations</h2>
 <img src="images/latex_generated_images/matrix_mult_4.png"
 	   style="width:70%"
-		 alt = "TODO: straight-up show matrix multiplication, no via dot product">
+		 alt = "TODO: show calculation, then show addition of intercept">
 				</section>
 
 				<section>
@@ -262,6 +270,13 @@ def cost(Y_hat, Y):
 <p>Hold X and Y constant.<br/>Adjust <b>parameters</b> to minimize <b>cost</b>.</p>
 				</section>
 
+				<section data-transition="fade-out">
+					<h2>Optimization</h2>
+<img src="images/latex_generated_images/cost_function_no_tangents.png"
+     alt="Graph of cost with respect to weights"
+		 style="width: 50%;">
+				</section>
+
 				<section>
 					<h2>Trial and error</h2>
 <img src="images/shooting_hoops.jpg"
@@ -270,17 +285,17 @@ def cost(Y_hat, Y):
 <p style="font-size: 35%; text-align: left;">Image source: <a href="https://commons.wikimedia.org/wiki/File:Barack_Obama_playing_basketball.jpg">Wikimedia Commons</a></p>
 				</section>
 
-				<section data-transition="fade-out">
-					<h2>Optimization</h2>
-<img src="images/latex_generated_images/cost_function_no_tangents.png"
-     alt="Graph of cost with respect to weights"
-		 style="width: 50%;">
-				</section>
-
 				<section data-transition="fade">
 					<h2>Optimization</h2>
 <img src="images/latex_generated_images/cost_function_with_tangents.png"
      alt="Follow tangents down to the weight with the lowest cost"
+		 style="width: 50%;">
+				</section>
+
+				<section data-transition="fade-out">
+					<h2>Optimization</h2>
+<img src="images/latex_generated_images/cost_function_goldilocks.png"
+     alt="Nice trajectory down towards the inimum"
 		 style="width: 50%;">
 				</section>
 
@@ -292,6 +307,17 @@ $$\epsilon = (y-\hat{y})^2$$</p>
 <p>&nbsp;</p>
 
 <p><b>Goal:</b> \(\frac{\partial\epsilon}{\partial w_i}, \frac{\partial\epsilon}{\partial b}\)</p>
+				</section>
+
+				<section data-transition="fade">
+					<h2>Optimization - Gradient Calculation</h2>
+<p>\(\frac{\partial\hat{y}}{\partial w_0} = x_0\)</p>
+<p>\(\frac{d\epsilon}{d\hat{y}} = -2(y-\hat{y})\)</p>
+
+<p>&nbsp;</p>
+
+<p><b>Chain rule:</b> \(\frac{\partial\epsilon}{\partial w_0} =
+	    \frac{d\epsilon}{d\hat{y}}\frac{\partial\hat{y}}{\partial w_0} \)
 				</section>
 
 				<section data-transition="fade">
@@ -312,18 +338,6 @@ $$\epsilon = (y-\hat{y})^2$$</p>
 <p>\(\frac{d\epsilon}{d\hat{y}} =\) <span class="fragment"><span class="fragment">\(-\)</span>\(2(y-\hat{y})\)</span></p>
 				</section>
 
-
-				<section data-transition="fade">
-					<h2>Optimization - Gradient Calculation</h2>
-<p>\(\frac{\partial\hat{y}}{\partial w_0} = x_0\)</p>
-<p>\(\frac{d\epsilon}{d\hat{y}} = -2(y-\hat{y})\)</p>
-
-<p>&nbsp;</p>
-
-<p><b>Chain rule:</b> \(\frac{\partial\epsilon}{\partial w_0} =
-	    \frac{d\epsilon}{d\hat{y}}\frac{\partial\hat{y}}{\partial w_0} \)
-				</section>
-
 				<section data-transition="fade-in">
 					<h2>Optimization - Gradient Calculation</h2>
 <p>\(\frac{\partial\hat{y}}{\partial w_0} = x_0\)</p>
@@ -331,7 +345,7 @@ $$\epsilon = (y-\hat{y})^2$$</p>
 
 <p>&nbsp;</p>
 
-\(\frac{\partial\epsilon}{\partial x_0} =
+\(\frac{\partial\epsilon}{\partial w_0} =
 	    -2(y-\hat{y})x_0 \)
 				</section>
 
@@ -350,8 +364,8 @@ $$\epsilon = (y-\hat{y})^2$$</p>
 <pre>
 	<code data-trim data-noescape class="python">
 		delta_y = y - y_hat
-		delta_weights = -2 * delta_y * weights
-		delta_intercept = -2 * delta_y * 1
+		gradient_weights = -2 * delta_y * weights
+		gradient_intercept = -2 * delta_y * 1
 	</code>
 </pre>
 				</section>
@@ -360,8 +374,8 @@ $$\epsilon = (y-\hat{y})^2$$</p>
 					<h2>Optimization - Parameter Update</h2>
 <pre>
 	<code data-trim data-noescape class="python">
-weights = weights - delta_weights
-intercept = intercept - delta_intercept
+weights = weights - gradient_weights
+intercept = intercept - gradient_intercept
 	</code>
 </pre>
 				</section>
@@ -389,9 +403,9 @@ intercept = intercept - delta_intercept
 learning_rate = 0.05
 
 weights = weights - \
-             learning_rate * delta_weights
+             learning_rate * gradient_weights
 intercept = intercept - \
-             learning_rate * delta_intercept
+             learning_rate * gradient_intercept
 	</code>
 </pre>
 				</section>
@@ -409,37 +423,12 @@ def training_round(x, y, weights, intercept,
     delta_y = y - y_hat
 
     # calculate gradients
-    delta_weights = -2 * delta_y * weights
-    delta_intercept = -2 * delta_y
+    gradient_weights = -2 * delta_y * weights
+    gradient_intercept = -2 * delta_y
 
     # update parameters
-    weights = weights - alpha * delta_weights
-    intercept = intercept - alpha * delta_intercept
-
-    return weights, intercept
-	</code>
-</pre>
-				</section>
-
-				<section>
-					<h2>Training</h2>
-<pre style="font-size:55%;">
-	<code data-trim data-noescape class="python">
-def training_round(x, y, weights, intercept,
-                   alpha=learning_rate):
-    # calculate our estimate
-    <mark>y_hat = model(x, weights, intercept)</mark>
-
-    # calculate error
-    delta_y = y - y_hat
-
-    # calculate gradients
-    <mark>delta_weights = -2 * delta_y * weights</mark>
-    <mark>delta_intercept = -2 * delta_y</mark>
-
-    # update parameters
-    weights = weights - alpha * delta_weights
-    intercept = intercept - alpha * delta_intercept
+    weights = weights - alpha * gradient_weights
+    intercept = intercept - alpha * gradient_intercept
 
     return weights, intercept
 	</code>
@@ -475,7 +464,7 @@ def test(X_test, Y_test, weights, intercept):
     error = cost(Y_predicted, Y_test)
     return np.sqrt(np.mean(error))
 
->>> error
+>>> test(X_test, Y_test, final_weights, final_intercept)
 6052.79
 </code>
 </pre>
@@ -504,8 +493,26 @@ def test(X_test, Y_test, weights, intercept):
 							 alt = "Usually we omit the intercept from this diagram">
 				</section>
 
+     </section> <!-- end linear regression section -->
+
+<!-- Linear regression in TensorFlow -->
+
+     <section>
 				<section>
 					<h2>Once more, with TensorFlow</h2>
+				</section>
+
+				<section data-transition="fade-out">
+					<h2></h2>
+					<ul>
+						<li>Inputs</li>
+						<li>Model - Parameters</li>
+						<li>Model - Operations</li>
+						<li>Cost function</li>
+						<li>Optimization</li>
+						<li>Train</li>
+						<li>Test</li>
+					</ul>
 				</section>
 
 				<section>
@@ -521,7 +528,7 @@ Y = tf.placeholder(tf.float32, [None, 1])
 				</section>
 
 				<section>
-					<h2>Model - parameters</h2>
+					<h2>Parameters &rarr; Variables</h2>
 <pre>
   <code data-trim data-noescape class="python">
 # create tf.Variable(s)
@@ -535,7 +542,7 @@ b = tf.get_variable("intercept", [1],
 				</section>
 
 				<section>
-					<h2>Model - operations</h2>
+					<h2>Operations</h2>
 <pre>
   <code data-trim data-noescape class="python">
 Y_hat = tf.matmul(X, W) + b
@@ -573,9 +580,8 @@ with tf.Session() as sess:
 
     # train
     for _ in range(NUM_EPOCHS):
-        for (X_batch, Y_batch) in \
-           minibatches(X_train, Y_train,
-                       BATCH_SIZE):
+        for (X_batch, Y_batch) in get_minibatches(
+               X_train, Y_train, BATCH_SIZE):
             sess.run(optimizer,
                      feed_dict={
                          X: X_batch,
@@ -594,14 +600,14 @@ with tf.Session() as sess:
 X = tf.placeholder(tf.float32, [None, 3])
 Y = tf.placeholder(tf.float32, [None, 1])
 
-# Parameters
+# Parameters/Variables
 W = tf.get_variable("weights", [3, 1],
        initializer=tf.random_normal_initializer())
 b = tf.get_variable("intercept", [1, 1],
        initializer=tf.constant_initializer(0))
 
 # Operations
-<mark>Y_hat = tf.matmul(X, W) + b</mark>
+Y_hat = tf.matmul(X, W) + b
 
 # Cost function
 cost = tf.reduce_mean(tf.square(Y_hat - Y))
@@ -638,7 +644,7 @@ with tf.Session() as sess:
 X = tf.placeholder(tf.float32, [None, 3])
 Y = tf.placeholder(tf.float32, [None, 1])
 
-# Parameters
+# Parameters/Variables
 W = tf.get_variable("weights", [3, 1],
        initializer=tf.random_normal_initializer())
 b = tf.get_variable("intercept", [1, 1],
@@ -737,6 +743,32 @@ with tf.Session() as sess:
 	     style="width: 100%;">
 					</section>
 
+					<section>
+						<h2>Forward propagation</h2>
+	<pre style="font-size:55%;">
+		<code data-trim data-noescape class="python">
+	def training_round(x, y, weights, intercept,
+	                   alpha=learning_rate):
+      # calculate our estimate
+      <mark>y_hat = model(x, weights, intercept)</mark>
+
+      # calculate error
+      <mark>delta_y = y - y_hat</mark>
+
+      # calculate gradients
+      gradient_weights = -2 * delta_y * weights
+      gradient_intercept = -2 * delta_y
+
+      # update parameters
+      weights = weights - alpha * gradient_weights
+      intercept = intercept - alpha * gradient_intercept
+
+      return weights, intercept
+		</code>
+	</pre>
+					</section>
+
+
 					<section data-transition="fade">
 						<h2>Backpropagation</h2>
 	<img src="images/latex_generated_images/computation_graph_backprop_goal.png"
@@ -754,13 +786,6 @@ with tf.Session() as sess:
 					<section data-transition="fade">
 						<h2>Backpropagation</h2>
 	<img src="images/latex_generated_images/computation_graph_backprop_0.5.png"
-	     alt="Just gradually working through the computation graph..."
-	     style="width: 100%;">
-					</section>
-
-					<section data-transition="fade">
-						<h2>Backpropagation</h2>
-	<img src="images/latex_generated_images/computation_graph_backprop_1.png"
 	     alt="Just gradually working through the computation graph..."
 	     style="width: 100%;">
 					</section>
@@ -828,6 +853,31 @@ with tf.Session() as sess:
 	     style="width: 100%;">
 					</section>
 
+					<section>
+						<h2>Backpropagation</h2>
+	<pre style="font-size:55%;">
+		<code data-trim data-noescape class="python">
+	def training_round(x, y, weights, intercept,
+	                   alpha=learning_rate):
+      # calculate our estimate
+      y_hat = model(x, weights, intercept)
+
+      # calculate error
+      delta_y = y - y_hat
+
+      # calculate gradients
+      <mark>gradient_weights = -2 * delta_y * weights</mark>
+      <mark>gradient_intercept = -2 * delta_y</mark>
+
+      # update parameters
+      weights = weights - alpha * gradient_weights
+      intercept = intercept - alpha * gradient_intercept
+
+      return weights, intercept
+		</code>
+	</pre>
+					</section>
+
 					<section data-transition="fade">
 						<h2>Weight Update</h2>
 	<img src="images/latex_generated_images/computation_graph_just_before_update.png"
@@ -851,6 +901,31 @@ with tf.Session() as sess:
 				</section>
 
 				<section>
+					<h2>Weight Update</h2>
+<pre style="font-size:55%;">
+	<code data-trim data-noescape class="python">
+def training_round(x, y, weights, intercept,
+                   alpha=learning_rate):
+    # calculate our estimate
+    y_hat = model(x, weights, intercept)
+
+    # calculate error
+    delta_y = y - y_hat
+
+    # calculate gradients
+    gradient_weights = -2 * delta_y * weights
+    gradient_intercept = -2 * delta_y
+
+    # update parameters
+    <mark>weights = weights - alpha * gradient_weights</mark>
+    <mark>intercept = intercept - alpha * gradient_intercept</mark>
+
+    return weights, intercept
+	</code>
+</pre>
+				</section>
+
+				<section>
 					<h2>Testing</h2>
 <pre>
 	<code data-trim data-noescape class="python">
@@ -869,6 +944,10 @@ with tf.Session() as sess:
 	</code>
 </pre>
 				</section>
+     </section>
+
+   <!-- LOGISTIC REGRESSION -->
+		 <section>
 
 				<section>
 					<h2>Logistic regression</h2>
@@ -921,6 +1000,14 @@ Y = tf.placeholder(tf.float32, [None, 10])
 				</section>
 
 				<section>
+					<h2>Classification with logistic regression</h2>
+					<img src="images/logistic_regression_binary.png"
+					     alt="Binary classification with logistic regression"
+							 style="width: 40%;">
+				 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://playground.tensorflow.org">playground.tensorflow.org</a></p>
+				</section>
+
+				<section>
 					<h2>Model</h2>
 					<img src="images/latex_generated_images/multinomial_logistic_regression_as_neural_network_up_to_logits.png"
 					     alt="Neural network representation of multi-valued logistic regression"
@@ -948,11 +1035,11 @@ Z = np.sum(np.exp(logits))
 				</section>
 
 				<section>
-					<h2>Model - parameters</h2>
+					<h2>Variables</h2>
 
 <pre>
 	<code data-trim data-noescape class="python">
-# Parameters
+# Parameters/Variables
 W = tf.get_variable("weights", [784, 10],
        initializer=tf.random_normal_initializer())
 b = tf.get_variable("bias", [10],
@@ -962,7 +1049,7 @@ b = tf.get_variable("bias", [10],
 				</section>
 
 				<section>
-					<h2>Model - operations</h2>
+					<h2>Operations</h2>
 <pre>
 	<code data-trim data-noescape class="python">
 Y_logits = tf.matmul(X, W) + b
@@ -1054,7 +1141,12 @@ with tf.Session() as sess:
 		 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://playground.tensorflow.org">playground.tensorflow.org</a></p>
 				</section>
 
-				<section>
+      </section>
+<!-- SINGLE HIDDEN LAYER FEEDFORWARD NETWORK -->
+
+     <section>
+
+ 			  <section>
 					<h2>Let's go deeper!</h2>
 				</section>
 
@@ -1087,8 +1179,8 @@ b2 = tf.get_variable("bias2", [10],
 						<h2>Adding another layer - operations</h2>
 	<pre>
 		<code data-trim data-noescape class="python">
-layer_1  = tf.matmul(X, W1) + b1
-y_logits = tf.matmul(layer_1, W2) + b2
+hidden   = tf.matmul(X, W1) + b1
+y_logits = tf.matmul(hidden, W2) + b2
 		</code>
 	</pre>
 					</section>
@@ -1168,7 +1260,7 @@ y_logits = tf.matmul(layer_1, W2) + b2
 
 
 				<section>
-					<h2>Model - operations</h2>
+					<h2>Operations</h2>
 <pre styl>
 	<code data-trim data-noescape class="python">
 hidden   = tf.nn.relu(tf.matmul(X, W1) + b1)
@@ -1276,13 +1368,17 @@ y_logits = tf.matmul(hidden, W2) + b2
 					(basically) <b>any interesting function</b>
 				</section>
 
+			</section>
+<!-- DEEP LEARNING -->
+			<section>
+
 				<section>
 					<h2>Are we deep learning yet?</h2>
 					<p class="fragment">No!</p>
 				</section>
 
 				<section>
-					<h2>Model - operations</h2>
+					<h2>Operations</h2>
 <pre style="font-size: 68%;">
 	<code data-trim data-noescape class="python">
 hidden_1 = tf.nn.relu(tf.matmul(X, W1) + b1)
@@ -1396,6 +1492,10 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 							 style="width: 50%;">
 				</section>
 
+      </section>
+<!-- REGULARIZATION -->
+			<section>
+
 				<section>
 					<h2>Regularization</h2>
 				</section>
@@ -1409,7 +1509,7 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 				<section>
 					<h2>Regularization</h2>
 					<p><b>L2 regularization:</b> weights should be small.</p>
-					$L = \sum{w_i}$
+					$L = \sum{w_i^2}$
 				</section>
 
 				<section>
@@ -1511,13 +1611,13 @@ y_logits = tf.nn.relu(tf.matmul(dropout, w1) + b1)
 with tf.Session() as sess:
     # ... init, then train:
     for _ in range(NUM_EPOCHS <mark>* 2</mark>):
-        X_batch, Y_batch = random_minibatch(
-              X_train, Y_train, BATCH_SIZE)
-        sess.run(optimizer,
-                 feed_dict={
-                     X: X_batch, Y: Y_batch,
-                     <mark>keep_prob: 0.5</mark>
-                 })
+        for (X_batch, Y_batch) in get_minibatches(
+              X_train, Y_train, BATCH_SIZE):
+            sess.run(optimizer,
+                     feed_dict={
+                         X: X_batch, Y: Y_batch,
+                         <mark>keep_prob: 0.5</mark>
+                     })
 
     # test
     sess.run(predict, feed_dict={X: X_test,
@@ -1544,9 +1644,11 @@ with tf.Session() as sess:
 					</table>
 				</section>
 
+    </section>
 <!-- end section on regularization -->
 <!-- start conclusion -->
 
+    <section>
 				<section>
 					<h2>Where to from here?</h2>
 				</section>
@@ -1554,8 +1656,8 @@ with tf.Session() as sess:
 				<section data-transition="fade-out">
 					<h2></h2>
 					<ul>
-						<li>Variables</li>
-						<li>Model - Parameters</li>
+						<li>Placeholders</li>
+						<li>Model - Variables</li>
 						<li>Model - Operations</li>
 						<li>Cost function</li>
 						<li>Optimization</li>
@@ -1566,8 +1668,8 @@ with tf.Session() as sess:
 				<section data-transition="fade-in">
 					<h2></h2>
 					<ul>
-						<li style="color: #A9A9A9;">Variables</li>
-						<li>Model - Parameters</li>
+						<li style="color: #A9A9A9;">Placeholders</li>
+						<li>Model - Variables</li>
 						<li>Model - Operations</li>
 						<li style="color: #A9A9A9;">Cost function</li>
 						<li>Optimization</li>
@@ -1693,6 +1795,7 @@ model.evaluate(X_test, Y_test)
 						<li class="fragment">Thank you!</li>
 				  </ul>
 				</section>
+      </section> <!-- end conclusion -->
 
 			</div>
 		</div>
