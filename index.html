@@ -35,10 +35,29 @@
 
 					<p>&nbsp;</p>
 					<p>Slides: michelleful.github.io/PyCon2017</p>
+
+					<aside class="notes">
+						Welcome to A Gentle Introduction to Deep Learning.
+						So this is an intermediate level talk,
+					</aside>
 				</section>
 
 <!-- Introduction -->
 		 <section>
+
+			 <section>
+				 <h2>Prerequisites</h2>
+				 <ul>
+					 <li>Knowledge of concepts of supervised ML</li>
+					 <li>Familiarity with linear and logistic regression</li>
+				 </ul>
+				 <aside class="notes">
+					 and I'm going to assume that you know the concepts
+					 of supervised machine learning and are familiar with
+					 linear and logistic regression. That will be our
+					 STARTING POINT.
+				 </aside>
+			 </section>
 
 				<section>
 					<h2>Target</h2>
@@ -53,7 +72,11 @@
 						<li>How to train and optimize them</li>
 					</ul>
 					<p style="font-size: 35%; text-align: left;">Image source: Fjodor van Veen (2016) <a href="http://www.asimovinstitute.org/neural-network-zoo/">Neural Network Zoo</a></p>
-
+					<aside class="notes">
+ 					 Our target end point is an in-depth understanding
+					 of the MOST FUNDAMENTAL CLASS OF NEURAL NETWORKS,
+					 FEEDFORWARD NEURAL NETWORKS, which look like this.
+ 				 </aside>
 				</section>
 
 				<section data-transition="fade-out">
@@ -61,6 +84,10 @@
 					<img src="images/latex_generated_images/learning_curve_nopoints.png"
 					     alt="Completely made-up learning curve"
 							 style="width: 60%;">
+					<aside class="notes">
+						So along this completely made-up deep learning learning curve,
+						I'm going to put our target here.
+					</aside>
 				</section>
 
 				<section data-transition="fade">
@@ -71,14 +98,11 @@
 										or multi-layer perceptrons. How they work, how to train them,
 										how to optimize them."
 							 style="width: 60%;">
-				</section>
-
-				<section>
-					<h2>Starting point</h2>
-					<ul>
-						<li>Knowledge of concepts of supervised learning</li>
-						<li>Familiarity with linear and logistic regression</li>
-					</ul>
+					 <aside class="notes">
+ 						And the way I hope to make this talk "gentle" is by
+ 						convincing you that if you meet the prerequisites for this
+ 						talk, you aren't here...or here...but here.
+   				</aside>
 				</section>
 
 				<section data-transition="fade">
@@ -103,6 +127,10 @@
 					<img src="images/latex_generated_images/learning_curve_but_here.png"
 					     alt="but you're actually here!"
 							 style="width: 60%;">
+					<aside class="notes">
+						If you know logistic regression, you're but two
+						tiny steps away from deep learning.
+					</aside>
 				</section>
 
 				<section>
@@ -127,6 +155,20 @@
 							<td style="text-align: center;"><div class="fragment" data-fragment-index="1">Deep learning</div></td>
 						</tr>
 					</table>
+
+					<aside class="notes">
+						To put things another way, IF TRADITIONAL MACHINE LEARNING
+						IS A HAMMER, !CLICK! then DEEP LEARNING IS JUST ANOTHER, FANCIER
+						HAMMER. It might not LOOK like a hammer at first, but, you
+						know, you can pick that thing up, you can start bashing
+						things. It USES THE SAME TECHNOLOGIES, IT OBEYS THE
+						SAME LAWS OF PHYSICS.
+
+						But at the same time, it is a PRETTY WEIRD HAMMER with
+						all these extra knobs and whistles. So we'll
+						talk about what the extra knobs and whistles buy us
+						in terms of power and performance.
+					</aside>
 				</section>
 
 				<section>
@@ -137,6 +179,10 @@
 						<li>Python API, makes calls to C++ back-end</li>
 						<li>Works on CPUs and GPUs</li>
 					</ul>
+					<aside class="notes">
+						And we're going to learn how to do all this in TensorFlow,
+						an open-source deep learning toolkit out of Google.
+					</aside>
 				</section>
 			</section>
 
@@ -145,6 +191,13 @@
 
 				<section>
 					<h2>Linear Regression<br/>from scratch</h2>
+					<aside class="notes">
+						OK! Let's talk about linear regression. We're
+						going to code up a linear regressor FROM SCRATCH.
+						And as we go through this section, I want you to
+						FOCUS NOT SO MUCH ON THE CODE, but ON THE
+						INGREDIENTS. What are they, how do they go together.
+					</aside>
 				</section>
 
 				<section>
@@ -168,6 +221,15 @@
 					<img src="images/regression_target_house_price.png"
 						   alt="Target value for regression: house price"
 					     style="width:18%;">
+				 <aside class="notes">
+					 Here's a typical linear regression problem.
+					 We're trying to PREDICT PRICES OF INDIVIDUAL HOUSES.
+					 And we're given three pieces of information
+					 about each house, three features:
+					 !CLICK! FLOOR AREA,
+					 !CLICK! DISTANCE FROM PUBLIC TRANSPORT,
+					 !CLICK! Number of rooms.
+					</aside>
 				</section>
 
 				<section>
@@ -176,6 +238,14 @@
 						   style="width:80%"
 							 alt = "Represent multiple x's in an mxn matrix
 							        and y's in a mx1 vector">
+
+				<aside class="notes">
+					And we're going to represent our features in a matrix
+					with as many rows as we have houses and three columns,
+					one for each of our input features. We'll call that matrix X.
+					And we're trying to predict this vector Y, which represents
+					the housing prices.
+				</aside>
 				</section>
 
 				<section>
@@ -191,6 +261,9 @@ X_train = np.array([
 Y_train = np.array([345000, 580000, 360000])
 </code>
 </pre>
+<aside class="notes">
+Here's what that looks like in numpy.
+</aside>
 				</section>
 
 				<section>
@@ -199,6 +272,13 @@ Y_train = np.array([345000, 580000, 360000])
 						Multiply each <b>feature</b> by a <b>weight</b> and add them up.<br/>
 						Add an <b>intercept</b> to get our final <b>estimate</b>.
 					</p>
+					<aside class="notes">
+						Next we have to consider our MODEL. The model
+						is the set of functions that we're going to
+						consider in mapping X to Y. Since this is
+						linear regression, we'll multiply each feature
+						by...(off slide)
+					</aside>
 				</section>
 
 				<section>
@@ -206,6 +286,10 @@ Y_train = np.array([345000, 580000, 360000])
 					<img src="images/latex_generated_images/linear_regression_2d_fitline.png"
 						   style="width:50%"
 							 alt = "Linear regression is a straight line">
+				 <aside class="notes">
+					 And that corresponds to drawing the line of best fit
+					 through the data.
+				 </aside>
 				</section>
 
 				<section>
@@ -216,6 +300,11 @@ weights = np.array([300, -10, -1])
 intercept = -26497
 						</code>
 					</pre>
+					<aside class="notes">
+						So the parameters of this model will be the
+						three weights that correspond to each feature,
+						and the intercept.
+					</aside>
 				</section>
 
 				<section data-transition="fade">
@@ -223,6 +312,12 @@ intercept = -26497
 <img src="images/latex_generated_images/matrix_mult_4.png"
 	   style="width:70%"
 		 alt = "TODO: show calculation, then show addition of intercept">
+		 <aside class="notes">
+			 And the key operation of this model will be matrix
+			 multiplication of X by the weights. Then we'll add
+			 the intercept element-wise to get our
+			 final prediction.
+		 </aside>
 				</section>
 
 				<section>
@@ -242,6 +337,13 @@ Y_hat = model(X_train, weights, intercept)
 					<img src="images/latex_generated_images/linear_regression_2d_multiplepoints.png"
 						   style="width:50%"
 							 alt = "Okay so we had a pretty bad fit...let's measure it">
+				 <aside class="notes">
+					 Now the next ingredient we'll need is a COST FUNCTION,
+					 also called a LOSS FUNCTION. We need this to measure how
+					 good or bad a set of parameters is, how close our predictions
+					 are getting to the actual values. For example, this
+					 is a really badly-fit line.
+				 </aside>
 				</section>
 
 				<section data-transition="fade">
@@ -249,6 +351,10 @@ Y_hat = model(X_train, weights, intercept)
 					<img src="images/latex_generated_images/linear_regression_2d_multiplepoints_witherrorlines.png"
 						   style="width:50%"
 							 alt = "Drop a line from the actual y to the estimated y_hat">
+				 <aside class="notes">
+					 So we'll do is take the difference between the prediction
+					 and the actual value, and square it.
+				 </aside>
 				</section>
 
 				<section data-transition="fade-in">
@@ -270,6 +376,11 @@ def cost(Y_hat, Y):
 				<section>
 					<h2>Optimization</h2>
 <p>Hold X and Y constant.<br/>Adjust <b>parameters</b> to minimize <b>cost</b>.</p>
+<aside class="notes">
+	Now we need to actually find the parameters that give us the best fit.
+	In other words, holding X and Y constant, we'll adjust our parameters
+	to minimize the cost.
+</aside>
 				</section>
 
 				<section data-transition="fade-out">
@@ -277,6 +388,12 @@ def cost(Y_hat, Y):
 <img src="images/latex_generated_images/cost_function_no_tangents.png"
      alt="Graph of cost with respect to weights"
 		 style="width: 50%;">
+		 <aside class="notes">
+			 Each set of parameters will yield a cost, so we can
+			 plot cost against parameter values. Our goal in
+			 optimization is to find the parameters that correspond
+			 to that lowest point.
+		 </aside>
 				</section>
 
 				<section>
@@ -285,6 +402,14 @@ def cost(Y_hat, Y):
      alt="Shooting hoops - adjust angle by trial and error"
 		 style="width: 50%;">
 <p style="font-size: 35%; text-align: left;">Image source: <a href="https://commons.wikimedia.org/wiki/File:Barack_Obama_playing_basketball.jpg">Wikimedia Commons</a></p>
+			<aside class="notes">
+				And we're going to do that by trial and error. By this I don't mean
+				just trying random sets of parameters and seeing what works best,
+				but the trial and error you do when you're, say, practising how
+				to shoot hoops and you're trying to adjust your angle. So you shoot,
+				and you miss by a couple inches. You're too far to the right. So
+				you adjust your angle to the left and try again.
+			</aside>
 				</section>
 
 				<section data-transition="fade">
@@ -292,12 +417,18 @@ def cost(Y_hat, Y):
 <img src="images/latex_generated_images/cost_function_with_tangents.png"
      alt="Follow tangents down to the weight with the lowest cost"
 		 style="width: 50%;">
+		 	<aside class="notes">
+				That's what we're going to do also. We'll try a set of parameters,
+				then we'll calculate our cost, and then we'll follow the gradient
+				of the cost curve at that point down towards the minimum. This
+				process is called GRADIENT DESCENT.
+			</aside>
 				</section>
 
 				<section data-transition="fade-out">
 					<h2>Optimization</h2>
 <img src="images/latex_generated_images/cost_function_goldilocks.png"
-     alt="Nice trajectory down towards the inimum"
+     alt="Nice trajectory down towards the minimum"
 		 style="width: 50%;">
 				</section>
 
@@ -309,17 +440,23 @@ $$\epsilon = (y-\hat{y})^2$$</p>
 <p>&nbsp;</p>
 
 <p><b>Goal:</b> \(\frac{\partial\epsilon}{\partial w_i}, \frac{\partial\epsilon}{\partial b}\)</p>
+				<aside class="notes">
+					So we need to be able to calculate the gradient of
+					the cost, epsilon, with respect to each of the weights and
+					the intercept.
+				</aside>
 				</section>
 
 				<section data-transition="fade">
 					<h2>Optimization - Gradient Calculation</h2>
-<p>\(\frac{\partial\hat{y}}{\partial w_0} = x_0\)</p>
-<p>\(\frac{d\epsilon}{d\hat{y}} = -2(y-\hat{y})\)</p>
-
-<p>&nbsp;</p>
-
-<p><b>Chain rule:</b> \(\frac{\partial\epsilon}{\partial w_0} =
-	    \frac{d\epsilon}{d\hat{y}}\frac{\partial\hat{y}}{\partial w_0} \)
+<p><b>Chain rule:</b> \(\frac{\partial\epsilon}{\partial w_i} =
+	    \frac{d\epsilon}{d\hat{y}}\frac{\partial\hat{y}}{\partial w_i} \)
+			<aside class="notes">
+				Applying the chain rule, we can break that up into
+				two pieces: the gradient of the cost with respect to
+				the predicted y, y hat, and the gradient of y hat
+				with respect to the weight. So let's calculate those.
+			</aside>
 				</section>
 
 				<section data-transition="fade">
@@ -329,6 +466,12 @@ $$\epsilon = (y-\hat{y})^2$$</p>
 <p>&nbsp;</p>
 
 <p>\(\frac{\partial\hat{y}}{\partial w_0} =\)<span class="fragment">\( x_0\)</span></p>
+
+<aside class="notes">
+	The gradient of y hat with respect to w naught is pretty simple.
+	All the terms are constant with respect to w naught so those go
+	to zero and we're left with x naught.
+</aside>
 				</section>
 
 				<section data-transition="fade">
@@ -338,6 +481,10 @@ $$\epsilon = (y-\hat{y})^2$$</p>
 <p>&nbsp;</p>
 
 <p>\(\frac{d\epsilon}{d\hat{y}} =\) <span class="fragment"><span class="fragment">\(-\)</span>\(2(y-\hat{y})\)</span></p>
+<aside class="notes">
+	For the second gradient, we bring down the power and then apply
+	the chain rule again to bring out that negative sign.
+</aside>
 				</section>
 
 				<section data-transition="fade-in">
@@ -349,6 +496,10 @@ $$\epsilon = (y-\hat{y})^2$$</p>
 
 \(\frac{\partial\epsilon}{\partial w_0} =
 	    -2(y-\hat{y})x_0 \)
+			<aside class="notes">
+				So to get our desired gradient, we multiply those together
+				to get this expression. And that goes for all the weights.
+			</aside>
 				</section>
 
 				<section data-transition="fade-in">
@@ -359,6 +510,12 @@ $$\epsilon = (y-\hat{y})^2$$</p>
 
 \(\frac{\partial\epsilon}{\partial b} =
 	    -2(y-\hat{y})\cdot 1 \)
+
+			<aside class="notes">
+				As for the intercept b, we can consider that a special
+				weight where the x it corresponds to is always 1. So
+				that's the form the gradient will take with respect to b.
+			</aside>
 				</section>
 
 				<section>
@@ -380,6 +537,10 @@ weights = weights - gradient_weights
 intercept = intercept - gradient_intercept
 	</code>
 </pre>
+<aside class="notes">
+	And then we just want to move the weights in the direction
+	of the gradient, and we do that by subtracting.
+</aside>
 				</section>
 
 
@@ -388,6 +549,16 @@ intercept = intercept - gradient_intercept
 	<img src="images/latex_generated_images/cost_function_overshoot.png"
 	     alt="If we take steps that are too big, we risk overshooting"
 			 style="width: 50%;">
+			 <aside class="notes">
+				 But, just like when you're practising basketball,
+				 you might overcorrect. You're too far to the right, you
+				 adjust your angle to the left, and you wind up too far
+				 to the left. So you move right, and now you've overshot
+				 in the other direction. And maybe you get angrier
+				 and angrier so you wind up even more wildly off as
+				 time goes on. We can do this in gradient descent
+				 also.
+			 </aside>
 					</section>
 
 					<section data-transition="fade">
@@ -395,6 +566,14 @@ intercept = intercept - gradient_intercept
 		<img src="images/latex_generated_images/cost_function_undershoot.png"
 		     alt="If we take steps that are too small, convergence takes forever"
 				 style="width: 50%;">
+				 <aside class="notes">
+					 Or you might have the opposite problem: you're too timid
+					 in making your corrections, so it takes you forever to get
+					 to the minimum. You converge really slowly.
+					 And if you have a cost curve that's uglier than this,
+					 with lots of local minima, you may get stuck inside
+					 a local minimum.
+				 </aside>
 						</section>
 
 
@@ -410,6 +589,13 @@ intercept = intercept - \
              learning_rate * gradient_intercept
 	</code>
 </pre>
+<aside class="notes">
+  So we're going to try and be Goldilocks, and
+	try to aim for something in between those two.
+	We regulate this using a hyperparameter
+	called the learning rate. The larger the
+	learning rate, the bigger the steps you take.
+</aside>
 				</section>
 
 				<section>
@@ -435,6 +621,14 @@ def training_round(x, y, weights, intercept,
     return weights, intercept
 	</code>
 </pre>
+
+<aside class="notes">
+Putting all that together, here's how training goes.
+Whatever our current weights and intercept are,
+we calculate our prediction, calculate our error,
+compute the gradients, and update our parameters
+by gradient descent.
+</aside>
 				</section>
 
 				<section>
@@ -455,6 +649,14 @@ def train(X, Y):
                                  weights, intercept)
 </pre>
 </code>
+
+<aside class="notes">
+That was a single round of training. The entire
+training process involves first initializing
+our parameters and doing some number of training rounds.
+Whatever the weights and intercept are at the end,
+that's what we'll use to predict with.
+</aside>
 				</section>
 
 				<section>
@@ -470,15 +672,29 @@ def test(X_test, Y_test, weights, intercept):
 6052.79
 </code>
 </pre>
+<aside class="notes">
+And testing is simple: we get our estimate and figure out
+how far off we were on average. And on this dataset, we
+were about $6000 off.
+</aside>
 				</section>
 
 				<section>
 					Uh, wasn't this supposed to be a talk about neural networks?
 					Why are we talking about linear regression?
+
+					<aside class="notes">
+						Okay, so you may be wondering: I came here to hear about
+						deep learning and neural networks. Why are we doing something
+						so basic as linear regression?
+					</aside>
 				</section>
 
 		    <section>
 					<h2>Surprise! <br/> You've already made <br/> a neural network!</h2>
+					<aside class="notes">
+						Surprise! We actually just made a neural network!
+					</aside>
 				</section>
 
 				<section data-transition="fade-out">
@@ -486,14 +702,29 @@ def test(X_test, Y_test, weights, intercept):
 					<img src="images/latex_generated_images/linear_regression_as_neural_network.png"
 						   style="width:30%"
 							 alt = "Linear regression is basically the simplest possible neural network">
+				 <aside class="notes">
+					 	Linear regression is one of the simplest possible neural networks.
+						It's so simple that we don't even call it a neural network, because
+						it preceded neural networks. But if you look at the definition of
+						a neural network, linear regression fits the bill. We have an input
+						layer, consisting of three neurons, we have an output layer, consisting
+						of a single neuron, and we have weights on the edges between those
+						neurons.
+					</aside>
 				</section>
 
+<!--
 				<section data-transition="fade-in">
 					<h2>Linear regression = <br/> Simplest neural network</h2>
 					<img src="images/latex_generated_images/linear_regression_as_neural_network_no_b.png"
 						   style="width:30%"
 							 alt = "Usually we omit the intercept from this diagram">
-				</section>
+							 <aside class="notes">
+								 As a side note about these graphical representations of neural
+								 networks, the intercept is usually omitted, but that's just
+								 to reduce visual clutter.
+								</aside>
+				</section> -->
 
      </section> <!-- end linear regression section -->
 
@@ -502,6 +733,10 @@ def test(X_test, Y_test, weights, intercept):
      <section>
 				<section>
 					<h2>Once more, with TensorFlow</h2>
+					<aside class="notes">
+						Now that we know that linear regression is a neural
+						network in disguise, we can rewrite it in TensorFlow.
+					</aside>
 				</section>
 
 				<section data-transition="fade-out">
@@ -515,6 +750,10 @@ def test(X_test, Y_test, weights, intercept):
 						<li>Train</li>
 						<li>Test</li>
 					</ul>
+					<aside class="notes">
+						What we're going to do is take those seven ingredients we
+						went through in numpy and recast them in TensorFlow.
+					</aside>
 				</section>
 
 				<section>
@@ -527,6 +766,17 @@ X = tf.placeholder(tf.float32, [None, 3])
 Y = tf.placeholder(tf.float32, [None, 1])
   </code>
 </pre>
+<aside class="notes">
+  Ingredient 1. Inputs. Already this looks very different.
+	Instead of supplying the data directly in numpy arrays,
+	we're going to have placeholders. The X placeholder says
+	I'll be a matrix of floats, and I'll have three columns.
+  The "None" here means I'm going to push through a variable
+	number of houses each time. You can specify a number here,
+	but then you'll be stuck with it. For flexibility, we'll just
+	say None. Similarly, the Y placeholder corresponds to
+	a single value, so it'll be a single column.
+</aside>
 				</section>
 
 				<section>
@@ -540,6 +790,14 @@ b = tf.get_variable("intercept", [1],
        initializer=tf.constant_initializer(0))
   </code>
 </pre>
+<aside class="notes">
+Our parameters will be represented by TensorFlow
+variables. We're mapping three neurons to one so the shape
+of our weights will be three rows and one column. And
+we can specify here how we want to initialize our
+weights, which we'll sample from a random normal distribution.
+The intercept we'll set to zero.
+</aside>
 
 				</section>
 
@@ -550,6 +808,9 @@ b = tf.get_variable("intercept", [1],
 Y_hat = tf.matmul(X, W) + b
   </code>
 </pre>
+<aside class="notes">
+Our operation will be matrix multiplication and addition.
+</aside>
 				</section>
 
 				<section>
@@ -559,6 +820,10 @@ Y_hat = tf.matmul(X, W) + b
 cost = tf.reduce_mean(tf.square(Y_hat - Y))
   </code>
 </pre>
+<aside class="notes">
+And this will be our cost function. reduce_mean just means
+mean.
+</aside>
 				</section>
 
 				<section>
@@ -570,13 +835,19 @@ optimizer = tf.train.GradientDescentOptimizer
                (learning_rate).minimize(cost)
   </code>
 </pre>
+<aside class="notes">
+  We'll specify that we're using gradient descent with
+	a certain learning rate, and the quantity we want to
+	minimize is cost.
+</aside>
 				</section>
+
 
 				<section>
 					<h2>Training</h2>
 <pre>
   <code data-trim data-noescape class="python">
-with tf.Session() as sess:
+<mark>with tf.Session() as sess:</mark>
     # initialize variables
     sess.run(tf.global_variables_initializer())
 
@@ -591,6 +862,91 @@ with tf.Session() as sess:
                      })
   </code>
 </pre>
+<aside class="notes">
+  Now for the training process. First of all, notice
+	that we're going to do this within a TensorFlow session.
+	In TensorFlow, nothing happens outside of a session.
+	It's only within a session that you can start writing
+	to the CPU or GPU, performing computations. You can't even
+	add two numbers in TensorFlow without going into a session.
+</aside>
+				</section>
+
+				<section>
+					<h2>Training</h2>
+<pre>
+  <code data-trim data-noescape class="python">
+with tf.Session() as sess:
+    # initialize variables
+    <mark>sess.run(tf.global_variables_initializer())</mark>
+
+    # train
+    for _ in range(NUM_EPOCHS):
+        for (X_batch, Y_batch) in get_minibatches(
+               X_train, Y_train, BATCH_SIZE):
+            sess.run(optimizer,
+                     feed_dict={
+                         X: X_batch,
+                         Y: Y_batch
+                     })
+  </code>
+</pre>
+<aside class="notes">
+Then we initialize the variables according to how
+we defined them outside of the session.
+</aside>
+				</section>
+
+				<section>
+					<h2>Training</h2>
+<pre>
+  <code data-trim data-noescape class="python">
+with tf.Session() as sess:
+    # initialize variables
+    sess.run(tf.global_variables_initializer())
+
+    # train
+    for _ in range(NUM_EPOCHS):
+        <mark>for (X_batch, Y_batch) in get_minibatches(</mark>
+               <mark>X_train, Y_train, BATCH_SIZE):</mark>
+            sess.run(optimizer,
+                     feed_dict={
+                         X: X_batch,
+                         Y: Y_batch
+                     })
+  </code>
+</pre>
+<aside class="notes">
+Now we're going to feed through the actual data. X_train and Y_train
+are the actual numpy arrays. We're also going to use minibatches,
+where we random.shuffle the data and feed the data through batch
+by batch.
+</aside>
+				</section>
+
+				<section>
+					<h2>Training</h2>
+<pre>
+  <code data-trim data-noescape class="python">
+with tf.Session() as sess:
+    # initialize variables
+    sess.run(tf.global_variables_initializer())
+
+    # train
+    for _ in range(NUM_EPOCHS):
+        for (X_batch, Y_batch) in get_minibatches(
+               X_train, Y_train, BATCH_SIZE):
+            <mark>sess.run(optimizer,</mark>
+                     <mark>feed_dict={</mark>
+                         <mark>X: X_batch,</mark>
+                         <mark>Y: Y_batch</mark>
+                     <mark>})</mark>
+  </code>
+</pre>
+<aside class="notes">
+And we pass the batches into the optimizer,
+inserting them into their respective placeholders.
+</aside>
 				</section>
 
 				<section data-transition="fade-out">
@@ -634,6 +990,12 @@ with tf.Session() as sess:
 				</code>
 			</pre>
 		</div>
+		<aside class="notes">
+			So here's all that code in one place. I want you
+			to notice a couple of things. First of all, remember
+			all that math we did to calculate the gradients? The
+			code that came out of that is gone.
+		</aside>
 
 					</section>
 
@@ -692,6 +1054,13 @@ with tf.Session() as sess:
 				<img src="images/rocket.jpg"
 				     alt="And this section is like the actual rocket that gets built">
 			</div>
+			<aside class="notes">
+				The other thing is that the code is divided into two parts.
+				The part outside the session, and the part inside the session. And I
+				want you to think of that first part as like the blueprints for
+				something, while the part within the session is like actually building
+				that thing.
+			</aside>
 
 					</section>
 
@@ -701,6 +1070,14 @@ with tf.Session() as sess:
 	     alt="Just gradually working through the computation graph..."
 	     style="width: 100%;">
 
+			 <aside class="notes">
+				 And the thing that we're building is the computation graph.
+				 This is where we take all the variables and the operations
+				 and sequence them together. So here's the dot product,
+				 the addition of the intercept. But that's not all the computation we need to do. There's also
+				 the computation of the error, so let's add that on.
+ 			</aside>
+
 					</section>
 
 					<section data-transition="fade">
@@ -708,6 +1085,10 @@ with tf.Session() as sess:
 	<img src="images/latex_generated_images/computation_graph_up_to_error_term.png"
 	     alt="Just gradually working through the computation graph..."
 	     style="width: 100%;">
+
+			 <aside class="notes">
+
+ 			</aside>
 					</section>
 
 					<section data-transition="fade">
@@ -715,6 +1096,12 @@ with tf.Session() as sess:
 	<img src="images/latex_generated_images/computation_graph_forward_1.png"
 	     alt="Just gradually working through the computation graph..."
 	     style="width: 100%;">
+
+			 <aside class="notes">
+				 So what do we do with the computation graph? First, forward propagation.
+				 We take our current weights and the x's and y's that got fed through
+				 and propagate them through the graph by performing the designated operations.
+ 			 </aside>
 					</section>
 
 					<section data-transition="fade">
@@ -768,6 +1155,10 @@ with tf.Session() as sess:
       return weights, intercept
 		</code>
 	</pre>
+
+	<aside class="notes">
+    That corresponds to these two lines from our numpy code.
+	</aside>
 					</section>
 
 
@@ -776,6 +1167,12 @@ with tf.Session() as sess:
 	<img src="images/latex_generated_images/computation_graph_backprop_goal.png"
 	     alt="Just gradually working through the computation graph..."
 	     style="width: 100%;">
+
+			 <aside class="notes">
+		     Next, we need to calculate the gradient of the cost with respect
+				 to each of our variables. This process is called back-propagation,
+				 or backprop for short. We start at the end and work backwards.
+		 	</aside>
 					</section>
 
 					<section data-transition="fade">
@@ -783,6 +1180,11 @@ with tf.Session() as sess:
 	<img src="images/latex_generated_images/computation_graph_backprop_0.png"
 	     alt="Just gradually working through the computation graph..."
 	     style="width: 100%;">
+
+			 <aside class="notes">
+				 First off, the derivative of the error with respect to the error
+				 is just going to be 1. Simple enough.
+		 	</aside>
 					</section>
 
 <!--
@@ -799,6 +1201,17 @@ with tf.Session() as sess:
 	<img src="images/latex_generated_images/computation_graph_backprop_1.5.png"
 	     alt="Just gradually working through the computation graph..."
 	     style="width: 100%;">
+
+			 <aside class="notes">
+				 And from this point on, what we're going to do is calculate
+				 the local gradient and multiply it by the gradient computed up
+				 to that point. Let's work through a concrete example.
+
+				 The function here is taking the square. Derivative of that is
+				 just 2 delta. Delta here was -2, so our local gradient is -4.
+				 We multiply that by the gradient calculated so far, 1. So
+				 the gradient of the error with respect to delta is going to be -4.
+		 	</aside>
 					</section>
 
 					<section data-transition="fade">
@@ -806,6 +1219,10 @@ with tf.Session() as sess:
 	<img src="images/latex_generated_images/computation_graph_backprop_2.png"
 	     alt="Just gradually working through the computation graph..."
 	     style="width: 100%;">
+			 <aside class="notes">
+				 And we just continue working backwards. I won't go through it here
+				 but you're welcome to work through it yourself with the help of the slides.
+		 	</aside>
 					</section>
 
 					<section data-transition="fade">
@@ -855,6 +1272,10 @@ with tf.Session() as sess:
 	<img src="images/latex_generated_images/computation_graph_backprop_complete.png"
 	     alt="Just gradually working through the computation graph..."
 	     style="width: 100%;">
+			 <aside class="notes">
+		     	So the gradient with respect to w naught is -8. That's -2 times
+					delta times its corresponding x naught...
+		  </aside>
 					</section>
 
 					<section>
@@ -880,6 +1301,10 @@ with tf.Session() as sess:
       return weights, intercept
 		</code>
 	</pre>
+	<aside class="notes">
+		...which is what we computed should be the case in the numpy code.
+ </aside>
+
 					</section>
 
 					<section data-transition="fade">
@@ -887,6 +1312,11 @@ with tf.Session() as sess:
 	<img src="images/latex_generated_images/computation_graph_just_before_update.png"
 	     alt="Just gradually working through the computation graph..."
 	     style="width: 100%;">
+
+			 <aside class="notes">
+		     	Lastly, we have to update the variables. Let's just drop everything
+					that isn't a variable.
+		  </aside>
 					</section>
 
 
@@ -895,6 +1325,10 @@ with tf.Session() as sess:
 <img src="images/latex_generated_images/computation_graph_after_update_w0.png"
      alt="Just gradually working through the computation graph..."
      style="width: 100%;">
+		 <aside class="notes">
+			 And then that weight w naught will be updated to the top number minus
+			 the learning rate times the bottom number, the gradient.
+		</aside>
 				</section>
 
 				<section data-transition="fade">
@@ -927,32 +1361,11 @@ def training_round(x, y, weights, intercept,
     return weights, intercept
 	</code>
 </pre>
+<aside class="notes">
+  That corresponds to these last two lines.
+</aside>
 				</section>
 
-				<section>
-					<h2>Variable Update</h2>
-<pre style="font-size:55%;">
-	<code data-trim data-noescape class="python">
-def training_round(x, y, weights, intercept,
-                   alpha=learning_rate):
-    # calculate our estimate
-    y_hat = model(x, weights, intercept)
-
-    # calculate error
-    delta_y = y - y_hat
-
-    # calculate gradients
-    gradient_weights = -2 * delta_y * weights
-    gradient_intercept = -2 * delta_y
-
-    # update parameters
-    <mark>weights = weights - alpha * gradient_weights</mark>
-    <mark>intercept = intercept - alpha * gradient_intercept</mark>
-
-    return weights, intercept
-	</code>
-</pre>
-				</section>
 
 			<section>
 				<h2>Numpy &rarr; TensorFlow</h2>
@@ -965,6 +1378,18 @@ sess.run(optimizer,
          })
 				  </code>
 				</pre>
+				<aside class="notes">
+					I just want to take a moment here to appreciate how much
+					work TensorFlow saved us. All those lines of
+					code in the previous slide
+					basically correspond to this one line of TensorFlow code.
+				   Once we defined the computation graph, which is implicitly
+					 encoded in the optimizer variable, all the steps within
+					 training were handled by TensorFlow, including the gradient
+					 computation. Which wasn't very painful in the case of linear
+					 regression, but it can get tedious fast once we start
+					 adding more operations to our model.
+	 		</aside>
 			</section>
 
 				<section>
@@ -985,6 +1410,12 @@ with tf.Session() as sess:
 5967.39
 	</code>
 </pre>
+<aside class="notes">
+  Our last step is testing. Within the same session,
+	we run a separate set of data, X_test, through the model
+	to get our predictions and compute our error.
+</aside>
+
 				</section>
      </section>
 
@@ -993,13 +1424,41 @@ with tf.Session() as sess:
 
 				<section>
 					<h2>Logistic regression</h2>
+					<aside class="notes">
+						So that was linear regression. What if we want to do
+						classification?
+		 		</aside>
+
 				</section>
 
 				<section>
 					<h2>Problem</h2>
 					<img src="images/mnist.png" alt="MNIST example"
 					     style="width: 40%;">
+							 <aside class="notes">
+								 An example classification problem is the MNIST
+								 dataset. These are small images of handwritten digits
+								 0 through 9. Our features are the values of the pixels
+								 and we're trying to predict which digit is which.
+			 	 		</aside>
 				</section>
+
+				<section>
+					<h2>Binary classification</h2>
+
+					<img src="images/binary_classification.png"
+					     alt="Binary classification problem"
+							 style="width: 50%;">
+				<aside class="notes">
+					But before we get to the ten-way classification, let's
+					talk about how we would do binary classification. We have
+					a bunch of samples that are positive and a bunch that are negative
+					and we want to be able to classify them. We can do this
+					with logistic regression.
+				</aside>
+				</section>
+
+
 
 				<section>
 					<h2>Binary logistic regression - Model</h2>
@@ -1009,6 +1468,14 @@ with tf.Session() as sess:
 						Convert the logit to a <b>probability</b><br/>
 						via the <b>logistic-sigmoid function</b>.
 					</p>
+					<aside class="notes">
+						Our model will be this. First take a weighted sum of the
+						features and add a number that we'll call the bias. This
+						should sound a lot like linear regression, except that
+						we give the outcome a funny name, the logit. Then
+						we'll convert the logit to a probability of belonging
+						to the positive class via the logistic sigmoid function.
+  			  </aside>
 				</section>
 
 				<section>
@@ -1016,6 +1483,11 @@ with tf.Session() as sess:
 					<img src="images/latex_generated_images/logistic_regression_as_neural_network.png"
 					     alt="Logistic regression as neural network"
 							 style="width: 40%;">
+							 <aside class="notes">
+								 This is what it looks like in neural network graphical style.
+								 We compute the logit and then apply this non-linear activation
+								 function, which I'll depict with this red semi-circle.
+		   			  </aside>
 				</section>
 
 				<section>
@@ -1024,6 +1496,10 @@ with tf.Session() as sess:
 					     alt="Logistic-sigmoid function shape"
 							 style="width: 50%;">
 					<div>$f(x) = \frac{e^x}{1+e^x}$</div>
+
+					<aside class="notes">
+						This is what the logistic sigmoid function looks like.
+				 </aside>
 				</section>
 
 				<section>
@@ -1032,6 +1508,12 @@ with tf.Session() as sess:
 					     alt="Binary classification with logistic regression"
 							 style="width: 40%;">
 				 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://playground.tensorflow.org">playground.tensorflow.org</a></p>
+				 <aside class="notes">
+					 We'll take 0.5 as the cut-off. If the probability is greater than
+					 0.5, we'll declare a sample positive. Otherwise, negative.
+					 The further away you are from the line in the positive direction,
+					 the more likely you are to be positive.
+				</aside>
 				</section>
 
 				<section>
@@ -1039,6 +1521,16 @@ with tf.Session() as sess:
 					<img src="images/latex_generated_images/multinomial_logistic_regression_as_neural_network_up_to_logits.png"
 					     alt="Neural network representation of multi-valued logistic regression"
 					     style="width: 30%;">
+
+							 <aside class="notes">
+								 Okay, now let's go back to the ten-dimensional problem. We'll
+								 have ten neurons in our output layer corresponding to each
+								 digit. Therefore, we'll have ten times the number of weights
+								 and ten different bias terms. And we need a way to turn those
+								 ten logits into probabilities. We can't just apply the logistic
+								 function to each of those logits, because that won't give you
+								 numbers that sum up to 1.
+							</aside>
 				</section>
 
 				<section>
@@ -1052,6 +1544,12 @@ Z = np.sum(np.exp(logits))
 <img src="images/latex_generated_images/softmax.png"
 		 alt="Softmax"
 		 style="width: 60%;">
+		 <aside class="notes">
+			 Instead, we're going to use the softmax function, which
+			 is just the multinomial version of the logistic function.
+			 It takes all of those logits and transforms them into
+			 a probability distribution.
+		</aside>
 				</section>
 
 				<section>
@@ -1059,6 +1557,10 @@ Z = np.sum(np.exp(logits))
 					<img src="images/latex_generated_images/multinomial_logistic_regression_as_neural_network.png"
 					     alt="Neural network representation of multi-valued logistic regression"
 					     style="width: 30%;">
+							 <aside class="notes">
+								 So that's the graphical representation of that.
+								 And we can start coding!
+							</aside>
 				</section>
 
 				<section>
@@ -1074,6 +1576,11 @@ X = tf.placeholder(tf.float32, [None, 28*28])
 Y = tf.placeholder(tf.float32, [None, 10])
   </code>
 </pre>
+<aside class="notes">
+  Our X placeholder is going to have 784 columns, one for each pixel.
+	We're going to use one-hot vectors to encode our digits, with a 1
+	in the position corresponding to the correct digit.
+</aside>
 				</section>
 
 				<section>
@@ -1088,6 +1595,12 @@ b = tf.get_variable("bias", [10],
        initializer=tf.constant_initializer(0))
 	</code>
 </pre>
+<aside class="notes">
+	Now for the variables.
+  We're taking 784 input neurons to 10 output neurons,
+	so our weight matrix will be 784 by 10.
+	And we have ten biases.
+</aside>
 				</section>
 
 				<section>
@@ -1097,6 +1610,14 @@ b = tf.get_variable("bias", [10],
 Y_logits = tf.matmul(X, W) + b
 	</code>
 </pre>
+<aside class="notes">
+  Our operation is going to be matrix multiplication again.
+	And you're probably thinking, wait, you're missing one
+	operation. What happened to the softmax?
+	But remember from the computation graph that the model
+	and the cost function meld into each other, so we just
+	push that to the cost function.
+</aside>
 				</section>
 
 				<section>
@@ -1108,6 +1629,14 @@ cost = tf.reduce_mean(
          logits=Y_logits, labels=Y))
 	</code>
 </pre>
+<aside class="notes">
+  So here's our cost function, softmax cross entropy,
+	and you can see that this particular function
+	expects logits and does the softmax internally.
+	If we'd computed the softmax in the operations part
+	and then supplied the probabilities to this function,
+	we'd be implicitly doing the softmax twice.
+</aside>
 				</section>
 
 				<section>
@@ -1115,6 +1644,13 @@ cost = tf.reduce_mean(
 Cross Entropy
 
 <p>$H(\hat{y}) = -\sum\limits_i y_i \log(\hat{y}_i)$</p>
+<aside class="notes">
+  This cross-entropy, incidentally, is a cost function
+	very commonly used in classification. And it basically
+	says, whatever the correct y is, I want the probability
+	of being that y to be as close to 1 as possible. And it
+	imposes a logarithmic cost for your distance away from 1.
+</aside>
 				</section>
 
 
@@ -1127,6 +1663,9 @@ optimizer = tf.train.GradientDescentOptimizer
               (learning_rate).minimize(cost)
 	</code>
 </pre>
+<aside class="notes">
+Our optimization code is exactly the same as in linear regression.
+</aside>
 				</section>
 
 				<section>
@@ -1144,6 +1683,9 @@ with tf.Session() as sess:
                                 Y: Y_batch})
 	</code>
 </pre>
+<aside class="notes">
+Ditto with the training code.
+</aside>
 				</section>
 
 				<section>
@@ -1164,6 +1706,20 @@ with tf.Session() as sess:
 0.925
   </code>
 </pre>
+<aside class="notes">
+Testing is a bit different, because when we compute
+how accurate our classification algorithm is, we don't
+want to use the vector of probabilities, we want to get back a one-hot
+vector with our predicted digit. So we'll define a new operation
+called predict that takes the argmax of the logits.
+
+So we run our test data through this operation and get the predictions,
+and we can compute our accuracy. Which in this case is 92.5%.
+
+It turns out that 92.5% for MNIST is pretty bad. The state of the art
+on this task is upwards of 99%. And one reason for this is that we're
+using a linear model, and linear models are pretty weak.
+</aside>
 				</section>
 
 				<section>
@@ -1172,6 +1728,11 @@ with tf.Session() as sess:
      style="width: 40%;">
 
 		 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://playground.tensorflow.org">playground.tensorflow.org</a></p>
+
+		 <aside class="notes">
+			 When all you can do is draw a straight line, you can't approximate
+			 a function like exclusive OR.
+		 </aside>
 
 				</section>
 
@@ -1182,6 +1743,10 @@ with tf.Session() as sess:
      style="width: 40%;">
 
 		 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://playground.tensorflow.org">playground.tensorflow.org</a></p>
+		 <aside class="notes">
+			 And you can't do something like concentric circles, either.
+			 So what can we do.
+		 </aside>
 				</section>
 
       </section>
@@ -1191,6 +1756,10 @@ with tf.Session() as sess:
 
  			  <section>
 					<h2>Let's go deeper!</h2>
+					<aside class="notes">
+						Well, I've heard that there's this magic thing called
+						deep learning, so let's go deeper.
+					</aside>
 				</section>
 
 				<section>
@@ -1198,6 +1767,12 @@ with tf.Session() as sess:
 <img src="images/latex_generated_images/hidden_layer_neural_network_linear.png"
      alt="Adding a hidden layer"
      style="width: 50%;">
+		 <aside class="notes">
+			 So what we'll do is add a hidden layer to our neural network.
+			 It's called hidden because we have no idea what the values
+			 are supposed to be. We know what our X's and we know what our Y's
+			 are, but we have no idea about the values of those hidden neurons.
+		 </aside>
 				</section>
 
 				<section>
@@ -1216,6 +1791,9 @@ b2 = tf.get_variable("bias2", [10],
       initializer=tf.constant_initializer(0))
 		</code>
 	</pre>
+	<aside class="notes">
+		So we'll need two sets of weights and biases.
+	</aside>
 					</section>
 
 					<section>
@@ -1226,6 +1804,10 @@ hidden   = tf.matmul(X, W1) + b1
 y_logits = tf.matmul(hidden, W2) + b2
 		</code>
 	</pre>
+	<aside class="notes">
+		And we'll do two rounds of matrix multiplications.
+		The rest of the code is just the same, so let's check our results...
+	</aside>
 					</section>
 
 				<section>
@@ -1242,6 +1824,12 @@ y_logits = tf.matmul(hidden, W2) + b2
 	</tr>
 </table>
 
+<aside class="notes">
+Wait a minute.
+What!
+I was told going deeper was going to HELP,
+but my accuracy went down!
+</aside>
 				</section>
 
 				<section>
@@ -1259,6 +1847,11 @@ y_logits = tf.matmul(hidden, W2) + b2
 				</p>
 
 				<p class="fragment">We need to add <b>non-linearity</b> to the system.
+					<aside class="notes">
+						And the problem is that we just did a linear transform
+						of a linear transform, which is still linear!
+						We need to add non-linearity.
+					</aside>
 				</section>
 
 
@@ -1267,6 +1860,12 @@ y_logits = tf.matmul(hidden, W2) + b2
 		<img src="images/latex_generated_images/hidden_layer_neural_network_linear.png"
 		     alt="Adding a hidden layer that's actually non-linear: before"
 		     style="width: 50%;">
+
+				 <aside class="notes">
+					 And we already know how to do that, right? Before, we applied
+					 a non-linear activation function to our output neurons.
+					 Now we just do the same thing for the hidden neurons.
+				 </aside>
 						</section>
 
 				<section data-transition="fade">
@@ -1292,6 +1891,13 @@ y_logits = tf.matmul(hidden, W2) + b2
 						</tr>
 					</table>
 
+					<aside class="notes">
+						There's a bunch of non-linear activation functions
+						we can consider, some work better than others. The one
+						on the right, Rectified Linear Units, or ReLU for short,
+						is pretty popular, so we'll use that.
+					</aside>
+
 				</section>
 
 				<section>
@@ -1299,6 +1905,9 @@ y_logits = tf.matmul(hidden, W2) + b2
 <img src="images/latex_generated_images/hidden_layer_neural_network_relu.png"
      alt="Adding a hidden layer with ReLU"
      style="width: 50%;">
+		 <aside class="notes">
+			 Here's what that looks like.
+		 </aside>
 				</section>
 
 
@@ -1310,6 +1919,10 @@ hidden   = tf.nn.relu(tf.matmul(X, W1) + b1)
 y_logits = tf.matmul(hidden, W2) + b2
 	</code>
 </pre>
+<aside class="notes">
+So we'll just amend our operations to apply ReLU to the logits
+of the hidden layer.
+</aside>
 				</section>
 
 				<section>
@@ -1325,6 +1938,9 @@ y_logits = tf.matmul(hidden, W2) + b2
 		<td>1</td><td>97.9</td><td>95.2</td>
 	</tr>
 </table>
+<aside class="notes">
+And yay, our accuracy went up!
+</aside>
 				</section>
 
 				<section>
@@ -1333,6 +1949,12 @@ y_logits = tf.matmul(hidden, W2) + b2
      style="width: 40%;">
 
 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://playground.tensorflow.org">playground.tensorflow.org</a></p>
+
+<aside class="notes">
+So what does having a hidden layer buy us? Well, it can classify
+things like XOR. Here's what the classification boundary looks like,
+I think this is with 4 hidden neurons.
+</aside>
 
 				</section>
 
@@ -1343,6 +1965,9 @@ y_logits = tf.matmul(hidden, W2) + b2
      style="width: 40%;">
 
  <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://playground.tensorflow.org">playground.tensorflow.org</a></p>
+ <aside class="notes">
+	 And we can also classify concentric circles with 3 hidden neurons.
+ </aside>
 				</section>
 
 				<section data-transition="fade-out">
@@ -1355,6 +1980,11 @@ y_logits = tf.matmul(hidden, W2) + b2
 <p>2 hidden neurons</p>
 
  <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
+
+ <aside class="notes">
+	 Let's take a look at how classification boundaries change as we
+	 add more hidden neurons. Here's what it looks like with 2 neurons.
+ </aside>
 				</section>
 
 				<section data-transition="fade">
@@ -1367,6 +1997,11 @@ y_logits = tf.matmul(hidden, W2) + b2
 		 <p>3 hidden neurons</p>
 
 		 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
+
+		 <aside class="notes">
+			 And you can see that as we add neurons, our classification boundary
+			 gets more and more complex
+		 </aside>
 				</section>
 
 				<section data-transition="fade">
@@ -1392,6 +2027,10 @@ y_logits = tf.matmul(hidden, W2) + b2
 
 		 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
 
+		 <aside class="notes">
+			 ...until we can perfectly classify everything
+		 </aside>
+
 				</section>
 
 				<section data-transition="fade">
@@ -1402,6 +2041,11 @@ y_logits = tf.matmul(hidden, W2) + b2
 				     style="width: 80%;">
 
 						 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
+
+						 <aside class="notes">
+							 And what we did was to transform our 2-D space into a 5-D space
+							 where the positive and negative samples could be linearly separated.
+						 </aside>
 				</section>
 
 				<section data-transition="fade">
@@ -1412,6 +2056,7 @@ y_logits = tf.matmul(hidden, W2) + b2
 				     style="width: 80%;">
 
 						 <p style="font-size: 35%; text-align: left;">Image generated with <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetJS by Andrej Karpathy</a></p>
+
 				</section>
 
 				<section>
@@ -1419,6 +2064,16 @@ y_logits = tf.matmul(hidden, W2) + b2
 					A <b>feedforward network</b> with a <b>single hidden layer</b>
 					containing a finite number of neurons <b>can approximate</b>
 					(basically) <b>any interesting function</b>
+
+					<aside class="notes">
+						So we saw that we can make our classification boundary
+						more and more complex by adding neurons to the hidden layer.
+						And it turns out that there's a theorem that says,
+						you can approximate basically any
+						interesting function using a single hidden layer. You may need
+						a LOT of hidden neurons, and it may be almost impossible
+						to actually train, but theoretically it exists.
+					</aside>
 				</section>
 
 			</section>
@@ -1428,6 +2083,12 @@ y_logits = tf.matmul(hidden, W2) + b2
 				<section>
 					<h2>Are we deep learning yet?</h2>
 					<p class="fragment">No!</p>
+
+					<aside class="notes">
+						Okay. Are we deep learning yet? !CLICK! NO!
+						We only have one hidden layer. And you don't qualify
+						as deep until you have at least two hidden layers.
+					</aside>
 				</section>
 
 				<section>
@@ -1439,6 +2100,11 @@ hidden_2 = tf.nn.relu(tf.matmul(hidden_1, W2) + b2)
 y_logits = tf.matmul(hidden_2, W3) + b3
 	</code>
 </pre>
+<aside class="notes">
+  I'm sure you can guess how to define the variables,
+	and as for the operations, we just need to add another
+	round of matrix multiplication and ReLU.
+</aside>
 				</section>
 
 				<section>
@@ -1449,6 +2115,12 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 						<li style="visibility: hidden;">Narrower networks are <b>less prone to overfitting</b></li>
 						<li style="visibility: hidden;">Deeper networks learn <b>hierarchical feature representations</b></li>
 					</ul>
+
+					<aside class="notes">
+						Okay. Just a couple of slides ago, we said: using a single hidden
+						layer, we can approximate just about any function. So why would we ever want to go deep?
+						Three reasons. Firstly, !CLICK! deeper networks are more powerful.
+					</aside>
 				</section>
 
 				<section>
@@ -1459,6 +2131,14 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 										layer (k+1) network with only a polynomial number of hidden
 										neurons"
 							 style="width: 70%;">
+
+				 <aside class="notes">
+					 There exist functions that can be approximated in a deep network
+					 with, say, k layers containing a number of neurons that's polynomial
+					 in the number of inputs. However, if we take even one of those
+					 layers away, k-1, we would need an exponential number of neurons
+					 in our hidden layers to approximate the same function.
+				 </aside>
 				</section>
 
 				<section>
@@ -1469,6 +2149,12 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 						<li>Narrower networks are <b>less prone to overfitting</b></li>
 						<li style="visibility: hidden;">Deeper networks learn <b>hierarchical feature representations</b></li>
 					</ul>
+
+					<aside class="notes">
+						The second point is really a bit more about narrow layers, but
+						deep and narrow tend to go together, so. Narrower networks
+						are less prone to overfitting.
+					</aside>
 				</section>
 
 				<section>
@@ -1476,6 +2162,13 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 					<img src="images/overfitting.png"
 					     alt="Illustration of overfitting"
 							 style="width: 40%">
+
+							 <aside class="notes">
+								 And when I say "overfitting" I mean something like this
+								 green boundary over here, which is so determined to get
+								 each and every point in the
+								 training data right, that it sacrifices generalizability.
+							 </aside>
 				</section>
 
 				<section>
@@ -1486,6 +2179,23 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 										representation. One application of this is
 										the autoencoder network"
 							 style="width: 70%;">
+
+							 <aside class="notes">
+								 Now, the thing is, if you're funnelling your data
+								 through a narrow layer, you're going to have to make
+								 tough choices about what information to pass through.
+								 You can't say, I'm going to allocate these five neurons
+								 to take care of that one outlier. Instead you have to
+								 figure out how to communicate the useful features of
+								 your data as best you can when passing it to the next layer.
+
+								 Incidentally, this is the principle behind autoencoder networks, which
+								 are a neural network where you're just trying to predict
+								 your input data. So this is trivial to do, right? Except
+								 that you're pushing it through this narrow layer, which
+								 forces you to come up with a compressed representation
+								 of the data. It's kind of a neat idea.
+							 </aside>
 				</section>
 
 				<section>
@@ -1496,6 +2206,10 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 						<li>Narrower networks are <b>less prone to overfitting</b></li>
 						<li>Deeper networks learn <b>hierarchical feature representations</b></li>
 					</ul>
+					<aside class="notes">
+						Okay, third reason. And this is probably the most important reason.
+						Deep networks learn hierarchical feature representations.
+					</aside>
 				</section>
 
 				<section>
@@ -1505,6 +2219,24 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 							 style="width:50%;">
 					 <p class="fragment">&rarr; End-to-end learning</p>
 					 <p style="font-size: 35%; text-align: left;">Image source: Goodfellow, Bengio, and Courville (2016) <a href="http://www.deeplearningbook.org/">(The) Deep Learning (Book)</a></p>
+
+					 <aside class="notes">
+						 We can see this most clearly when we look at the neural networks used in
+						 image classification. We input the pixels
+						 and get out a determination of the object seen in the image.
+						 And if you examine the kinds of features that each layer is
+						 detecting, you'll see that they build on each other. At the first
+						 hidden layer, it's detecting things like edges. In the next layer,
+						 it's putting together edges to find things like corners. And if you
+						 have two round things over a curve it says, aha! I see a face!
+						 Up until we can say, this is a person.
+
+						 And one trend we see as a result of this property of deep learning
+						 is a movement towards end-to-end learning, where you feed in the rawest
+						 form of your data, like pixels and characters, into your system, instead of first
+						 computing hand-engineered features. The deep learning system learns all
+						 the levels of the features for you.
+					 </aside>
 				</section>
 
 				<section>
@@ -1534,6 +2266,16 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 		<td>2</td><td>98.0</td><td>94.2</td>
 	</tr>
 </table>
+
+<aside class="notes">
+  Okay, so that didn't really work that well. And when this happens
+	there are a couple of things you should consider. First, is
+	this a problem that requires a deep network? Maybe solving the problem
+	involves combining the features in very simple ways, in which case a
+	deep network is useless. The other question is, do I have enough data
+	to train a deep network? To go deep, we need a lot of data. And MNIST
+	is not a large dataset.
+</aside>
 				</section>
 
 				<section>
@@ -1542,7 +2284,13 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 					     alt="Effect of increasing depth of network"
 							 style="width: 65%;">
 			 <p style="font-size: 35%; text-align: left;">Image source: Goodfellow, Bengio, and Courville (2016) <a href="http://www.deeplearningbook.org/">(The) Deep Learning (Book)</a></p>
-				</section>
+			 <aside class="notes">
+				 If you do have a large enough dataset, you can expect your test accuracy to gradually increase with number of layers.
+				 But we don't.
+			 </aside>
+
+		 </section>
+
 
 				<section>
 					<h2>Overfitting</h2>
@@ -1551,6 +2299,12 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 							      against epochs and model complexity
 										to diagnose over- and under-fitting"
 							 style="width: 50%;">
+							 <aside class="notes">
+								 Instead, we have overfitting. Our training accuracy increased but our
+								 test accuracy went down. I said overfitting was something shallow
+								 networks with wide layers with more prone to, but you can also get
+								 overfitting with increasing layers because that increases our model complexity.
+							 </aside>
 				</section>
 
       </section>
@@ -1559,18 +2313,42 @@ y_logits = tf.matmul(hidden_2, W3) + b3
 
 				<section>
 					<h2>Regularization</h2>
+
+					<aside class="notes">
+					  So what do we do? Regularization.
+					</aside>
 				</section>
 
 				<section>
 					<h2>Regularization</h2>
 					Put the brakes on the <b>training data</b>
 					by enforcing constraints on <b>weights</b>.
+
+					<aside class="notes">
+						And the idea behind regularization is this. Up till now,
+						our data has been in the driver's seat. Whatever the data says, goes.
+						If I have an outlier over here and there's no other data points
+						to argue against it, I'm going to contort my boundary to accommodate
+						that outlier.
+
+						Now we're going to put the brakes on regularization. And we'll do that
+						by enforcing constraints on the parameters we learn.
+					</aside>
 				</section>
 
 				<section>
 					<h2>Regularization</h2>
 					<p><b>L2 regularization:</b> weights should be small.</p>
 					$L = \sum{w_i^2}$
+
+					<aside class="notes">
+						You're probably familiar with L1 and L2 regularization, because
+						you also see them used in linear and logistic regression, SVMs,
+						etc. And what L2 regularization says is simply: I want my weights to be small.
+						And it does that by imposing a cost, or loss, on the weights
+						that's the sum of the squares of the weights. The larger the weights,
+						the bigger that cost.
+					</aside>
 				</section>
 
 				<section>
@@ -1583,6 +2361,12 @@ cost += REGULARIZATION_CONSTANT * \
            tf.nn.l2_loss(W3))
 	</code>
 </pre>
+<aside class="notes">
+  And we'll add that regularization loss to our existing
+	data loss, which we already encoded into the cost function.
+	We have another hyperparameter here that determines how
+	tightly we leash the data.
+</aside>
 				</section>
 
 <!-- haven't gotten this method to work yet
@@ -1617,6 +2401,9 @@ cost_function = data_loss + tf.get_collection(
 			<td>L2</td><td>95.1</td><td>95.1</td>
 		</tr>
 	</table>
+	<aside class="notes">
+		And here are the results! Pretty good!
+	</aside>
 </section>
 
 				<section data-transition="fade-out">
@@ -1624,6 +2411,12 @@ cost_function = data_loss + tf.get_collection(
 <img src="images/latex_generated_images/dropout_before.png"
      alt="Before dropout: using all hidden nodes"
 		 style="width: 60%;">
+
+		 <aside class="notes">
+			 Now let's talk about a different regularization method,
+			 called dropout. This isn't really applicable to linear
+			 methods, but it's something we can do once we have hidden layers.
+		 </aside>
 				</section>
 
 				<section data-transition="fade">
@@ -1631,6 +2424,11 @@ cost_function = data_loss + tf.get_collection(
 <img src="images/latex_generated_images/dropout.png"
      alt="Before dropout: knock out half the hidden nodes"
 		 style="width: 60%;">
+
+		 <aside class="notes">
+			 And this is what we're going to do: at each training step,
+			 we're going to randomly knock out half of our hidden neurons.
+		 </aside>
 				</section>
 
 				<section data-transition="fade">
@@ -1643,10 +2441,30 @@ cost_function = data_loss + tf.get_collection(
 				<section>
 					<h2>Dropout: why it works</h2>
 <ul>
-	<li>"Averaging" over several models</li>
+	<li class="fragment">"Averaging" over several models</li>
   <li class="fragment">Forces redundancy of useful features</li>
 	<li class="fragment">No conspiracies! Hidden neurons must be individually useful</li>
 </ul>
+<aside class="notes">
+  And this probably seems CRAZY to you. Why would we want to forfeit
+	half the modelling power of that layer? Why would we want to lose half
+	the information in our weights? Well, we do it because it works.
+	And here are some reasons people cite for why it works.
+
+	Firstly, every time we drop out some neurons, it's like we're building
+	a new prediction model. And when in the end, we take all the neurons
+	together, it's like we're averaging together all those models. If you're
+	familiar with ensemble learning, it's just like that, except that you're
+	doing it internally. Kinda freaky, I know.
+
+	Second reason is that it forces useful features to repeat themselves.
+	And that makes our network more robust.
+
+	Thirdly, we can't have a good conspiracy if your co-conspirator might
+	drop out at any time. So hidden neurons must be individually useful,
+	and again, we can't have three neurons over here conspiring to accommodate
+	an outlier because one or two of them may be missing at any time.
+</aside>
 				</section>
 
 				<section data-transition="fade-out">
@@ -1654,6 +2472,13 @@ cost_function = data_loss + tf.get_collection(
 <img src="images/latex_generated_images/dropout_before.png"
      alt="Before dropout: using all hidden nodes"
 		 style="width: 60%;">
+
+		 <aside class="notes">
+			 Okay, so during training we drop out half the neurons.
+			 At test time, we want to keep all the hidden nodes.
+			 But that creates a problem: our logits at each point are
+			 going to be twice as much as they were in training.
+		 </aside>
 				</section>
 
 				<section data-transition="fade">
@@ -1661,6 +2486,10 @@ cost_function = data_loss + tf.get_collection(
 <img src="images/latex_generated_images/dropout_2x.png"
      alt="Before dropout: in training, bump up the rest by 2x"
 		 style="width: 60%;">
+		 <aside class="notes">
+			 To solve that problem, for the neurons that stayed alive
+			 in training, we'll multiply all their logits.
+		 </aside>
 				</section>
 
 				<section>
@@ -1676,6 +2505,14 @@ hidden   = tf.nn.relu(tf.matmul(X, w0) + b0)
 y_logits = tf.nn.relu(tf.matmul(dropout, w1) + b1)
   </code>
 </pre>
+<aside class="notes">
+Now let's look at the code. We need to add a new placeholder.
+What the placeholder does is define the probability of keeping
+a neuron. It's usually set to 0.5.
+
+And then we're going to add a dropout operation between the hidden
+layer and the output layer, supplying it the keep probability.
+</aside>
 				</section>
 
 				<section>
@@ -1699,6 +2536,17 @@ with tf.Session() as sess:
                             <mark>keep_prob: 1.0</mark>})
   </code>
 </pre>
+
+<aside class="notes">
+And during training we pass it a keep_prob of 0.5, dropping out
+half the neurons, and during test time we supply it a keep_prob of 1.0.
+TensorFlow handles all the dropping out of neurons and the scaling of
+the logits. Thank you, TensorFlow!
+
+Another thing to note is that training is generally a lot slower with
+dropout, because you're considering all these different models. So
+you'll want to bump up your number of training rounds.
+</aside>
 				</section>
 
 				<section>
@@ -1717,6 +2565,9 @@ with tf.Session() as sess:
 							<td>Dropout</td><td>93.3</td><td>93.1</td>
 						</tr>
 					</table>
+					<aside class="notes">
+						And with MNIST I found that I got a modest increase in test accuracy.
+					</aside>
 				</section>
 
     </section>
@@ -1726,6 +2577,29 @@ with tf.Session() as sess:
     <section>
 				<section>
 					<h2>Where to from here?</h2>
+					<aside class="notes">
+						Okay! We made it to the end! Where do we go from here?
+					</aside>
+
+				</section>
+
+				<section data-transition="fade-out">
+					<h2>Ingredients</h2>
+					<ul>
+						<li>Placeholders</li>
+						<li>Model - Variables</li>
+						<li>Model - Operations</li>
+						<li>Cost function</li>
+						<li>Optimization</li>
+						<li>Train/Test</li>
+						<li>Regularization</li>
+					</ul>
+
+					<aside class="notes">
+						We saw that there were a number of ingredients
+						we had to define and consider in every single
+						model we created.
+					</aside>
 				</section>
 
 				<section data-transition="fade-out">
@@ -1736,8 +2610,14 @@ with tf.Session() as sess:
 						<li>Model - Operations</li>
 						<li>Cost function</li>
 						<li>Optimization</li>
+						<li>Train/Test</li>
 						<li>Regularization</li>
+						<aside class="notes">
+							These ingredients also constitute a good roadmap
+							of exploring deep learning further.
+						</aside>
 					</ul>
+
 				</section>
 
 				<section data-transition="fade-in">
@@ -1748,8 +2628,16 @@ with tf.Session() as sess:
 						<li>Model - Operations</li>
 						<li style="color: #A9A9A9;">Cost function</li>
 						<li>Optimization</li>
+						<li style="color: #A9A9A9;">Train/Test</li>
 						<li>Regularization</li>
 					</ul>
+
+					<aside class="notes">
+						We'll ignore placeholders and cost function
+						because those are pretty much driven by the problem.
+						We also saw that training and testing didn't differ
+						much by problem. So let's explore the others.
+					</aside>
 				</section>
 
 				<section>
@@ -1760,6 +2648,11 @@ with tf.Session() as sess:
 					</p>
 					<p># layers, # neurons / layer</p>
 					<p style="font-size: 35%; text-align: left;">Image source: Fjodor van Veen (2016) <a href="http://www.asimovinstitute.org/neural-network-zoo/">Neural Network Zoo</a></p>
+
+					<aside class="notes">
+						In terms of variables, we can consider varying the number of
+						hidden layers, and the number of hidden neurons per layer.
+					</aside>
 				</section>
 
 				<section>
@@ -1771,6 +2664,9 @@ with tf.Session() as sess:
 						<li>tf.constant_initializer</li>
 						<li>tf.contrib.layers.xavier_initializer</li>
 					</ul>
+					<aside class="notes">
+						We can also explore different methods of initializin variables.
+					</aside>
 				</section>
 
 				<section>
@@ -1779,8 +2675,13 @@ with tf.Session() as sess:
 					<img src="images/nnz_mlp.png"
 					     style="width: 20%;">
 					</p>
-					<p>Activation functions: ReLU, tanh, leaky RELU, Maxout...</p>
+					<p>Activation functions: ReLU, tanh, leaky ReLU, Maxout...</p>
 					<p style="font-size: 35%; text-align: left;">Image source: Fjodor van Veen (2016) <a href="http://www.asimovinstitute.org/neural-network-zoo/">Neural Network Zoo</a></p>
+
+					<aside class="notes">
+						And different non-linear activation functions. ReLU is the current
+						recommended starting point but you can play around with these others.
+					</aside>
 				</section>
 
 				<section>
@@ -1791,6 +2692,11 @@ with tf.Session() as sess:
 					Recurrent neural networks (sequences &amp; time series)
 
 					<p style="font-size: 35%; text-align: left;">Image source: Fjodor van Veen (2016) <a href="http://www.asimovinstitute.org/neural-network-zoo/">Neural Network Zoo</a></p>
+					<aside class="notes">
+						You can also consider an entirely different architecture than feedforward neural networks.
+						If you're doing anything with images, take a look at convolutional neural networks and
+						if you're doing anything with text, sequences, time series, look at recurrent neural networks.
+					</aside>
 				</section>
 
 				<section>
@@ -1798,6 +2704,12 @@ with tf.Session() as sess:
 					<img src="images/radford_sgd_comparison.gif">
 					<p>Try Adam</p>
 					<p style="font-size: 35%; text-align: left;">Image source: <a href="https://www.reddit.com/r/MachineLearning/comments/2gopfa/visualizing_gradient_optimization_techniques/cklhott/">Alec Radford</a></p>
+
+					<aside class="notes">
+						We used gradient descent exclusively in this talk but it's actually one of the slowest-converging
+						optimization problems. It's the red straggler in this GIF. The current recommended
+						one to try first is the Adam optimizer, so give that a shot.
+					</aside>
 				</section>
 
 				<section>
@@ -1808,6 +2720,13 @@ with tf.Session() as sess:
 						<li>Batch normalization</li>
 						<li>Layer normalization</li>
 					</ul>
+
+					<aside class="notes">
+						Lastly, there are a bunch of regularization slash
+						optimization techniques that can help with training and
+						reducing overfitting. We looked at L2 regularization and dropout,
+						also check out batchnorm and layernorm.
+					</aside>
 				</section>
 
 				<section>
@@ -1819,6 +2738,11 @@ with tf.Session() as sess:
 						<li>DyNet</li>
 						<li>Many others...</li>
 					</ul>
+					<aside class="notes">
+						We used the TensorFlow library in this talk, but there are
+						other deep learning toolkits out there. These are some I've heard
+						good things about.
+					</aside>
 				</section>
 
 				<section>
@@ -1832,6 +2756,13 @@ $$
 \textrm{TensorFlow} &: \textrm{Keras}
 \end{align*}
 $$
+
+<aside class="notes">
+I also want to give a plug for Keras. This is a higher-level
+library that sits atop of TensorFlow, there's also a Theano back-end.
+And Keras is sort of to TensorFlow as scikit-learn is to numpy,
+it simplifies things considerably.
+</aside>
 				</section>
 
 				<section>
@@ -1856,6 +2787,11 @@ model.fit(X_train, Y_train, epochs=100, batch_size=120)
 model.evaluate(X_test, Y_test)
 	</code>
 </pre>
+<aside class="notes">
+This is how the TensorFlow code we've been using translates to Keras.
+Hopefully with the background provided in this talk, you can understand
+what's happening in every line intuitively.
+</aside>
 				</section>
 
 				<section>
@@ -1870,6 +2806,10 @@ model.evaluate(X_test, Y_test)
 				  </ul>
 					<p>&nbsp;</p>
 					<p>Slides: michelleful.github.io/PyCon2017</p>
+
+					<aside class="notes">
+						Final thoughts!
+					</aside>
 				</section>
       </section> <!-- end conclusion -->
 
